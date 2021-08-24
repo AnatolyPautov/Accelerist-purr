@@ -3,21 +3,22 @@ import styled from 'styled-components';
 import { Form, Field } from 'react-final-form';
 import * as Types from '../../types/types';
 import { ReactSVG } from 'react-svg';
-import logo from '../../assets/icons/authLogo.svg';
+import linkedin from '../../assets/icons/linkedin.svg';
 import eyeoff from '../../assets/icons/eye-off.svg';
-import authBg from '../../assets/images/authBg.jpg';
 import { NavLink } from 'react-router-dom';
 
 interface LoginProps {}
 
-const Login: React.FC<LoginProps> = ({}) => {
+const Registration: React.FC<LoginProps> = ({}) => {
+  const [showPassword, setShowPassword] = React.useState<boolean>(true);
+
   const onSubmit = (values: any) => {
     if (values) {
       /* setJoined(true); */
     }
   };
 
-  const required = (value: string) => (value ? undefined : 'Введите имя');
+  const required = (value: string) => (value ? undefined : 'Required');
 
   return (
     <Form
@@ -26,33 +27,39 @@ const Login: React.FC<LoginProps> = ({}) => {
         <FormContainer onSubmit={handleSubmit}>
           <FormTitle>Welcome to Accelerist</FormTitle>
           <Tabs>
-            <Tab to="/registration">Register</Tab>
-            <TabActive to="/login">Login</TabActive>
+            <TabActive to="/registration">Register</TabActive>
+            <Tab to="/login">Login</Tab>
           </Tabs>
           <Inputs>
             <label>Email</label>
             <Field
-              name="Email"
+              name="email"
               validate={required}
               render={({ input, meta }) => (
                 <InputContainer>
-                  <Input {...input} type="email" placeholder="Enter email" />
+                  <Input
+                    {...input}
+                    meta={meta}
+                    type="email"
+                    placeholder="Enter email"
+                  />
                   {meta.error && meta.touched && <Error>{meta.error}</Error>}
                 </InputContainer>
               )}
             />
             <label>Password</label>
             <Field
-              name="Password"
+              name="password"
               validate={required}
               render={({ input, meta }) => (
                 <InputContainer>
                   <Input
                     {...input}
-                    type="password"
+                    meta={meta}
+                    type={showPassword ? 'password' : 'text'}
                     placeholder="Enter password"
                   />
-                  <Eye>
+                  <Eye onClick={() => setShowPassword(!showPassword)}>
                     <ReactSVG src={eyeoff} />
                   </Eye>
                   {meta.error && meta.touched && <Error>{meta.error}</Error>}
@@ -60,9 +67,17 @@ const Login: React.FC<LoginProps> = ({}) => {
               )}
             />
           </Inputs>
+          <Desc>
+            I agree that by clicking <strong>“Registration”</strong> I accept
+            the Terms Of Service and Privacy Policy
+          </Desc>
           <AythBtn type="submit" disabled={!values.password || !values.email}>
             Registration
           </AythBtn>
+          <Desc>or continue with</Desc>
+          <Linkedin>
+            <ReactSVG src={linkedin} />
+          </Linkedin>
         </FormContainer>
       )}
     />
@@ -126,13 +141,19 @@ const Inputs = styled.div`
 const InputContainer = styled.div`
   position: relative;
 `;
-const Input = styled.input`
+type InputProps = {
+  meta: any;
+};
+const Input = styled.input<InputProps>`
   width: 100%;
   padding: 10px 30px 10px 16px;
   outline: none;
   font-size: 16px;
   line-height: 155%;
-  border: 1px solid #e8e8e8;
+  border: 1px solid
+    ${({ meta }) => (meta.error && meta.touched ? '#F05658' : '#e8e8e8')};
+  background: ${({ meta }) =>
+    meta.error && meta.touched ? '#FFF2F2' : 'transparent'};
   border-radius: 6px;
   margin-top: 4px;
   &:first-child {
@@ -148,25 +169,47 @@ const Eye = styled.button`
   height: 20px;
   cursor: pointer;
 `;
-const AythBtn = styled.button`
+const Desc = styled.p`
+  font-size: 12px;
+  line-height: 150%;
+  text-align: center;
+  color: #737373;
+  margin-bottom: 16px;
+`;
+type AythBtnProps = {
+  disabled: boolean;
+};
+const AythBtn = styled.button<AythBtnProps>`
+  margin-bottom: 32px;
   padding: 12px 0;
   outline: none;
   cursor: pointer;
-  background: #2baee0;
+  background: ${({ disabled }) =>
+    disabled ? 'rgb(206, 237, 249)' : '#2baee0'};
+  color: ${({ disabled }) => (disabled ? 'rgba(43, 174, 224, 0.3)' : 'white')};
   border-radius: 6px;
-  color: white;
   font-weight: 500;
   font-size: 16px;
   line-height: 145%;
   transition: 0.3s;
+  &:hover {
+    background: ${({ disabled }) =>
+      disabled ? 'rgb(206, 237, 249)' : '#51c2ee'};
+  }
+`;
+const Linkedin = styled.div`
+  display: flex;
+  justify-content: center;
 `;
 
 const Error = styled.div`
   position: absolute;
-  bottom: -30px;
+  bottom: -7px;
   left: 0;
   width: 100%;
   height: 30px;
   color: red;
+  font-size: 12px;
+  line-height: 150%;
 `;
-export default Login;
+export default Registration;
