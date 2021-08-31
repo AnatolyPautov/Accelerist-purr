@@ -27,7 +27,7 @@ const Registration: React.FC<LoginProps> = ({}) => {
         <FormContainer onSubmit={handleSubmit}>
           <FormTitle>Welcome to Accelerist</FormTitle>
           <Tabs>
-            <TabActive to="/registration">Register</TabActive>
+            <TabActive to="/signup">Register</TabActive>
             <Tab to="/login">Login</Tab>
           </Tabs>
           <Inputs>
@@ -76,7 +76,9 @@ const Registration: React.FC<LoginProps> = ({}) => {
           </AythBtn>
           <Desc>or continue with</Desc>
           <Linkedin>
-            <ReactSVG src={linkedin} />
+            <a href="https://ru.linkedin.com/">
+              <ReactSVG src={linkedin} />
+            </a>
           </Linkedin>
         </FormContainer>
       )}
@@ -85,9 +87,10 @@ const Registration: React.FC<LoginProps> = ({}) => {
 };
 
 const FormContainer = styled.form`
+  width: 100%;
   max-width: 454px;
   padding: 40px;
-  margin: 0 auto;
+  margin: 74px auto 40px;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -98,13 +101,16 @@ const FormContainer = styled.form`
     line-height: 150%;
     color: #737373;
   }
+  @media (max-width: 500px) {
+    padding: 24px 16px 40px;
+    margin: 20px 16px 40px;
+  }
 `;
 const Tabs = styled.div`
   display: flex;
   background: #f8f8f8;
   align-items: center;
   justify-content: center;
-  gap: 2px;
   border-radius: 6px;
   width: 100%;
   height: 40px;
@@ -116,8 +122,8 @@ const Tab = styled(NavLink)`
   background: transparent;
   border-radius: 6px;
   padding: 9px 0;
-  width: 183px;
-  height: 36px;
+  margin: 0 2px;
+  width: 100%;
   cursor: pointer;
   color: #737373;
   font-size: 12px;
@@ -143,8 +149,10 @@ const InputContainer = styled.div`
 `;
 type InputProps = {
   meta: any;
+  type: string;
 };
 const Input = styled.input<InputProps>`
+  display: block;
   width: 100%;
   padding: 10px 30px 10px 16px;
   outline: none;
@@ -156,8 +164,10 @@ const Input = styled.input<InputProps>`
     meta.error && meta.touched ? '#FFF2F2' : 'transparent'};
   border-radius: 6px;
   margin-top: 4px;
-  &:first-child {
-    margin-bottom: 24px;
+  margin-bottom: ${({ type }) => (type === 'email' ? '24px' : '0')};
+  &:focus {
+    border: 1px solid
+      ${({ meta }) => (meta.error && meta.touched ? '#F05658' : '#2baee0')};
   }
 `;
 const Eye = styled.button`
@@ -183,7 +193,7 @@ const AythBtn = styled.button<AythBtnProps>`
   margin-bottom: 32px;
   padding: 12px 0;
   outline: none;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   background: ${({ disabled }) =>
     disabled ? 'rgb(206, 237, 249)' : '#2baee0'};
   color: ${({ disabled }) => (disabled ? 'rgba(43, 174, 224, 0.3)' : 'white')};
@@ -204,7 +214,7 @@ const Linkedin = styled.div`
 
 const Error = styled.div`
   position: absolute;
-  bottom: -7px;
+  bottom: -29px;
   left: 0;
   width: 100%;
   height: 30px;

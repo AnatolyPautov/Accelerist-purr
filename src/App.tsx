@@ -1,30 +1,28 @@
-import Header from './components/Header';
+import Header from './components/header';
 import GlobalStyle from './globalstyles';
 import styled from 'styled-components';
 import { Route } from 'react-router';
-import SearchList from './components/SearchList';
-import PageHeader from './components/PageHeader';
-import Login from './components/login';
-import Registration from './components/registration';
+import SearchList from './components/searchList';
+import PageHeader from './components/pageHeader';
 import Auth from './components/auth';
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      {/* <Header />
+      <Header />
       <PageHeader />
       <Wrapper>
         <Route path="/dashboard" render={() => <SearchList />} />
-      </Wrapper> */}
-      <Auth />
+      </Wrapper>
+      {/* <Auth /> */}
     </>
   );
 }
 
 const Wrapper = styled.div`
-  max-width: 1000px;
   margin: 0 auto;
+  width: 1200px;
 `;
 
 export default App;

@@ -1,18 +1,23 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
-import trelloSlice from './trelloSlice';
+import companySlice from './companySlice';
+import createSagaMiddleware from 'redux-saga';
+import { watcherSaga } from '../sagas/rootSaga';
+
+const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
-  reducer: trelloSlice,
+  reducer: companySlice,
+  devTools: true,
+  middleware: [...getDefaultMiddleware({ thunk: false }), sagaMiddleware],
 });
+sagaMiddleware.run(watcherSaga);
 
 type RootState = ReturnType<typeof store.getState>;
 
 export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 
-export const getColumns = (state: RootState) => state.columns;
-export const getCards = (state: RootState) => state.cards;
-export const getComments = (state: RootState) => state.comments;
+export const getCompanies = (state: RootState) => state.companies;
 
 export default store;

@@ -10,32 +10,38 @@ interface LoginProps {}
 
 const Auth: React.FC<LoginProps> = ({}) => {
   return (
-    <>
+    <Container>
+      <AuthHeader>
+        <ReactSVG src={logo} />
+      </AuthHeader>
       <AuthContainer>
-        <AuthHeader>
-          <ReactSVG src={logo} />
-        </AuthHeader>
-        <Route path="/registration" render={() => <Registration />} />
+        <Route path="/signup" render={() => <Registration />} />
         <Route path="/login" render={() => <Login />} />
       </AuthContainer>
-    </>
+    </Container>
   );
 };
 
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 const AuthHeader = styled.div`
   background: #122434;
   height: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 73px;
 `;
 
 const AuthContainer = styled.div`
-  padding-bottom: 73px;
   background: no-repeat url(${authBg});
   background-size: cover;
   background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   min-height: calc(100% - 80px);
 `;
 
