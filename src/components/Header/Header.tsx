@@ -2,20 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { ReactSVG } from 'react-svg';
 import logo from '../../assets/icons/logo.svg';
-import search from '../../assets/icons/search-header.svg';
 import Navbar from '../navbar';
 import SearchInput from '../searchInput';
-import { useAppDispatch } from '../../store/store';
-import { addCompanies } from '../../store/companySlice';
 
 interface BoardProps {}
 const Header: React.FC<BoardProps> = ({}) => {
-  const dispatch = useAppDispatch();
-
-  React.useEffect(() => {
-    dispatch(addCompanies({ page: 1, limit: 10 }));
-  }, [dispatch]);
-
   return (
     <HeaderContainer>
       <Wrapper>

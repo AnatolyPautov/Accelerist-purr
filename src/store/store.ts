@@ -18,6 +18,6 @@ type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 
-export const getCompanies = (state: RootState) => state.companies;
+export const getCompaniesState = (state: RootState) => state;
 
 export default store;

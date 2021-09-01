@@ -9,7 +9,7 @@ import globe from '../../assets/icons/globe.svg';
 import phone from '../../assets/icons/phone.svg';
 import mapPin from '../../assets/icons/map-pin.svg';
 import { Row } from '../../ui/Row';
-import { GrayText } from '../../ui/GrayText';
+import { Text } from '../../ui/Text';
 import { Subtitle } from '../../ui/Subtitle';
 import { Title } from '../../ui/Title';
 
@@ -25,9 +25,9 @@ const CompanyPage: React.FC<CompanyPageProps> = ({}) => {
               <Title mb={'4'}>NameCompany</Title>
               <ReactSVG src={heart} />
             </Row>
-            <GrayText containerStyled={CompanyDesc}>
+            <Text containerStyled={CompanyDesc}>
               Administration, Business Support and Waste Management Services
-            </GrayText>
+            </Text>
             <Row containerStyled={SocialStyle}>
               <ReactSVG src={facebook} />
               <ReactSVG src={twitter} />
@@ -60,11 +60,11 @@ const CompanyPage: React.FC<CompanyPageProps> = ({}) => {
           <Subtitle mb={'16'}>Reported</Subtitle>
           <ReportedBlock>
             <Row containerStyled={Reported}>
-              <GrayText>Revenue Reported</GrayText>
+              <Text>Revenue Reported</Text>
               <p>$ 4,456,379</p>
             </Row>
             <Row containerStyled={Reported}>
-              <GrayText>Employees Reported</GrayText>
+              <Text>Employees Reported</Text>
               <p>42</p>
             </Row>
           </ReportedBlock>
@@ -72,15 +72,15 @@ const CompanyPage: React.FC<CompanyPageProps> = ({}) => {
           <Row containerStyled={TickerBlock}>
             <Ticker>
               <p>WMT</p>
-              <GrayText>London Stock Exchange</GrayText>
+              <Text>London Stock Exchange</Text>
             </Ticker>
             <Ticker>
               <p>WMT</p>
-              <GrayText>Nasdaq</GrayText>
+              <Text>Nasdaq</Text>
             </Ticker>
             <Ticker>
               <p>WMT</p>
-              <GrayText>Stock Exchange of Singapore</GrayText>
+              <Text>Stock Exchange of Singapore</Text>
             </Ticker>
           </Row>
           <Subtitle mb={'16'}>Company Contacts</Subtitle>
@@ -140,19 +140,19 @@ const CompanyPage: React.FC<CompanyPageProps> = ({}) => {
           <Subtitle mb={'16'}>Contributions</Subtitle>
           <ReportedBlock>
             <Row containerStyled={Сontribution}>
-              <GrayText>Cash Contributions</GrayText>
+              <Text>Cash Contributions</Text>
               <p>$ 4,456,379</p>
             </Row>
             <Row containerStyled={Сontribution}>
-              <GrayText>Employees Reported</GrayText>
+              <Text>Employees Reported</Text>
               <p>42</p>
             </Row>
             <Row containerStyled={Сontribution}>
-              <GrayText>Employees Reported</GrayText>
+              <Text>Employees Reported</Text>
               <p>42</p>
             </Row>
             <Row containerStyled={Сontribution}>
-              <GrayText>In-Kind Contributions</GrayText>
+              <Text>In-Kind Contributions</Text>
               <p>42</p>
             </Row>
           </ReportedBlock>

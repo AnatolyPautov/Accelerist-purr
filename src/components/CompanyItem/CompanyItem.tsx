@@ -5,20 +5,25 @@ import heart from '../../assets/icons/heart.svg';
 import heartLike from '../../assets/icons/heart-like.svg';
 import { Link } from 'react-router-dom';
 import { Row } from '../../ui/Row';
-import { GrayText } from '../../ui/GrayText';
+import { Text } from '../../ui/Text';
 import { Subtitle } from '../../ui/Subtitle';
 
 interface CompanyItemProps {
   company: any;
 }
 const CompanyItem: React.FC<CompanyItemProps> = ({ company }) => {
-  const { country, city, state, street, zipCode, revenue, id } = company;
+  const { country, city, state, street, zipCode, revenue, id, fax, score } =
+    company;
   const address = street + '. ' + city + ', ' + state + ' ' + zipCode;
 
   const rev = (revenue: string) => {
-    let parts = revenue.toString().split('.');
-    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    return parts.join(',');
+    if (revenue) {
+      let parts = revenue.toString().split('.');
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      return parts.join(',');
+    } else {
+      return '0';
+    }
   };
 
   return (
@@ -26,19 +31,19 @@ const CompanyItem: React.FC<CompanyItemProps> = ({ company }) => {
       <LogoRanking>
         <Logo>Logo</Logo>
         <Ranking>
-          <GrayText>Priority Ranking</GrayText>
-          <p>{company.score}</p>
+          <Text>Priority Ranking</Text>
+          <p>{score}</p>
         </Ranking>
       </LogoRanking>
       <div>
         <Subtitle mb="12">{company.name}</Subtitle>
-        <GrayText>
+        <Text>
           {address.length > 42 ? address.substring(0, 45) + '...' : address}
-        </GrayText>
-        <GrayText>{company.fax || 'the phone number is missing'}</GrayText>
+        </Text>
+        <Text>{fax || 'the phone number is missing'}</Text>
         <Data>
           <CSRFocusBlock>
-            <GrayText>CSR Focus</GrayText>
+            <Text>CSR Focus</Text>
             <Categories>
               <Category>Health</Category>
               <Category>Animals</Category>
@@ -46,9 +51,8 @@ const CompanyItem: React.FC<CompanyItemProps> = ({ company }) => {
             </Categories>
           </CSRFocusBlock>
           <RevenueBlock>
-            <GrayText>Revenue</GrayText>
+            <Text>Revenue</Text>
             <Revenue>
-              ${' '}
               {rev(revenue).length > 9
                 ? rev(revenue).substring(0, 9) + '...'
                 : rev(revenue)}
@@ -111,7 +115,6 @@ const RevenueBlock = styled.div`
   flex-direction: column;
   align-items: flex-end;
 `;
-
 const Categories = styled.div`
   margin-top: 4px;
   display: flex;

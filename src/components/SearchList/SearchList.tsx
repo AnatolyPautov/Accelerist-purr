@@ -2,21 +2,28 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { ReactSVG } from 'react-svg';
 import styled from 'styled-components';
-import { getCompanies } from '../../store/store';
+import { getCompaniesState, useAppDispatch } from '../../store/store';
 import CompanyItem from '../companyItem';
 import folderPlus from '../../assets/icons/folder-plus.svg';
 import upload from '../../assets/icons/upload.svg';
 import mail from '../../assets/icons/mail.svg';
+import prev from '../../assets/icons/arrow-left.svg';
+import next from '../../assets/icons/arrow-right.svg';
+import { Row } from '../../ui/Row';
+import { addCompanies } from '../../store/companySlice';
 
 interface BoardProps {}
 const SearchList: React.FC<BoardProps> = ({}) => {
-  const companies = useSelector(getCompanies);
+  const state = useSelector(getCompaniesState);
+
+  const dispatch = useAppDispatch();
+
   return (
     <>
       <Container>
         <p>Found 32 companies</p>
         <Panel>
-          <Actions>
+          <Row>
             <Action>
               <Icon>
                 <ReactSVG src={folderPlus} />
@@ -35,11 +42,35 @@ const SearchList: React.FC<BoardProps> = ({}) => {
               </Icon>
               <p>Accelerist Support</p>
             </Action>
-          </Actions>
-          <Pagination></Pagination>
+          </Row>
+          <Row>
+            <Arrow
+              onClick={() =>
+                dispatch(
+                  addCompanies({ page: state.currentPage - 1, limit: 12 })
+                )
+              }
+            >
+              <ReactSVG src={prev} />
+            </Arrow>
+            {console.log(state.currentPage)}
+            <PagesText>
+              {12 * state.currentPage + 1 - 12}-{12 * state.currentPage} of{' '}
+              {state.totalCompanies}
+            </PagesText>
+            <Arrow
+              onClick={() =>
+                dispatch(
+                  addCompanies({ page: state.currentPage + 1, limit: 12 })
+                )
+              }
+            >
+              <ReactSVG src={next} />
+            </Arrow>
+          </Row>
         </Panel>
         <CompaniesContainer>
-          {companies.map((company, index) => (
+          {state.companies.map((company, index) => (
             <CompanyItem company={company} key={index} />
           ))}
         </CompaniesContainer>
@@ -58,13 +89,12 @@ const CompaniesContainer = styled.div`
   align-items: center;
 `;
 const Panel = styled.div`
-  margin-top: 26px;
-`;
-const Actions = styled.div`
+  margin-top: 15px;
+  max-width: 1096px;
   display: flex;
+  justify-content: space-between;
 `;
 const Action = styled.div`
-  height: 30px;
   display: flex;
   align-items: center;
   margin-right: 37px;
@@ -80,6 +110,15 @@ const Action = styled.div`
 const Icon = styled.div`
   margin-right: 17px;
 `;
-const Pagination = styled.div``;
+const Arrow = styled.button`
+  background: transparent;
+  cursor: pointer;
+`;
+const PagesText = styled.p`
+  font-size: 12px;
+  line-height: 150%;
+  color: #122434;
+  margin: 0 19px;
+`;
 
 export default SearchList;
