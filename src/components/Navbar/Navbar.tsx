@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import React from 'react';
 
@@ -6,22 +6,22 @@ const Navbar = () => {
   return (
     <NavContainer>
       <div>
-        <Link to="/dashboard">Dashboard</Link>
+        <StyledLink to="/dashboard">Dashboard</StyledLink>
       </div>
       <div>
-        <Link to="/audience">Audience</Link>
+        <StyledLink to="/audience">Audience</StyledLink>
       </div>
       <div>
-        <Link to="/pricing">Pricing</Link>
+        <StyledLink to="/pricing">Pricing</StyledLink>
       </div>
       <div>
-        <Link to="/prospecting">Prospecting</Link>
+        <StyledLink to="/prospecting">Prospecting</StyledLink>
       </div>
       <div>
-        <Link to="/roi">ROI</Link>
+        <StyledLink to="/roi">ROI</StyledLink>
       </div>
       <div>
-        <Link to="/upgrade">Upgrade Membership</Link>
+        <StyledLink to="/upgrade">Upgrade Membership</StyledLink>
       </div>
     </NavContainer>
   );
@@ -32,7 +32,7 @@ const NavContainer = styled.nav`
   align-items: center;
   justify-content: center;
 `;
-const Link = styled(NavLink)`
+const StyledLink = styled(Link)`
   font-size: 12px;
   line-height: 150%;
   color: #122434;

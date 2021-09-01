@@ -3,12 +3,16 @@ import styled from 'styled-components';
 import { ReactSVG } from 'react-svg';
 import heart from '../../assets/icons/heart.svg';
 import heartLike from '../../assets/icons/heart-like.svg';
+import { Link } from 'react-router-dom';
+import { Row } from '../../ui/Row';
+import { GrayText } from '../../ui/GrayText';
+import { Subtitle } from '../../ui/Subtitle';
 
 interface CompanyItemProps {
   company: any;
 }
 const CompanyItem: React.FC<CompanyItemProps> = ({ company }) => {
-  const { country, city, state, street, zipCode, revenue } = company;
+  const { country, city, state, street, zipCode, revenue, id } = company;
   const address = street + '. ' + city + ', ' + state + ' ' + zipCode;
 
   const rev = (revenue: string) => {
@@ -27,14 +31,14 @@ const CompanyItem: React.FC<CompanyItemProps> = ({ company }) => {
         </Ranking>
       </LogoRanking>
       <div>
-        <Title>{company.name}</Title>
-        <GrayTextMB>
+        <Subtitle mb="12">{company.name}</Subtitle>
+        <GrayText>
           {address.length > 42 ? address.substring(0, 45) + '...' : address}
-        </GrayTextMB>
+        </GrayText>
         <GrayText>{company.fax || 'the phone number is missing'}</GrayText>
         <Data>
           <CSRFocusBlock>
-            <GrayTextMB>CSR Focus</GrayTextMB>
+            <GrayText>CSR Focus</GrayText>
             <Categories>
               <Category>Health</Category>
               <Category>Animals</Category>
@@ -42,7 +46,7 @@ const CompanyItem: React.FC<CompanyItemProps> = ({ company }) => {
             </Categories>
           </CSRFocusBlock>
           <RevenueBlock>
-            <GrayTextMB>Revenue</GrayTextMB>
+            <GrayText>Revenue</GrayText>
             <Revenue>
               ${' '}
               {rev(revenue).length > 9
@@ -55,7 +59,7 @@ const CompanyItem: React.FC<CompanyItemProps> = ({ company }) => {
           <LikeBtn>
             <ReactSVG src={company.like ? heartLike : heart} />
           </LikeBtn>
-          <LinkBtn>Profile</LinkBtn>
+          <LinkBtn to={`/dashboard/${id}`}>Profile</LinkBtn>
         </Buttons>
       </div>
     </Company>
@@ -91,12 +95,6 @@ const Ranking = styled.div`
   height: 59px;
   text-align: center;
 `;
-const Title = styled.h1`
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 145%;
-  margin-bottom: 12px;
-`;
 const Data = styled.div`
   display: flex;
   justify-content: space-between;
@@ -115,6 +113,7 @@ const RevenueBlock = styled.div`
 `;
 
 const Categories = styled.div`
+  margin-top: 4px;
   display: flex;
   justify-content: space-between;
 `;
@@ -123,8 +122,10 @@ const Revenue = styled.div`
   font-size: 12px;
   line-height: 150%;
   white-space: nowrap;
+  margin-top: 4px;
 `;
 const Category = styled(Revenue)`
+  margin-top: 0;
   margin-right: 16px;
 `;
 const Buttons = styled.div`
@@ -136,7 +137,7 @@ const LikeBtn = styled.button`
   border: 1px solid #e8e8e8;
   border-radius: 6px;
   cursor: pointer;
-  background-color: white;
+  background: white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -149,15 +150,19 @@ const LikeBtn = styled.button`
     border: 1px solid #f05658;
   }
 `;
-const LinkBtn = styled.button`
+const LinkBtn = styled(Link)`
   padding: 10px;
   border: 1px solid #2baee0;
   border-radius: 6px;
   cursor: pointer;
-  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
+  font-size: 12px;
+  line-height: 150%;
+  color: #122434;
   transition: 0.2s;
-  outline: none;
   &:hover {
     background: #ebf9ff;
     color: #2baee0;
@@ -166,14 +171,6 @@ const LinkBtn = styled.button`
     background: #caf0ff;
     color: #2baee0;
   }
-`;
-const GrayText = styled.p`
-  font-size: 12px;
-  line-height: 150%;
-  color: #737373;
-`;
-const GrayTextMB = styled(GrayText)`
-  margin-bottom: 4px;
 `;
 
 export default CompanyItem;
