@@ -15,6 +15,7 @@ import { getCompaniesState } from '../../store/store';
 import Spinner from '../../ui/Spinner';
 import { numberWithCommas } from '../../utils/NumberWithCommas';
 import { TextBold } from '../../ui/TextBold';
+import { Wrapper } from '../../ui/Wrapper';
 
 interface CompanyPageProps {}
 const CompanyPage: React.FC<CompanyPageProps> = ({}) => {
@@ -163,10 +164,6 @@ const CompanyPage: React.FC<CompanyPageProps> = ({}) => {
       </Wrapper>
     );
 };
-const Wrapper = styled.div`
-  margin: 0 auto;
-  width: 1200px;
-`;
 const Container = styled.div`
   margin-top: 32px;
   padding-bottom: 60px;

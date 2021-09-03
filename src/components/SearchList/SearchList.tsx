@@ -13,6 +13,7 @@ import UploadIcon from '../../assets/icons/UploadIcon';
 import MailIcon from '../../assets/icons/MailIcon';
 import FolderPlusIcon from '../../assets/icons/FolderPlusIcon';
 import ModalSupport from '../../modals/ModalSupport';
+import { Wrapper } from '../../ui/Wrapper';
 
 interface BoardProps {}
 const SearchList: React.FC<BoardProps> = ({}) => {
@@ -50,18 +51,20 @@ const SearchList: React.FC<BoardProps> = ({}) => {
               </Action>
             </Row>
             <Row>
-              <Arrow
-                onClick={() =>
-                  dispatch(
-                    addCompanies({
-                      page: stateCompany.currentPage - 1,
-                      limit: 12,
-                    })
-                  )
-                }
-              >
-                <ReactSVG src={prev} />
-              </Arrow>
+              {stateCompany.currentPage !== 1 && (
+                <Arrow
+                  onClick={() =>
+                    dispatch(
+                      addCompanies({
+                        page: stateCompany.currentPage - 1,
+                        limit: 12,
+                      })
+                    )
+                  }
+                >
+                  <ReactSVG src={prev} />
+                </Arrow>
+              )}
               <PagesText>
                 {12 * stateCompany.currentPage + 1 - 12}-
                 {12 * stateCompany.currentPage} of {stateCompany.totalCompanies}
@@ -89,10 +92,7 @@ const SearchList: React.FC<BoardProps> = ({}) => {
       </Wrapper>
     );
 };
-const Wrapper = styled.div`
-  margin: 0 auto;
-  width: 1200px;
-`;
+
 const Container = styled.div`
   padding: 32px 0;
 `;

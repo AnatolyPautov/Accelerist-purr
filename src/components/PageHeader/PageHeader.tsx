@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 import { Text } from '../../ui/Text';
 import { css } from 'styled-components';
 import MailIcon from '../../assets/icons/MailIcon';
+import { Wrapper } from '../../ui/Wrapper';
 
 interface SearchListProps {
   name?: string;
@@ -33,7 +34,11 @@ const PageHeader: React.FC<SearchListProps> = ({ name }) => {
         ) : (
           <Row>
             <SearchTitle>Search</SearchTitle>
-            <SearchInput width="715" background="#F1F4F5" setting="setting" />
+            <SearchInput
+              width="715"
+              background="#F1F4F5"
+              searchList="searchList"
+            />
           </Row>
         )}
       </Wrapper>
@@ -47,13 +52,6 @@ const SearchHeader = styled.div`
   width: 100%;
   height: 96px;
   background-color: white;
-`;
-const Wrapper = styled.div`
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
 `;
 const SearchTitle = styled.h1`
   font-weight: 500;

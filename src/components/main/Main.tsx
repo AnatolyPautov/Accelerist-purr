@@ -34,13 +34,7 @@ const Main: React.FC<LoginProps> = ({}) => {
 };
 
 const Container = styled.div`
-  width: 100%;
   height: 100%;
-  min-width: 1200px;
-`;
-const Wrapper = styled.div`
-  margin: 0 auto;
-  width: 1200px;
 `;
 
 export default Main;

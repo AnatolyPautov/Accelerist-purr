@@ -8,27 +8,26 @@ import { useAppDispatch } from '../../store/store';
 interface SearchInputProps {
   width?: string;
   background?: string;
-  setting?: string;
+  searchList?: string;
 }
 const SearchInput: React.FC<SearchInputProps> = ({
   width,
   background,
-  setting,
+  searchList,
 }) => {
   const [value, setValue] = React.useState<string>();
 
   const dispatch = useAppDispatch();
   return (
-    <SearchContainer>
+    <SearchContainer searchList={searchList} width={width}>
       <Input
         onChange={(e) => setValue(e.target.value)}
         type="text"
         placeholder="Search"
         value={value}
-        width={width}
         background={background}
       />
-      {setting && (
+      {searchList && (
         <Setting>
           <SettingsSearchIcon />
         </Setting>
@@ -41,14 +40,21 @@ const SearchInput: React.FC<SearchInputProps> = ({
     </SearchContainer>
   );
 };
-
-const SearchContainer = styled.div`
+type SearchContainerProps = {
+  searchList?: string;
+  width?: string;
+};
+const SearchContainer = styled.div<SearchContainerProps>`
   position: relative;
-  /* visibility: hidden; */
+  width: 100%;
+  max-width: ${({ width }) => (width ? width + 'px' : '365px')};
+  flex: 1 1 auto;
+  @media (max-width: 1110px) {
+    display: ${({ searchList }) => (searchList ? 'block' : 'none')};
+  }
 `;
 
 type InputProps = {
-  width?: string;
   background?: string;
 };
 const Input = styled.input<InputProps>`
@@ -57,7 +63,7 @@ const Input = styled.input<InputProps>`
   outline: none;
   border: none;
   height: 36px;
-  width: ${({ width }) => (width ? width + 'px' : '365px')};
+  width: 100%;
   padding: 9px 24px;
 `;
 const Search = styled.div`
