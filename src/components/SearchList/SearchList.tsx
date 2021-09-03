@@ -4,81 +4,95 @@ import { ReactSVG } from 'react-svg';
 import styled from 'styled-components';
 import { getCompaniesState, useAppDispatch } from '../../store/store';
 import CompanyItem from '../companyItem';
-import folderPlus from '../../assets/icons/folder-plus.svg';
-import upload from '../../assets/icons/upload.svg';
-import mail from '../../assets/icons/mail.svg';
 import prev from '../../assets/icons/arrow-left.svg';
 import next from '../../assets/icons/arrow-right.svg';
 import { Row } from '../../ui/Row';
 import { addCompanies } from '../../store/companySlice';
+import Spinner from '../../ui/Spinner';
+import UploadIcon from '../../assets/icons/UploadIcon';
+import MailIcon from '../../assets/icons/MailIcon';
+import FolderPlusIcon from '../../assets/icons/FolderPlusIcon';
+import ModalSupport from '../../modals/ModalSupport';
 
 interface BoardProps {}
 const SearchList: React.FC<BoardProps> = ({}) => {
-  const state = useSelector(getCompaniesState);
+  const stateCompany = useSelector(getCompaniesState);
 
   const dispatch = useAppDispatch();
 
-  return (
-    <>
-      <Container>
-        <p>Found 32 companies</p>
-        <Panel>
-          <Row>
-            <Action>
-              <Icon>
-                <ReactSVG src={folderPlus} />
-              </Icon>
-              <p>Save List</p>
-            </Action>
-            <Action>
-              <Icon>
-                <ReactSVG src={upload} />
-              </Icon>
-              <p>Export to Excel</p>
-            </Action>
-            <Action>
-              <Icon>
-                <ReactSVG src={mail} />
-              </Icon>
-              <p>Accelerist Support</p>
-            </Action>
-          </Row>
-          <Row>
-            <Arrow
-              onClick={() =>
-                dispatch(
-                  addCompanies({ page: state.currentPage - 1, limit: 12 })
-                )
-              }
-            >
-              <ReactSVG src={prev} />
-            </Arrow>
-            {console.log(state.currentPage)}
-            <PagesText>
-              {12 * state.currentPage + 1 - 12}-{12 * state.currentPage} of{' '}
-              {state.totalCompanies}
-            </PagesText>
-            <Arrow
-              onClick={() =>
-                dispatch(
-                  addCompanies({ page: state.currentPage + 1, limit: 12 })
-                )
-              }
-            >
-              <ReactSVG src={next} />
-            </Arrow>
-          </Row>
-        </Panel>
-        <CompaniesContainer>
-          {state.companies.map((company, index) => (
-            <CompanyItem company={company} key={index} />
-          ))}
-        </CompaniesContainer>
-      </Container>
-    </>
-  );
+  if (stateCompany.loading) {
+    return <Spinner />;
+  } else
+    return (
+      <Wrapper>
+        {/* <ModalSupport /> */}
+        <Container>
+          <p>Found 32 companies</p>
+          <Panel>
+            <Row>
+              <Action>
+                <Icon>
+                  <FolderPlusIcon />
+                </Icon>
+                <p>Save List</p>
+              </Action>
+              <Action>
+                <Icon>
+                  <UploadIcon />
+                </Icon>
+                <p>Export to Excel</p>
+              </Action>
+              <Action>
+                <Icon>
+                  <MailIcon />
+                </Icon>
+                <p>Accelerist Support</p>
+              </Action>
+            </Row>
+            <Row>
+              <Arrow
+                onClick={() =>
+                  dispatch(
+                    addCompanies({
+                      page: stateCompany.currentPage - 1,
+                      limit: 12,
+                    })
+                  )
+                }
+              >
+                <ReactSVG src={prev} />
+              </Arrow>
+              <PagesText>
+                {12 * stateCompany.currentPage + 1 - 12}-
+                {12 * stateCompany.currentPage} of {stateCompany.totalCompanies}
+              </PagesText>
+              <Arrow
+                onClick={() =>
+                  dispatch(
+                    addCompanies({
+                      page: stateCompany.currentPage + 1,
+                      limit: 12,
+                    })
+                  )
+                }
+              >
+                <ReactSVG src={next} />
+              </Arrow>
+            </Row>
+          </Panel>
+          <CompaniesContainer>
+            {stateCompany.companies.map((company, index) => (
+              <CompanyItem company={company} key={index} />
+            ))}
+          </CompaniesContainer>
+        </Container>
+      </Wrapper>
+    );
 };
-
+const Wrapper = styled.div`
+  margin: 0 auto;
+  width: 1200px;
+`;
 const Container = styled.div`
   padding: 32px 0;
 `;

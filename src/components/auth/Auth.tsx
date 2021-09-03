@@ -26,7 +26,7 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
 `;
-const AuthHeader = styled.div`
+const AuthHeader = styled.header`
   background: #122434;
   height: 80px;
   display: flex;

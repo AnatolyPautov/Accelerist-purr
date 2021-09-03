@@ -2,206 +2,177 @@ import React from 'react';
 import styled from 'styled-components';
 import { css } from 'styled-components';
 import { ReactSVG } from 'react-svg';
-import facebook from '../../assets/icons/facebook.svg';
-import twitter from '../../assets/icons/twitter.svg';
-import heart from '../../assets/icons/heart.svg';
-import globe from '../../assets/icons/globe.svg';
-import phone from '../../assets/icons/phone.svg';
-import mapPin from '../../assets/icons/map-pin.svg';
+import globeIcon from '../../assets/icons/globe.svg';
+import phoneIcon from '../../assets/icons/phone.svg';
+import mapPinIcon from '../../assets/icons/map-pin.svg';
 import { Row } from '../../ui/Row';
 import { Text } from '../../ui/Text';
 import { Subtitle } from '../../ui/Subtitle';
 import { Title } from '../../ui/Title';
+import CompanyHeader from './CompanyHeader';
+import { useSelector } from 'react-redux';
+import { getCompaniesState } from '../../store/store';
+import Spinner from '../../ui/Spinner';
+import { numberWithCommas } from '../../utils/NumberWithCommas';
+import { TextBold } from '../../ui/TextBold';
 
 interface CompanyPageProps {}
 const CompanyPage: React.FC<CompanyPageProps> = ({}) => {
-  return (
-    <Container>
-      <CompanyHeader>
-        <Row>
-          <Logo>Logo</Logo>
-          <div>
-            <Row>
-              <Title mb={'4'}>NameCompany</Title>
-              <ReactSVG src={heart} />
-            </Row>
-            <Text containerStyled={CompanyDesc}>
-              Administration, Business Support and Waste Management Services
-            </Text>
-            <Row containerStyled={SocialStyle}>
-              <ReactSVG src={facebook} />
-              <ReactSVG src={twitter} />
-              <ReactSVG src={twitter} />
-            </Row>
-          </div>
-        </Row>
-      </CompanyHeader>
-      <Row containerStyled={Content}>
-        <Main>
-          <Title mb={'24'}>Business Description Products</Title>
-          <Subtitle mb={'16'}>Description</Subtitle>
-          <Desc>
-            We are a national, award-winning nonprofit that provides the most
-            flexible and accountable funding for K-12 teachers and schools with
-            our proprietary, easy-to-use education fundraising platform. Through
-            local impact, our goal is to give every child the tools they deserve
-            to succeed in school.
-          </Desc>
-          <Subtitle mb={'16'}>Products & Brand Descriptions</Subtitle>
-          <Desc>
-            We are a national, award-winning nonprofit that provides the most
-            flexible and accountable funding for K-12 teachers and schools with
-            our proprietary, easy-to-use education fundraising platform. Through
-            local impact, our goal is to give every child the tools they deserve
-            to succeed in school.
-          </Desc>
-          <Subtitle mb={'16'}>Structure</Subtitle>
-          <Desc>Sole proprietorship</Desc>
-          <Subtitle mb={'16'}>Reported</Subtitle>
-          <ReportedBlock>
-            <Row containerStyled={Reported}>
-              <Text>Revenue Reported</Text>
-              <p>$ 4,456,379</p>
-            </Row>
-            <Row containerStyled={Reported}>
-              <Text>Employees Reported</Text>
-              <p>42</p>
-            </Row>
-          </ReportedBlock>
-          <Subtitle mb={'16'}>Company Ticker</Subtitle>
-          <Row containerStyled={TickerBlock}>
-            <Ticker>
-              <p>WMT</p>
-              <Text>London Stock Exchange</Text>
-            </Ticker>
-            <Ticker>
-              <p>WMT</p>
-              <Text>Nasdaq</Text>
-            </Ticker>
-            <Ticker>
-              <p>WMT</p>
-              <Text>Stock Exchange of Singapore</Text>
-            </Ticker>
+  const stateCompany = useSelector(getCompaniesState);
+  const {
+    revenue,
+    descriptionList,
+    employeeCount,
+    ticker,
+    website,
+    phone,
+    city,
+    state,
+    street,
+    zipCode,
+  } = stateCompany.currentCompany;
+  const address = street + '. ' + city + ', ' + state + ' ' + zipCode;
+
+  if (stateCompany.loading) {
+    return <Spinner />;
+  } else
+    return (
+      <Wrapper>
+        <Container>
+          <CompanyHeader />
+          <Row containerStyled={Content}>
+            <Main>
+              <Title mb={'24'}>Business Description Products</Title>
+              <Subtitle mb={'16'}>Description</Subtitle>
+              <Desc>{descriptionList}</Desc>
+              {/* <Subtitle mb={'16'}>Products & Brand Descriptions</Subtitle>
+              <Desc>
+              </Desc> */}
+              <Subtitle mb={'16'}>Structure</Subtitle>
+              <Desc>Sole proprietorship</Desc>
+              <Subtitle mb={'16'}>Reported</Subtitle>
+              <ReportedBlock>
+                <Row containerStyled={Reported}>
+                  <Text mb={'4'}>Revenue Reported</Text>
+                  <DescBoldLittle>$ {numberWithCommas(revenue)}</DescBoldLittle>
+                </Row>
+                <Row containerStyled={Reported}>
+                  <Text mb={'4'}>Employees Reported</Text>
+                  <DescBoldLittle>
+                    {numberWithCommas(employeeCount)}
+                  </DescBoldLittle>
+                </Row>
+              </ReportedBlock>
+              <Subtitle mb={'16'}>Company Ticker</Subtitle>
+              <Row containerStyled={TickerBlock}>
+                <Ticker>
+                  <TextBold>{ticker || 'No information'}</TextBold>
+                </Ticker>
+              </Row>
+              <Subtitle mb={'16'}>Company Contacts</Subtitle>
+              <Contacts>
+                <Contact>
+                  <Icon>
+                    <ReactSVG src={globeIcon} />
+                  </Icon>
+                  <a href={website}>{website}</a>
+                </Contact>
+                <Contact>
+                  <Icon>
+                    <ReactSVG src={phoneIcon} />
+                  </Icon>
+                  <a href={`tel:${phone}`}>{phone}</a>
+                </Contact>
+                <Contact>
+                  <Icon>
+                    <ReactSVG src={mapPinIcon} />
+                  </Icon>
+                  <p>{address}</p>
+                </Contact>
+              </Contacts>
+              <Title mb={'24'}>Social Impact</Title>
+              <SocialImpact>
+                <Row>
+                  <ImpactBlock>
+                    <Subtitle mb={'16'}>Type of Investment</Subtitle>
+                    <ImpactList>
+                      <li>sdfsdfs</li>
+                      <li>dfsdf</li>
+                      <li>sdfsd</li>
+                      <li>fsdf</li>
+                    </ImpactList>
+                  </ImpactBlock>
+                  <ImpactBlock>
+                    <Subtitle mb={'16'}>CRS Focus</Subtitle>
+                    <ImpactList>
+                      <li>sdfsdfs</li>
+                      <li>dfsdf</li>
+                      <li>sdfsd</li>
+                      <li>fsdf</li>
+                    </ImpactList>
+                  </ImpactBlock>
+                </Row>
+              </SocialImpact>
+              <Subtitle mb={'16'}>SDG Goal Alignment</Subtitle>
+              <SDGContainer>
+                <Row>
+                  <SDGBlock></SDGBlock>
+                  <SDGBlock></SDGBlock>
+                  <SDGBlock></SDGBlock>
+                </Row>
+              </SDGContainer>
+              <Subtitle mb={'16'}>Contributions</Subtitle>
+              <ReportedBlock>
+                <Row containerStyled={Сontribution}>
+                  <Text>Cash Contributions</Text>
+                  <p>$ 4,456,379</p>
+                </Row>
+                <Row containerStyled={Сontribution}>
+                  <Text>Employees Reported</Text>
+                  <p>42</p>
+                </Row>
+                <Row containerStyled={Сontribution}>
+                  <Text>Employees Reported</Text>
+                  <p>42</p>
+                </Row>
+                <Row containerStyled={Сontribution}>
+                  <Text>In-Kind Contributions</Text>
+                  <p>42</p>
+                </Row>
+              </ReportedBlock>
+              <Subtitle mb={'16'}>Charitable partners</Subtitle>
+              <CharitablePartnersContainer>
+                <CharitablePartnersList>
+                  <li>sdfsdfs</li>
+                  <li>dfsdf</li>
+                  <li>sdfsd</li>
+                  <li>fsdf</li>
+                  <li>fsdf</li>
+                  <li>fsdf</li>
+                  <li>fsdf</li>
+                </CharitablePartnersList>
+              </CharitablePartnersContainer>
+              <Subtitle mb={'22'}>Partnership and Program Details</Subtitle>
+              <WebsiteLink href="https://ru.linkedin.com/">
+                Go to the company's website
+              </WebsiteLink>
+            </Main>
+            <div></div>
           </Row>
-          <Subtitle mb={'16'}>Company Contacts</Subtitle>
-          <Contacts>
-            <Row>
-              <Contact>
-                <Icon>
-                  <ReactSVG src={globe} />
-                </Icon>
-                <a href="ageliromir.com">ageliromir.com</a>
-              </Contact>
-              <Contact>
-                <Icon>
-                  <ReactSVG src={phone} />
-                </Icon>
-                <a href="tel:(702) 555-0122">(702) 555-0122</a>
-              </Contact>
-              <Contact>
-                <Icon>
-                  <ReactSVG src={mapPin} />
-                </Icon>
-                <p>4140 Parker Rd. Allentown, New Mexico 31134</p>
-              </Contact>
-            </Row>
-          </Contacts>
-          <Title mb={'24'}>Social Impact</Title>
-          <SocialImpact>
-            <Row>
-              <ImpactBlock>
-                <Subtitle mb={'16'}>Type of Investment</Subtitle>
-                <ImpactList>
-                  <li>sdfsdfs</li>
-                  <li>dfsdf</li>
-                  <li>sdfsd</li>
-                  <li>fsdf</li>
-                </ImpactList>
-              </ImpactBlock>
-              <ImpactBlock>
-                <Subtitle mb={'16'}>CRS Focus</Subtitle>
-                <ImpactList>
-                  <li>sdfsdfs</li>
-                  <li>dfsdf</li>
-                  <li>sdfsd</li>
-                  <li>fsdf</li>
-                </ImpactList>
-              </ImpactBlock>
-            </Row>
-          </SocialImpact>
-          <Subtitle mb={'16'}>SDG Goal Alignment</Subtitle>
-          <SDGContainer>
-            <Row>
-              <SDGBlock></SDGBlock>
-              <SDGBlock></SDGBlock>
-              <SDGBlock></SDGBlock>
-            </Row>
-          </SDGContainer>
-          <Subtitle mb={'16'}>Contributions</Subtitle>
-          <ReportedBlock>
-            <Row containerStyled={Сontribution}>
-              <Text>Cash Contributions</Text>
-              <p>$ 4,456,379</p>
-            </Row>
-            <Row containerStyled={Сontribution}>
-              <Text>Employees Reported</Text>
-              <p>42</p>
-            </Row>
-            <Row containerStyled={Сontribution}>
-              <Text>Employees Reported</Text>
-              <p>42</p>
-            </Row>
-            <Row containerStyled={Сontribution}>
-              <Text>In-Kind Contributions</Text>
-              <p>42</p>
-            </Row>
-          </ReportedBlock>
-          <Subtitle mb={'16'}>Charitable partners</Subtitle>
-          <CharitablePartnersContainer>
-            <CharitablePartnersList>
-              <li>sdfsdfs</li>
-              <li>dfsdf</li>
-              <li>sdfsd</li>
-              <li>fsdf</li>
-              <li>fsdf</li>
-              <li>fsdf</li>
-              <li>fsdf</li>
-              <li>fsdf</li>
-            </CharitablePartnersList>
-          </CharitablePartnersContainer>
-          <Subtitle mb={'22'}>Partnership and Program Details</Subtitle>
-        </Main>
-        <div></div>
-      </Row>
-    </Container>
-  );
+        </Container>
+      </Wrapper>
+    );
 };
+const Wrapper = styled.div`
+  margin: 0 auto;
+  width: 1200px;
+`;
 const Container = styled.div`
   margin-top: 32px;
   padding-bottom: 60px;
   max-width: 1096px;
   border-radius: 6px;
   overflow: hidden;
-`;
-const CompanyHeader = styled.div`
-  padding: 40px;
-  display: flex;
-  justify-content: space-between;
-  background: #f2f2f2;
-`;
-const Logo = styled.div`
-  background: #ffffff;
-  border-radius: 8px;
-  width: 100px;
-  height: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 24px;
-`;
-const SocialStyle = css`
-  width: 84px;
-  justify-content: space-between;
 `;
 const Content = css`
   background: #ffffff;
@@ -247,13 +218,12 @@ const TickerBlock = css`
   margin-bottom: 32px;
 `;
 const Ticker = styled.div`
-  width: 206px;
   border: 1px solid rgb(232, 232, 232);
   border-radius: 6px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 24px 0 24px 24px;
+  padding: 24px;
 `;
 
 const Contacts = styled.div`
@@ -261,6 +231,9 @@ const Contacts = styled.div`
   border: 1px solid #e8e8e8;
   border-radius: 6px;
   padding: 18px 0 18px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 const Contact = styled.div`
   height: 30px;
@@ -317,6 +290,14 @@ const CharitablePartnersContainer = styled(SocialImpact)`
 `;
 const CharitablePartnersList = styled(ImpactList)`
   border: none;
+  display: flex;
+  flex-wrap: wrap;
+  li {
+    width: 50%;
+  }
+`;
+const WebsiteLink = styled.a`
+  color: #2baee0;
 `;
 /// TEXT //////
 const Desc = styled.p`
@@ -325,8 +306,12 @@ const Desc = styled.p`
   color: #122434;
   margin-bottom: 24px;
 `;
-const CompanyDesc = css`
-  margin-bottom: 22px;
+const DescBoldLittle = styled.p`
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 145%;
+  color: #122434;
+  white-space: nowrap;
 `;
 
 export default CompanyPage;

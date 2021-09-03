@@ -19,13 +19,16 @@ const Main: React.FC<LoginProps> = ({}) => {
   return (
     <Container>
       <Header />
-      <PageHeader />
-      <Wrapper>
-        <Switch>
-          <Route exact path="/dashboard" component={SearchList} />
-          <Route path="/dashboard/:number" component={CompanyPage} />
-        </Switch>
-      </Wrapper>
+      <Switch>
+        <Route exact path="/dashboard">
+          <PageHeader />
+          <SearchList />
+        </Route>
+        <Route path="/dashboard/:number">
+          <PageHeader name="company" />
+          <CompanyPage />
+        </Route>
+      </Switch>
     </Container>
   );
 };

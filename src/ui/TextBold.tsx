@@ -8,7 +8,7 @@ interface AppTextProps {
   mb?: string;
 }
 
-export const Text: FC<AppTextProps> = ({
+export const TextBold: FC<AppTextProps> = ({
   children,
   containerStyled = {},
   color,
@@ -26,9 +26,11 @@ const StyledText = styled.p<{
   $color?: CSSProp;
   $mb?: CSSProp;
 }>`
-  font-size: 12px;
-  line-height: 150%;
-  color: ${(props) => props.$color || '#737373'};
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 148%;
+  white-space: nowrap;
+  color: ${(props) => props.$color || '#122434'};
   margin-bottom: ${(props) => props.$mb + 'px'};
   ${({ $CSS }) => $CSS};
 `;

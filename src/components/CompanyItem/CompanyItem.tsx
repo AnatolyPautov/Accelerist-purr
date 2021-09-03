@@ -4,9 +4,11 @@ import { ReactSVG } from 'react-svg';
 import heart from '../../assets/icons/heart.svg';
 import heartLike from '../../assets/icons/heart-like.svg';
 import { Link } from 'react-router-dom';
-import { Row } from '../../ui/Row';
 import { Text } from '../../ui/Text';
 import { Subtitle } from '../../ui/Subtitle';
+import { useAppDispatch } from '../../store/store';
+import { addCompany } from '../../store/companySlice';
+import { numberWithCommas } from '../../utils/NumberWithCommas';
 
 interface CompanyItemProps {
   company: any;
@@ -16,15 +18,7 @@ const CompanyItem: React.FC<CompanyItemProps> = ({ company }) => {
     company;
   const address = street + '. ' + city + ', ' + state + ' ' + zipCode;
 
-  const rev = (revenue: string) => {
-    if (revenue) {
-      let parts = revenue.toString().split('.');
-      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-      return parts.join(',');
-    } else {
-      return '0';
-    }
-  };
+  const dispatch = useAppDispatch();
 
   return (
     <Company>
@@ -35,37 +29,36 @@ const CompanyItem: React.FC<CompanyItemProps> = ({ company }) => {
           <p>{score}</p>
         </Ranking>
       </LogoRanking>
-      <div>
-        <Subtitle mb="12">{company.name}</Subtitle>
-        <Text>
-          {address.length > 42 ? address.substring(0, 45) + '...' : address}
-        </Text>
-        <Text>{fax || 'the phone number is missing'}</Text>
+      <Info>
+        <TextBlock>
+          <Subtitle mb="12">{company.name}</Subtitle>
+          <Text>{address}</Text>
+          <Text>{fax || 'the phone number is missing'}</Text>
+        </TextBlock>
         <Data>
           <CSRFocusBlock>
             <Text>CSR Focus</Text>
             <Categories>
-              <Category>Health</Category>
-              <Category>Animals</Category>
-              <Category>Education</Category>
+              <Category>No Information</Category>
             </Categories>
           </CSRFocusBlock>
           <RevenueBlock>
             <Text>Revenue</Text>
-            <Revenue>
-              {rev(revenue).length > 9
-                ? rev(revenue).substring(0, 9) + '...'
-                : rev(revenue)}
-            </Revenue>
+            <Revenue>$ {numberWithCommas(revenue)}</Revenue>
           </RevenueBlock>
         </Data>
         <Buttons>
           <LikeBtn>
             <ReactSVG src={company.like ? heartLike : heart} />
           </LikeBtn>
-          <LinkBtn to={`/dashboard/${id}`}>Profile</LinkBtn>
+          <LinkBtn
+            onClick={() => dispatch(addCompany(id))}
+            to={`/dashboard/${id}`}
+          >
+            Profile
+          </LinkBtn>
         </Buttons>
-      </div>
+      </Info>
     </Company>
   );
 };
@@ -87,7 +80,11 @@ const LogoRanking = styled.div`
   width: 168px;
   margin-right: 16px;
 `;
+const Info = styled.div`
+  width: 100%;
+`;
 const Logo = styled.div`
+  min-width: 166px;
   height: 156px;
   border-bottom: 1px solid #e8e8e8;
   display: flex;
@@ -99,16 +96,22 @@ const Ranking = styled.div`
   height: 59px;
   text-align: center;
 `;
+const TextBlock = styled.div`
+  min-height: 100px;
+`;
 const Data = styled.div`
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #e8e8e8;
   margin: 28px 0 24px;
+  width: 100%;
 `;
 const CSRFocusBlock = styled.div`
   padding: 0 5px 12px 0;
+  width: 50%;
 `;
 const RevenueBlock = styled.div`
+  width: 50%;
   padding: 0 0 12px 20px;
   border-left: 1px solid #e8e8e8;
   display: flex;
@@ -120,7 +123,7 @@ const Categories = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-const Revenue = styled.div`
+const Revenue = styled.p`
   font-weight: 500;
   font-size: 12px;
   line-height: 150%;

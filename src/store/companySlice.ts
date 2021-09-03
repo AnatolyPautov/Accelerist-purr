@@ -6,6 +6,7 @@ interface CompaniesSliceState {
   totalCompanies: number;
   currentPage: number;
   loading: boolean;
+  currentCompany: any;
 }
 
 const initialState: CompaniesSliceState = {
@@ -13,6 +14,7 @@ const initialState: CompaniesSliceState = {
   totalCompanies: 2054,
   currentPage: 1,
   loading: false,
+  currentCompany: {},
 };
 
 export const companiesSlice = createSlice({
@@ -29,9 +31,18 @@ export const companiesSlice = createSlice({
       state.currentPage = Number(payload.meta.currentPage);
       state.loading = false;
     },
+    addCompany(state, { payload }) {
+      state.loading = true;
+    },
+    setCompany(state, { payload }) {
+      console.log(payload);
+      state.currentCompany = payload;
+      state.loading = false;
+    },
   },
 });
 
-export const { addCompanies, setCompanies } = companiesSlice.actions;
+export const { addCompanies, setCompanies, addCompany, setCompany } =
+  companiesSlice.actions;
 
 export default companiesSlice.reducer;
