@@ -16,7 +16,7 @@ interface SearchListProps {
 const PageHeader: React.FC<SearchListProps> = ({ name }) => {
   const history = useHistory();
   return (
-    <SearchHeader>
+    <Container>
       <Wrapper>
         {name === 'company' ? (
           <Row containerStyled={RowWidth}>
@@ -32,26 +32,30 @@ const PageHeader: React.FC<SearchListProps> = ({ name }) => {
             </SearchBlock>
           </Row>
         ) : (
-          <Row>
+          <SearchHeader>
             <SearchTitle>Search</SearchTitle>
             <SearchInput
               width="715"
               background="#F1F4F5"
               searchList="searchList"
             />
-          </Row>
+          </SearchHeader>
         )}
       </Wrapper>
-    </SearchHeader>
+    </Container>
   );
 };
 
-const SearchHeader = styled.div`
+const Container = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
   height: 96px;
   background-color: white;
+  @media (max-width: 525px) {
+    background-color: transparent;
+    height: auto;
+  }
 `;
 const SearchTitle = styled.h1`
   font-weight: 500;
@@ -59,6 +63,11 @@ const SearchTitle = styled.h1`
   line-height: 150%;
   color: #122434;
   margin-right: 82px;
+  @media (max-width: 525px) {
+    font-size: 16px;
+    line-height: 145%;
+    margin: 16px 0 8px;
+  }
 `;
 const RowWidth = css`
   width: 100%;
@@ -84,5 +93,11 @@ const SearchBlock = styled.div`
 const TextMargin = css`
   margin-left: 10px;
 `;
-
+const SearchHeader = styled.div`
+  display: flex;
+  align-items: center;
+  @media (max-width: 525px) {
+    display: block;
+  }
+`;
 export default PageHeader;

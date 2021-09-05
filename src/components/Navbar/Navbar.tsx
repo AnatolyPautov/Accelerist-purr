@@ -4,26 +4,55 @@ import React from 'react';
 interface NavbarProps {
   responsive?: string;
   menuActive?: boolean;
+  setMenuActive(menuActive: boolean): void;
 }
-const Navbar: React.FC<NavbarProps> = ({ responsive, menuActive }) => {
+const Navbar: React.FC<NavbarProps> = ({
+  responsive,
+  menuActive,
+  setMenuActive,
+}) => {
   return (
     <NavContainer responsive={responsive} menuActive={menuActive}>
-      <StyledLink responsive={responsive} to="/dashboard">
+      <StyledLink
+        responsive={responsive}
+        onClick={() => setMenuActive(false)}
+        to="/dashboard"
+      >
         Dashboard
       </StyledLink>
-      <StyledLink responsive={responsive} to="/audience">
+      <StyledLink
+        responsive={responsive}
+        onClick={() => setMenuActive(false)}
+        to="/audience"
+      >
         Audience
       </StyledLink>
-      <StyledLink responsive={responsive} to="/pricing">
+      <StyledLink
+        responsive={responsive}
+        onClick={() => setMenuActive(false)}
+        to="/pricing"
+      >
         Pricing
       </StyledLink>
-      <StyledLink responsive={responsive} to="/prospecting">
+      <StyledLink
+        responsive={responsive}
+        onClick={() => setMenuActive(false)}
+        to="/prospecting"
+      >
         Prospecting
       </StyledLink>
-      <StyledLink responsive={responsive} to="/roi">
+      <StyledLink
+        responsive={responsive}
+        onClick={() => setMenuActive(false)}
+        to="/roi"
+      >
         ROI
       </StyledLink>
-      <StyledLink responsive={responsive} to="/upgrade">
+      <StyledLink
+        responsive={responsive}
+        onClick={() => setMenuActive(false)}
+        to="/upgrade"
+      >
         Upgrade Membership
       </StyledLink>
     </NavContainer>

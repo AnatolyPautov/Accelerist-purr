@@ -37,4 +37,13 @@ const StyledWrapper = styled.div<StyledRowProps>`
   @media (max-width: 750px) {
     max-width: 600px;
   }
+  @media (max-width: 620px) {
+    max-width: 500px;
+  }
+  @media (max-width: 525px) {
+    max-width: 400px;
+  }
+  @media (max-width: 420px) {
+    max-width: 340px;
+  }
 `;

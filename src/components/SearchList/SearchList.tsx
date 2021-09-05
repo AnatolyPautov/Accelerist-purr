@@ -14,12 +14,11 @@ import MailIcon from '../../assets/icons/MailIcon';
 import FolderPlusIcon from '../../assets/icons/FolderPlusIcon';
 import ModalSupport from '../../modals/ModalSupport';
 import { Wrapper } from '../../ui/Wrapper';
+import Pagination from './Pagination';
 
 interface BoardProps {}
 const SearchList: React.FC<BoardProps> = ({}) => {
   const stateCompany = useSelector(getCompaniesState);
-
-  const dispatch = useAppDispatch();
 
   if (stateCompany.loading) {
     return <Spinner />;
@@ -35,59 +34,39 @@ const SearchList: React.FC<BoardProps> = ({}) => {
                 <Icon>
                   <FolderPlusIcon />
                 </Icon>
-                <p>Save List</p>
+                <p>
+                  Save<span> List</span>
+                </p>
               </Action>
               <Action>
                 <Icon>
                   <UploadIcon />
                 </Icon>
-                <p>Export to Excel</p>
+                <p>
+                  Export<span> to Excel</span>
+                </p>
               </Action>
               <Action>
                 <Icon>
                   <MailIcon />
                 </Icon>
-                <p>Accelerist Support</p>
+                <p>
+                  <span>Accelerist </span>Support
+                </p>
               </Action>
             </Row>
-            <Row>
-              {stateCompany.currentPage !== 1 && (
-                <Arrow
-                  onClick={() =>
-                    dispatch(
-                      addCompanies({
-                        page: stateCompany.currentPage - 1,
-                        limit: 12,
-                      })
-                    )
-                  }
-                >
-                  <ReactSVG src={prev} />
-                </Arrow>
-              )}
-              <PagesText>
-                {12 * stateCompany.currentPage + 1 - 12}-
-                {12 * stateCompany.currentPage} of {stateCompany.totalCompanies}
-              </PagesText>
-              <Arrow
-                onClick={() =>
-                  dispatch(
-                    addCompanies({
-                      page: stateCompany.currentPage + 1,
-                      limit: 12,
-                    })
-                  )
-                }
-              >
-                <ReactSVG src={next} />
-              </Arrow>
-            </Row>
+            <PaginationTop>
+              <Pagination />
+            </PaginationTop>
           </Panel>
           <CompaniesContainer>
             {stateCompany.companies.map((company, index) => (
               <CompanyItem company={company} key={index} />
             ))}
           </CompaniesContainer>
+          <PaginationBottom>
+            <Pagination />
+          </PaginationBottom>
         </Container>
       </Wrapper>
     );
@@ -95,6 +74,9 @@ const SearchList: React.FC<BoardProps> = ({}) => {
 
 const Container = styled.div`
   padding: 32px 0;
+  @media (max-width: 525px) {
+    padding: 20px 0;
+  }
 `;
 const CompaniesContainer = styled.div`
   margin-top: 27px;
@@ -103,36 +85,49 @@ const CompaniesContainer = styled.div`
   align-items: center;
 `;
 const Panel = styled.div`
-  margin-top: 15px;
+  margin-top: 18px;
   max-width: 1096px;
   display: flex;
   justify-content: space-between;
 `;
 const Action = styled.div`
+  height: 30px;
   display: flex;
   align-items: center;
   margin-right: 37px;
   cursor: pointer;
   font-size: 12px;
-  line-height: 150%;
   color: #122434;
   transition: 0.5s;
   &:hover {
     text-shadow: 0 0 0.01px #122434, 0 0 0.01px #122434;
   }
+  span {
+    @media (max-width: 620px) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 750px) {
+    margin-right: 22px;
+  }
 `;
 const Icon = styled.div`
   margin-right: 17px;
+  @media (max-width: 750px) {
+    margin-right: 10px;
+  }
 `;
-const Arrow = styled.button`
-  background: transparent;
-  cursor: pointer;
+const PaginationTop = styled.div`
+  @media (max-width: 525px) {
+    display: none;
+  }
 `;
-const PagesText = styled.p`
-  font-size: 12px;
-  line-height: 150%;
-  color: #122434;
-  margin: 0 19px;
+const PaginationBottom = styled.div`
+  display: none;
+  @media (max-width: 525px) {
+    display: block;
+  }
 `;
 
 export default SearchList;

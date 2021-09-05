@@ -15,16 +15,16 @@ const SearchInput: React.FC<SearchInputProps> = ({
   background,
   searchList,
 }) => {
-  const [value, setValue] = React.useState<string>();
+  const [text, setText] = React.useState<string>();
 
   const dispatch = useAppDispatch();
   return (
     <SearchContainer searchList={searchList} width={width}>
       <Input
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => setText(e.target.value)}
         type="text"
         placeholder="Search"
-        value={value}
+        value={text}
         background={background}
       />
       {searchList && (
@@ -33,7 +33,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
         </Setting>
       )}
       <Search
-        onClick={() => dispatch(addCompanies({ page: 1, limit: 12, q: value }))}
+        onClick={() => dispatch(addCompanies({ page: 1, limit: 12, q: text }))}
       >
         <SearchIcon />
       </Search>
@@ -65,6 +65,8 @@ const Input = styled.input<InputProps>`
   height: 36px;
   width: 100%;
   padding: 9px 24px;
+  font-size: 12px;
+  line-height: 150%;
 `;
 const Search = styled.div`
   position: absolute;

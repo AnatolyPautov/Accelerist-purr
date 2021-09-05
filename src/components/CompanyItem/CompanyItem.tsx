@@ -84,6 +84,9 @@ const Company = styled.div`
   margin-bottom: 24px;
   &:nth-child(2n + 1) {
     margin-right: 24px;
+    @media (max-width: 420px) {
+      margin-right: 0;
+    }
   }
   @media (max-width: 1170px) {
     max-width: 340px;
