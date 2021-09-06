@@ -4,10 +4,7 @@ import { ReactSVG } from 'react-svg';
 import styled from 'styled-components';
 import { getCompaniesState, useAppDispatch } from '../../store/store';
 import CompanyItem from '../companyItem';
-import prev from '../../assets/icons/arrow-left.svg';
-import next from '../../assets/icons/arrow-right.svg';
 import { Row } from '../../ui/Row';
-import { addCompanies } from '../../store/companySlice';
 import Spinner from '../../ui/Spinner';
 import UploadIcon from '../../assets/icons/UploadIcon';
 import MailIcon from '../../assets/icons/MailIcon';
@@ -27,7 +24,7 @@ const SearchList: React.FC<BoardProps> = ({}) => {
       <Wrapper>
         {/* <ModalSupport /> */}
         <Container>
-          <p>Found 32 companies</p>
+          <p>Found {stateCompany.totalCompanies} companies</p>
           <Panel>
             <Row>
               <Action>

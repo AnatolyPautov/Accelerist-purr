@@ -14,7 +14,7 @@ const Main: React.FC<LoginProps> = ({}) => {
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
-    dispatch(addCompanies({ page: 1, limit: 10 }));
+    dispatch(addCompanies({ page: 1, limit: 12 }));
   }, [dispatch]);
   return (
     <Container>

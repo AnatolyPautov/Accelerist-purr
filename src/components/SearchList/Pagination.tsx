@@ -22,6 +22,7 @@ const Pagination: React.FC<BoardProps> = ({}) => {
               addCompanies({
                 page: stateCompany.currentPage - 1,
                 limit: 12,
+                q: stateCompany.searchParams.q,
               })
             )
           }
@@ -30,21 +31,27 @@ const Pagination: React.FC<BoardProps> = ({}) => {
         </Arrow>
       )}
       <PagesText>
-        {12 * stateCompany.currentPage + 1 - 12}-{12 * stateCompany.currentPage}{' '}
+        {12 * stateCompany.currentPage + 1 - 12}-
+        {stateCompany.currentPage === stateCompany.totalPages
+          ? stateCompany.totalCompanies
+          : 12 * stateCompany.currentPage}{' '}
         of {stateCompany.totalCompanies}
       </PagesText>
-      <Arrow
-        onClick={() =>
-          dispatch(
-            addCompanies({
-              page: stateCompany.currentPage + 1,
-              limit: 12,
-            })
-          )
-        }
-      >
-        <ReactSVG src={next} />
-      </Arrow>
+      {stateCompany.currentPage !== stateCompany.totalPages && (
+        <Arrow
+          onClick={() =>
+            dispatch(
+              addCompanies({
+                page: stateCompany.currentPage + 1,
+                limit: 12,
+                q: stateCompany.searchParams.q,
+              })
+            )
+          }
+        >
+          <ReactSVG src={next} />
+        </Arrow>
+      )}
     </PaginationContainer>
   );
 };
