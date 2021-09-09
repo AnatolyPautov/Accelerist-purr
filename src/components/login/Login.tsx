@@ -5,7 +5,11 @@ import * as Types from '../../types/types';
 import { ReactSVG } from 'react-svg';
 import linkedin from '../../assets/icons/linkedin.svg';
 import eyeoff from '../../assets/icons/eye-off.svg';
+import eye from '../../assets/icons/eye.svg';
 import { NavLink } from 'react-router-dom';
+import { Tab } from '../../ui/Tab';
+import { useHistory } from 'react-router';
+import { CheckBox } from '../../ui/Checkbox';
 
 interface LoginProps {}
 
@@ -19,6 +23,7 @@ const Login: React.FC<LoginProps> = ({}) => {
   };
 
   const required = (value: string) => (value ? undefined : 'Required');
+  const history = useHistory();
 
   return (
     <Form
@@ -26,10 +31,12 @@ const Login: React.FC<LoginProps> = ({}) => {
       render={({ handleSubmit, values }) => (
         <FormContainer onSubmit={handleSubmit}>
           <FormTitle>Welcome to Accelerist</FormTitle>
-          <Tabs>
-            <Tab to="/signup">Register</Tab>
-            <TabActive to="/login">Login</TabActive>
-          </Tabs>
+          <TabContainer>
+            <Tab onClick={() => history.push('/signup')}>Register</Tab>
+            <Tab active={true} onClick={() => history.push('/login')}>
+              Login
+            </Tab>
+          </TabContainer>
           <Inputs>
             <label>Email</label>
             <Field
@@ -60,7 +67,11 @@ const Login: React.FC<LoginProps> = ({}) => {
                     placeholder="Enter password"
                   />
                   <Eye onClick={() => setShowPassword(!showPassword)}>
-                    <ReactSVG src={eyeoff} />
+                    {showPassword ? (
+                      <ReactSVG src={eyeoff} />
+                    ) : (
+                      <ReactSVG src={eye} />
+                    )}
                   </Eye>
                   {meta.error && meta.touched && <Error>{meta.error}</Error>}
                 </InputContainer>
@@ -68,15 +79,10 @@ const Login: React.FC<LoginProps> = ({}) => {
             />
           </Inputs>
           <PasswordActions>
-            <PasswordCheckbox>
-              <Field
-                name="remember"
-                component="input"
-                type="checkbox"
-                value="remember"
-              />
-              <label>Remember</label>
-            </PasswordCheckbox>
+            <div></div>
+            <Field name="remember" type="checkbox" render={CheckBox}>
+              Remember
+            </Field>
             <ForgotPassword to="/signup">Forgot Password?</ForgotPassword>
           </PasswordActions>
           <AythBtn type="submit" disabled={!values.password || !values.email}>
@@ -104,42 +110,11 @@ const FormContainer = styled.form`
   flex-direction: column;
   border-radius: 6px;
   position: relative;
-  label {
-    font-size: 12px;
-    line-height: 150%;
-    color: #737373;
-  }
+
   @media (max-width: 500px) {
     padding: 24px 16px 40px;
     margin: 20px 16px 40px;
   }
-`;
-const Tabs = styled.div`
-  display: flex;
-  background: #f8f8f8;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  width: 100%;
-  height: 40px;
-  margin-bottom: 34px;
-`;
-const Tab = styled(NavLink)`
-  text-align: center;
-  text-decoration: none;
-  background: transparent;
-  border-radius: 6px;
-  padding: 9px 0;
-  margin: 0 2px;
-  width: 100%;
-  cursor: pointer;
-  color: #737373;
-  font-size: 12px;
-  line-height: 150%;
-`;
-const TabActive = styled(Tab)`
-  background: #caf0ff;
-  color: #122434;
 `;
 const FormTitle = styled.h1`
   text-align: center;
@@ -148,6 +123,16 @@ const FormTitle = styled.h1`
   line-height: 148%;
   color: #122434;
   margin-bottom: 27px;
+`;
+const TabContainer = styled.div`
+  display: flex;
+  background: #f8f8f8;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  width: 100%;
+  height: 40px;
+  margin-bottom: 34px;
 `;
 const Inputs = styled.div`
   margin-bottom: 20px;
@@ -219,16 +204,6 @@ const PasswordActions = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 60px;
-`;
-const PasswordCheckbox = styled.div`
-  display: flex;
-  align-items: center;
-  label {
-    margin-left: 5px;
-    font-size: 12px;
-    line-height: 150%;
-    color: black;
-  }
 `;
 const ForgotPassword = styled(NavLink)`
   color: #737373;

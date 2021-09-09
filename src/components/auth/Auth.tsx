@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { ReactSVG } from 'react-svg';
 import logo from '../../assets/icons/authLogo.svg';
 import authBg from '../../assets/images/authBg.jpg';
-import { Route } from 'react-router';
+import { Redirect, Route, Switch } from 'react-router';
 import Registration from '../registration';
 import Login from '../login';
 interface LoginProps {}
@@ -15,8 +15,11 @@ const Auth: React.FC<LoginProps> = ({}) => {
         <ReactSVG src={logo} />
       </AuthHeader>
       <AuthContainer>
-        <Route path="/signup" render={() => <Registration />} />
-        <Route path="/login" render={() => <Login />} />
+        <Switch>
+          <Route exact path="/" render={() => <Redirect to="/signup" />} />
+          <Route path="/signup" component={Registration} />
+          <Route path="/login" component={Login} />
+        </Switch>
       </AuthContainer>
     </Container>
   );
@@ -27,7 +30,7 @@ const Container = styled.div`
   height: 100%;
 `;
 const AuthHeader = styled.header`
-  background: #122434;
+  background: ${({ theme }) => theme.colors.black};
   height: 80px;
   display: flex;
   justify-content: center;

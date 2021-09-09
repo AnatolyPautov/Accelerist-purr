@@ -12,61 +12,66 @@ import FolderPlusIcon from '../../assets/icons/FolderPlusIcon';
 import ModalSupport from '../../modals/ModalSupport';
 import { Wrapper } from '../../ui/Wrapper';
 import Pagination from './Pagination';
+import Filtres from './Filters';
 
 interface BoardProps {}
 const SearchList: React.FC<BoardProps> = ({}) => {
   const stateCompany = useSelector(getCompaniesState);
 
-  if (stateCompany.loading) {
-    return <Spinner />;
-  } else
-    return (
-      <Wrapper>
-        {/* <ModalSupport /> */}
-        <Container>
-          <p>Found {stateCompany.totalCompanies} companies</p>
-          <Panel>
-            <Row>
-              <Action>
-                <Icon>
-                  <FolderPlusIcon />
-                </Icon>
-                <p>
-                  Save<span> List</span>
-                </p>
-              </Action>
-              <Action>
-                <Icon>
-                  <UploadIcon />
-                </Icon>
-                <p>
-                  Export<span> to Excel</span>
-                </p>
-              </Action>
-              <Action>
-                <Icon>
-                  <MailIcon />
-                </Icon>
-                <p>
-                  <span>Accelerist </span>Support
-                </p>
-              </Action>
-            </Row>
-            <PaginationTop>
+  return (
+    <Wrapper>
+      {/* <ModalSupport /> */}
+      <Container>
+        <Filtres />
+        {stateCompany.loading ? (
+          <Spinner />
+        ) : (
+          <>
+            <p>Found {stateCompany.totalCompanies} companies</p>
+            <Panel>
+              <Row>
+                <Action>
+                  <Icon>
+                    <FolderPlusIcon />
+                  </Icon>
+                  <p>
+                    Save<span> List</span>
+                  </p>
+                </Action>
+                <Action>
+                  <Icon>
+                    <UploadIcon />
+                  </Icon>
+                  <p>
+                    Export<span> to Excel</span>
+                  </p>
+                </Action>
+                <Action>
+                  <Icon>
+                    <MailIcon />
+                  </Icon>
+                  <p>
+                    <span>Accelerist </span>Support
+                  </p>
+                </Action>
+              </Row>
+              <PaginationTop>
+                <Pagination />
+              </PaginationTop>
+            </Panel>
+            <CompaniesContainer>
+              {stateCompany.companies.map((company, index) => (
+                <CompanyItem company={company} key={index} />
+              ))}
+            </CompaniesContainer>
+            <PaginationBottom>
               <Pagination />
-            </PaginationTop>
-          </Panel>
-          <CompaniesContainer>
-            {stateCompany.companies.map((company, index) => (
-              <CompanyItem company={company} key={index} />
-            ))}
-          </CompaniesContainer>
-          <PaginationBottom>
-            <Pagination />
-          </PaginationBottom>
-        </Container>
-      </Wrapper>
-    );
+            </PaginationBottom>
+          </>
+        )}
+      </Container>
+    </Wrapper>
+  );
 };
 
 const Container = styled.div`
@@ -94,7 +99,7 @@ const Action = styled.div`
   margin-right: 37px;
   cursor: pointer;
   font-size: 12px;
-  color: #122434;
+  color: ${({ theme }) => theme.colors.black};
   transition: 0.5s;
   &:hover {
     text-shadow: 0 0 0.01px #122434, 0 0 0.01px #122434;

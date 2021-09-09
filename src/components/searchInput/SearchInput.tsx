@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import SearchIcon from '../../assets/icons/SearchIcon';
 import SettingsSearchIcon from '../../assets/icons/SettingsSearchIcon';
+import Context from '../../context';
 import { addCompanies } from '../../store/companySlice';
 import { useAppDispatch } from '../../store/store';
 
@@ -16,8 +17,10 @@ const SearchInput: React.FC<SearchInputProps> = ({
   searchList,
 }) => {
   const [text, setText] = React.useState<string>();
+  const { filterActive, setFilterActive } = React.useContext(Context);
 
   const dispatch = useAppDispatch();
+
   return (
     <SearchContainer searchList={searchList} width={width}>
       <Input
@@ -28,7 +31,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
         background={background}
       />
       {searchList && (
-        <Setting>
+        <Setting onClick={() => setFilterActive(!filterActive)}>
           <SettingsSearchIcon />
         </Setting>
       )}

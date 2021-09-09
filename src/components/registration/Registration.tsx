@@ -5,7 +5,9 @@ import * as Types from '../../types/types';
 import { ReactSVG } from 'react-svg';
 import linkedin from '../../assets/icons/linkedin.svg';
 import eyeoff from '../../assets/icons/eye-off.svg';
-import { NavLink } from 'react-router-dom';
+import eye from '../../assets/icons/eye.svg';
+import { Tab } from '../../ui/Tab';
+import { useHistory } from 'react-router';
 
 interface LoginProps {}
 
@@ -19,17 +21,19 @@ const Registration: React.FC<LoginProps> = ({}) => {
   };
 
   const required = (value: string) => (value ? undefined : 'Required');
-
+  const history = useHistory();
   return (
     <Form
       onSubmit={onSubmit}
       render={({ handleSubmit, values }) => (
         <FormContainer onSubmit={handleSubmit}>
           <FormTitle>Welcome to Accelerist</FormTitle>
-          <Tabs>
-            <TabActive to="/signup">Register</TabActive>
-            <Tab to="/login">Login</Tab>
-          </Tabs>
+          <TabContainer>
+            <Tab active={true} onClick={() => history.push('/signup')}>
+              Register
+            </Tab>
+            <Tab onClick={() => history.push('/login')}>Login</Tab>
+          </TabContainer>
           <Inputs>
             <label>Email</label>
             <Field
@@ -60,7 +64,11 @@ const Registration: React.FC<LoginProps> = ({}) => {
                     placeholder="Enter password"
                   />
                   <Eye onClick={() => setShowPassword(!showPassword)}>
-                    <ReactSVG src={eyeoff} />
+                    {showPassword ? (
+                      <ReactSVG src={eyeoff} />
+                    ) : (
+                      <ReactSVG src={eye} />
+                    )}
                   </Eye>
                   {meta.error && meta.touched && <Error>{meta.error}</Error>}
                 </InputContainer>
@@ -106,7 +114,15 @@ const FormContainer = styled.form`
     margin: 20px 16px 40px;
   }
 `;
-const Tabs = styled.div`
+const FormTitle = styled.h1`
+  text-align: center;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 148%;
+  color: #122434;
+  margin-bottom: 27px;
+`;
+const TabContainer = styled.div`
   display: flex;
   background: #f8f8f8;
   align-items: center;
@@ -115,31 +131,6 @@ const Tabs = styled.div`
   width: 100%;
   height: 40px;
   margin-bottom: 34px;
-`;
-const Tab = styled(NavLink)`
-  text-align: center;
-  text-decoration: none;
-  background: transparent;
-  border-radius: 6px;
-  padding: 9px 0;
-  margin: 0 2px;
-  width: 100%;
-  cursor: pointer;
-  color: #737373;
-  font-size: 12px;
-  line-height: 150%;
-`;
-const TabActive = styled(Tab)`
-  background: #caf0ff;
-  color: #122434;
-`;
-const FormTitle = styled.h1`
-  text-align: center;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 148%;
-  color: #122434;
-  margin-bottom: 27px;
 `;
 const Inputs = styled.div`
   margin-bottom: 40px;

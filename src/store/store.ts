@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import companySlice from './companySlice';
 import createSagaMiddleware from 'redux-saga';
 import { watcherSaga } from '../sagas/rootSaga';
+import { createSelector } from 'reselect';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -18,6 +19,10 @@ type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 
-export const getCompaniesState = (state: RootState) => state;
+export const selectCompaniesState = (state: RootState) => state;
+export const getCompaniesState = createSelector(
+  selectCompaniesState,
+  (data) => data
+);
 
 export default store;

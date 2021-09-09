@@ -14,6 +14,6 @@ const StyledText = styled.h3<{ $mb?: CSSProp }>`
   font-weight: 500;
   font-size: 16px;
   line-height: 145%;
-  color: #122434;
+  color: ${({ theme }) => theme.colors.black};
   margin-bottom: ${(props) => props.$mb + 'px'};
 `;
