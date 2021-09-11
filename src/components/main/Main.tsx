@@ -8,6 +8,7 @@ import SearchList from '../searchList';
 import CompanyPage from '../companyPage';
 import { useAppDispatch } from '../../store/store';
 import { addCompanies } from '../../store/companySlice';
+import SearchScreen from '../searchList/SearchScreen';
 interface LoginProps {}
 
 const Main: React.FC<LoginProps> = ({}) => {
@@ -22,7 +23,7 @@ const Main: React.FC<LoginProps> = ({}) => {
       <Switch>
         <Route exact path="/dashboard">
           <PageHeader />
-          <SearchList />
+          <SearchScreen />
         </Route>
         <Route path="/dashboard/:number">
           <PageHeader name="company" />

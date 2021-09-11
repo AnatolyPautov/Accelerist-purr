@@ -273,7 +273,11 @@ const Filtres: React.FC<BoardProps> = ({}) => {
                   <Button onClick={() => setFilterActive(!filterActive)}>
                     Cancel
                   </Button>
-                  <Button onClick={handleSubmit} search={true}>
+                  <Button
+                    onClick={handleSubmit}
+                    search={true}
+                    isLoading={stateCompany.loading}
+                  >
                     Search
                   </Button>
                 </Buttons>

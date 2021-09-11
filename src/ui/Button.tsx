@@ -1,16 +1,19 @@
 import React, { DOMAttributes, FC } from 'react';
 import { CSSProp } from 'styled-components';
 import styled from 'styled-components';
+import { Loader } from './Loader';
 
 interface Props extends DOMAttributes<HTMLButtonElement> {
   containerStyled?: CSSProp;
   search?: boolean;
+  isLoading?: boolean;
 }
 
 export const Button: FC<Props> = ({
   children,
   containerStyled = {},
   search,
+  isLoading,
   ...all
 }) => {
   return (
@@ -20,7 +23,7 @@ export const Button: FC<Props> = ({
       $CSS={containerStyled}
       search={search}
     >
-      {children}
+      {isLoading ? <Loader /> : children}
     </StyledButton>
   );
 };

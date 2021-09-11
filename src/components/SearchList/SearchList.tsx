@@ -1,85 +1,74 @@
-import React from 'react';
+import React, { HtmlHTMLAttributes } from 'react';
 import { useSelector } from 'react-redux';
 import { ReactSVG } from 'react-svg';
 import styled from 'styled-components';
 import { getCompaniesState, useAppDispatch } from '../../store/store';
 import CompanyItem from '../companyItem';
 import { Row } from '../../ui/Row';
-import Spinner from '../../ui/Spinner';
 import UploadIcon from '../../assets/icons/UploadIcon';
 import MailIcon from '../../assets/icons/MailIcon';
 import FolderPlusIcon from '../../assets/icons/FolderPlusIcon';
-import ModalSupport from '../../modals/ModalSupport';
-import { Wrapper } from '../../ui/Wrapper';
 import Pagination from './Pagination';
-import Filtres from './Filters';
 
 interface BoardProps {}
 const SearchList: React.FC<BoardProps> = ({}) => {
   const stateCompany = useSelector(getCompaniesState);
 
+  const fieldRef = React.useRef<any>(null);
+  React.useEffect(() => {
+    if (fieldRef.current) {
+      fieldRef.current.scrollIntoView({
+        behavior: 'smooth',
+      });
+    }
+  }, []);
   return (
-    <Wrapper>
-      {/* <ModalSupport /> */}
-      <Container>
-        <Filtres />
-        {stateCompany.loading ? (
-          <Spinner />
-        ) : (
-          <>
-            <p>Found {stateCompany.totalCompanies} companies</p>
-            <Panel>
-              <Row>
-                <Action>
-                  <Icon>
-                    <FolderPlusIcon />
-                  </Icon>
-                  <p>
-                    Save<span> List</span>
-                  </p>
-                </Action>
-                <Action>
-                  <Icon>
-                    <UploadIcon />
-                  </Icon>
-                  <p>
-                    Export<span> to Excel</span>
-                  </p>
-                </Action>
-                <Action>
-                  <Icon>
-                    <MailIcon />
-                  </Icon>
-                  <p>
-                    <span>Accelerist </span>Support
-                  </p>
-                </Action>
-              </Row>
-              <PaginationTop>
-                <Pagination />
-              </PaginationTop>
-            </Panel>
-            <CompaniesContainer>
-              {stateCompany.companies.map((company, index) => (
-                <CompanyItem company={company} key={index} />
-              ))}
-            </CompaniesContainer>
-            <PaginationBottom>
-              <Pagination />
-            </PaginationBottom>
-          </>
-        )}
-      </Container>
-    </Wrapper>
+    <div ref={fieldRef}>
+      {}
+      <p>Found {stateCompany.totalCompanies} companies</p>
+      <Panel>
+        <Row>
+          <Action>
+            <Icon>
+              <FolderPlusIcon />
+            </Icon>
+            <p>
+              Save<span> List</span>
+            </p>
+          </Action>
+          <Action>
+            <Icon>
+              <UploadIcon />
+            </Icon>
+            <p>
+              Export<span> to Excel</span>
+            </p>
+          </Action>
+          <Action>
+            <Icon>
+              <MailIcon />
+            </Icon>
+            <p>
+              <span>Accelerist </span>Support
+            </p>
+          </Action>
+        </Row>
+        <PaginationTop>
+          <Pagination />
+        </PaginationTop>
+      </Panel>
+      <CompaniesContainer>
+        {stateCompany.companies.map((company, index) => (
+          <CompanyItem company={company} key={index} />
+        ))}
+      </CompaniesContainer>
+      <PaginationBottom>
+        <Pagination />
+      </PaginationBottom>
+    </div>
   );
 };
 
-const Container = styled.div`
-  padding: 32px 0;
-  @media (max-width: 525px) {
-    padding: 20px 0;
-  }
-`;
 const CompaniesContainer = styled.div`
   margin-top: 27px;
   display: flex;
