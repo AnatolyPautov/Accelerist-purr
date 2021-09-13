@@ -9,12 +9,14 @@ import { Subtitle } from '../../ui/Subtitle';
 import { useAppDispatch } from '../../store/store';
 import { addCompany } from '../../store/companySlice';
 import { numberWithCommas } from '../../utils/NumberWithCommas';
+import * as Types from '../../types/types';
 
 interface CompanyItemProps {
-  company: any;
+  company: Types.Company;
 }
 const CompanyItem: React.FC<CompanyItemProps> = ({ company }) => {
-  const { city, state, street, zipCode, revenue, id, fax, score } = company;
+  const { name, city, state, street, zipCode, revenue, id, fax, score, like } =
+    company;
   const address = street + '. ' + city + ', ' + state + ' ' + zipCode;
 
   const dispatch = useAppDispatch();
@@ -31,7 +33,7 @@ const CompanyItem: React.FC<CompanyItemProps> = ({ company }) => {
         </LogoRanking>
         <Info>
           <TextBlock>
-            <Subtitle mb="12">{company.name}</Subtitle>
+            <Subtitle mb="12">{name}</Subtitle>
             <Text>{address}</Text>
             <Text>{fax || 'the phone number is missing'}</Text>
           </TextBlock>
@@ -49,11 +51,11 @@ const CompanyItem: React.FC<CompanyItemProps> = ({ company }) => {
           </Data>
           <Buttons>
             <LikeBtn>
-              <ReactSVG src={company.like ? heartLike : heart} />
+              <ReactSVG src={like ? heartLike : heart} />
             </LikeBtn>
             <LinkBtn
               onClick={() => dispatch(addCompany(id))}
-              to={`/dashboard/${id}`}
+              to={`/audience/${id}`}
             >
               Profile
             </LinkBtn>
@@ -62,11 +64,11 @@ const CompanyItem: React.FC<CompanyItemProps> = ({ company }) => {
       </FlexRow>
       <ButtonsResponsive>
         <LikeBtn>
-          <ReactSVG src={company.like ? heartLike : heart} />
+          <ReactSVG src={like ? heartLike : heart} />
         </LikeBtn>
         <LinkBtn
           onClick={() => dispatch(addCompany(id))}
-          to={`/dashboard/${id}`}
+          to={`/audience/${id}`}
         >
           Profile
         </LinkBtn>

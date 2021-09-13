@@ -2,12 +2,12 @@ import React, { HtmlHTMLAttributes } from 'react';
 import { useSelector } from 'react-redux';
 import { ReactSVG } from 'react-svg';
 import styled from 'styled-components';
-import { getCompaniesState, useAppDispatch } from '../../store/store';
-import CompanyItem from '../companyItem';
-import { Row } from '../../ui/Row';
-import UploadIcon from '../../assets/icons/UploadIcon';
-import MailIcon from '../../assets/icons/MailIcon';
-import FolderPlusIcon from '../../assets/icons/FolderPlusIcon';
+import { getCompaniesState, useAppDispatch } from '../../../store/store';
+import CompanyItem from '../../../components/companyItem';
+import { Row } from '../../../ui/Row';
+import UploadIcon from '../../../assets/icons/UploadIcon';
+import MailIcon from '../../../assets/icons/MailIcon';
+import FolderPlusIcon from '../../../assets/icons/FolderPlusIcon';
 import Pagination from './Pagination';
 
 interface BoardProps {}
@@ -24,7 +24,6 @@ const SearchList: React.FC<BoardProps> = ({}) => {
   }, []);
   return (
     <div ref={fieldRef}>
-      {}
       <p>Found {stateCompany.totalCompanies} companies</p>
       <Panel>
         <Row>

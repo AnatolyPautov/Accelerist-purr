@@ -2,20 +2,20 @@ import React from 'react';
 import styled from 'styled-components';
 import { css } from 'styled-components';
 import { ReactSVG } from 'react-svg';
-import globeIcon from '../../assets/icons/globe.svg';
-import phoneIcon from '../../assets/icons/phone.svg';
-import mapPinIcon from '../../assets/icons/map-pin.svg';
-import { Row } from '../../ui/Row';
-import { Text } from '../../ui/Text';
-import { Subtitle } from '../../ui/Subtitle';
-import { Title } from '../../ui/Title';
+import globeIcon from '../../../assets/icons/globe.svg';
+import phoneIcon from '../../../assets/icons/phone.svg';
+import mapPinIcon from '../../../assets/icons/map-pin.svg';
+import { Row } from '../../../ui/Row';
+import { Text } from '../../../ui/Text';
+import { Subtitle } from '../../../ui/Subtitle';
+import { Title } from '../../../ui/Title';
 import CompanyHeader from './CompanyHeader';
 import { useSelector } from 'react-redux';
-import { getCompaniesState } from '../../store/store';
-import Spinner from '../../ui/Spinner';
-import { numberWithCommas } from '../../utils/NumberWithCommas';
-import { TextBold } from '../../ui/TextBold';
-import { Wrapper } from '../../ui/Wrapper';
+import { getCompaniesState } from '../../../store/store';
+import Spinner from '../../../ui/Spinner';
+import { numberWithCommas } from '../../../utils/NumberWithCommas';
+import { TextBold } from '../../../ui/TextBold';
+import { Wrapper } from '../../../ui/Wrapper';
 
 interface CompanyPageProps {}
 const CompanyPage: React.FC<CompanyPageProps> = ({}) => {

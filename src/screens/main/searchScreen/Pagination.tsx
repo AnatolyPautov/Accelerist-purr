@@ -2,10 +2,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { ReactSVG } from 'react-svg';
 import styled from 'styled-components';
-import { getCompaniesState, useAppDispatch } from '../../store/store';
-import prev from '../../assets/icons/arrow-left.svg';
-import next from '../../assets/icons/arrow-right.svg';
-import { addCompanies } from '../../store/companySlice';
+import { getCompaniesState, useAppDispatch } from '../../../store/store';
+import prev from '../../../assets/icons/arrow-left.svg';
+import next from '../../../assets/icons/arrow-right.svg';
+import { addCompanies } from '../../../store/companySlice';
 
 interface BoardProps {}
 const Pagination: React.FC<BoardProps> = ({}) => {

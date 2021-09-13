@@ -1,17 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Form, Field } from 'react-final-form';
-import * as Types from '../../types/types';
+import * as Types from '../../../types/types';
 import { ReactSVG } from 'react-svg';
 import linkedin from '../../assets/icons/linkedin.svg';
 import eyeoff from '../../assets/icons/eye-off.svg';
 import eye from '../../assets/icons/eye.svg';
-import { Tab } from '../../ui/Tab';
+import { NavLink } from 'react-router-dom';
+import { Tab } from '../../../ui/Tab';
 import { useHistory } from 'react-router';
+import { CheckBox } from '../../../ui/Checkbox';
 
 interface LoginProps {}
 
-const Registration: React.FC<LoginProps> = ({}) => {
+const Login: React.FC<LoginProps> = ({}) => {
   const [showPassword, setShowPassword] = React.useState<boolean>(true);
 
   const onSubmit = (values: any) => {
@@ -22,6 +24,7 @@ const Registration: React.FC<LoginProps> = ({}) => {
 
   const required = (value: string) => (value ? undefined : 'Required');
   const history = useHistory();
+
   return (
     <Form
       onSubmit={onSubmit}
@@ -29,10 +32,10 @@ const Registration: React.FC<LoginProps> = ({}) => {
         <FormContainer onSubmit={handleSubmit}>
           <FormTitle>Welcome to Accelerist</FormTitle>
           <TabContainer>
-            <Tab active={true} onClick={() => history.push('/signup')}>
-              Register
+            <Tab onClick={() => history.push('/signup')}>Register</Tab>
+            <Tab active={true} onClick={() => history.push('/login')}>
+              Login
             </Tab>
-            <Tab onClick={() => history.push('/login')}>Login</Tab>
           </TabContainer>
           <Inputs>
             <label>Email</label>
@@ -75,12 +78,15 @@ const Registration: React.FC<LoginProps> = ({}) => {
               )}
             />
           </Inputs>
-          <Desc>
-            I agree that by clicking <strong>“Registration”</strong> I accept
-            the Terms Of Service and Privacy Policy
-          </Desc>
+          <PasswordActions>
+            <div></div>
+            <Field name="remember" type="checkbox" render={CheckBox}>
+              Remember
+            </Field>
+            <ForgotPassword to="/signup">Forgot Password?</ForgotPassword>
+          </PasswordActions>
           <AythBtn type="submit" disabled={!values.password || !values.email}>
-            Registration
+            Login
           </AythBtn>
           <Desc>or continue with</Desc>
           <Linkedin>
@@ -104,11 +110,7 @@ const FormContainer = styled.form`
   flex-direction: column;
   border-radius: 6px;
   position: relative;
-  label {
-    font-size: 12px;
-    line-height: 150%;
-    color: #737373;
-  }
+
   @media (max-width: 500px) {
     padding: 24px 16px 40px;
     margin: 20px 16px 40px;
@@ -133,7 +135,7 @@ const TabContainer = styled.div`
   margin-bottom: 34px;
 `;
 const Inputs = styled.div`
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 `;
 const InputContainer = styled.div`
   position: relative;
@@ -198,6 +200,17 @@ const AythBtn = styled.button<AythBtnProps>`
       disabled ? 'rgb(206, 237, 249)' : '#51c2ee'};
   }
 `;
+const PasswordActions = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 60px;
+`;
+const ForgotPassword = styled(NavLink)`
+  color: #737373;
+  text-decoration: none;
+  font-size: 12px;
+  line-height: 150%;
+`;
 const Linkedin = styled.div`
   display: flex;
   justify-content: center;
@@ -213,4 +226,4 @@ const Error = styled.div`
   font-size: 12px;
   line-height: 150%;
 `;
-export default Registration;
+export default Login;

@@ -1,6 +1,6 @@
 import GlobalStyle from './globalstyles';
-import Main from './components/main';
-import Auth from './components/auth';
+import Main from './screens/main';
+import Auth from './screens/auth';
 
 function App() {
   return (

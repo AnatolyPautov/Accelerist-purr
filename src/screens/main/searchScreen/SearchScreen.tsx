@@ -1,14 +1,14 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { getCompaniesState, useAppDispatch } from '../../store/store';
-import Spinner from '../../ui/Spinner';
-import { Wrapper } from '../../ui/Wrapper';
+import { getCompaniesState, useAppDispatch } from '../../../store/store';
+import Spinner from '../../../ui/Spinner';
+import { Wrapper } from '../../../ui/Wrapper';
 import Filtres from './Filters';
-import SearchList from '.';
+import SearchList from './SearchList';
 
-interface BoardProps {}
-const SearchScreen: React.FC<BoardProps> = ({}) => {
+interface Props {}
+const SearchScreen: React.FC<Props> = ({}) => {
   const stateCompany = useSelector(getCompaniesState);
 
   return (

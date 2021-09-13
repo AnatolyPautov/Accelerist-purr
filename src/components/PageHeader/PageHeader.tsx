@@ -15,10 +15,11 @@ interface SearchListProps {
 }
 const PageHeader: React.FC<SearchListProps> = ({ name }) => {
   const history = useHistory();
-  return (
-    <Container>
-      <Wrapper>
-        {name === 'company' ? (
+
+  const renderSwitch = () => {
+    switch (name) {
+      case 'company':
+        return (
           <Row containerStyled={RowWidth}>
             <PrevArrow onClick={() => history.goBack()}>
               <ReactSVG src={prev} />
@@ -31,7 +32,9 @@ const PageHeader: React.FC<SearchListProps> = ({ name }) => {
               </Support>
             </SearchBlock>
           </Row>
-        ) : (
+        );
+      case 'search':
+        return (
           <SearchHeader>
             <SearchTitle>Search</SearchTitle>
             <SearchInput
@@ -40,8 +43,18 @@ const PageHeader: React.FC<SearchListProps> = ({ name }) => {
               searchList="searchList"
             />
           </SearchHeader>
-        )}
-      </Wrapper>
+        );
+      default:
+        return (
+          <SearchHeader>
+            <SearchTitle>Dashboard</SearchTitle>
+          </SearchHeader>
+        );
+    }
+  };
+  return (
+    <Container>
+      <Wrapper>{renderSwitch()}</Wrapper>
     </Container>
   );
 };

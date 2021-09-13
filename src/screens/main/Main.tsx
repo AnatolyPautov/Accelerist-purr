@@ -1,14 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Route } from 'react-router';
-import Header from '../header';
-import PageHeader from '../pageHeader';
+import Header from '../../components/header';
+import PageHeader from '../../components/pageHeader';
 import { Switch } from 'react-router-dom';
-import SearchList from '../searchList';
-import CompanyPage from '../companyPage';
+import CompanyPage from './companyScreen';
 import { useAppDispatch } from '../../store/store';
 import { addCompanies } from '../../store/companySlice';
-import SearchScreen from '../searchList/SearchScreen';
+import SearchScreen from './searchScreen';
+import SearchList from './searchScreen/SearchList';
+import DashboardScreen from './dashboardScreen';
 interface LoginProps {}
 
 const Main: React.FC<LoginProps> = ({}) => {
@@ -23,9 +24,13 @@ const Main: React.FC<LoginProps> = ({}) => {
       <Switch>
         <Route exact path="/dashboard">
           <PageHeader />
+          <DashboardScreen />
+        </Route>
+        <Route exact path="/audience">
+          <PageHeader name="search" />
           <SearchScreen />
         </Route>
-        <Route path="/dashboard/:number">
+        <Route path="/audience/:number">
           <PageHeader name="company" />
           <CompanyPage />
         </Route>

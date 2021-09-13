@@ -2,14 +2,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import * as Types from '../types/types';
 
 interface CompaniesSliceState {
-  companies: any[];
+  companies: Types.Company[];
   totalCompanies: number;
   currentPage: number;
   totalPages: number;
   itemCount: number;
   loading: boolean;
-  currentCompany: any;
-  searchParams: any;
+  currentCompany: Types.Company;
+  searchParams: Types.Filter;
 }
 
 const initialState: CompaniesSliceState = {
@@ -19,7 +19,23 @@ const initialState: CompaniesSliceState = {
   totalPages: 1,
   itemCount: 12,
   loading: false,
-  currentCompany: {},
+  currentCompany: {
+    name: '',
+    revenue: 0,
+    descriptionList: '',
+    employeeCount: 0,
+    ticker: '',
+    website: '',
+    phone: '',
+    city: '',
+    state: '',
+    street: '',
+    zipCode: '',
+    id: '',
+    fax: '',
+    score: 0,
+    like: false,
+  },
   searchParams: {
     q: '',
   },

@@ -2,21 +2,28 @@ import React from 'react';
 import styled from 'styled-components';
 import { css } from 'styled-components';
 import { ReactSVG } from 'react-svg';
-import facebook from '../../assets/icons/facebook.svg';
-import twitter from '../../assets/icons/twitter.svg';
-import heart from '../../assets/icons/heart.svg';
-import { Row } from '../../ui/Row';
-import { Text } from '../../ui/Text';
-import { Title } from '../../ui/Title';
+import facebook from '../../../assets/icons/facebook.svg';
+import twitter from '../../../assets/icons/twitter.svg';
+import heart from '../../../assets/icons/heart.svg';
+import { Row } from '../../../ui/Row';
+import { Text } from '../../../ui/Text';
+import { Title } from '../../../ui/Title';
 import { useSelector } from 'react-redux';
-import { getCompaniesState } from '../../store/store';
+import { getCompaniesState } from '../../../store/store';
 
 interface CompanyPageProps {}
 const CompanyHeader: React.FC<CompanyPageProps> = ({}) => {
   const stateCompany = useSelector(getCompaniesState);
   const { name } = stateCompany.currentCompany;
+
+  const Ref = React.useRef<any>(null);
+  React.useEffect(() => {
+    if (Ref.current) {
+      Ref.current.scrollIntoView();
+    }
+  }, []);
   return (
-    <Container>
+    <Container ref={Ref}>
       <Row>
         <Logo>Logo</Logo>
         <div>
