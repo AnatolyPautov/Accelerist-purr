@@ -8,8 +8,8 @@ import CompanyPage from './companyScreen';
 import { useAppDispatch } from '../../store/store';
 import { addCompanies } from '../../store/companySlice';
 import SearchScreen from './searchScreen';
-import SearchList from './searchScreen/SearchList';
 import DashboardScreen from './dashboardScreen';
+import { addFavorites } from '../../store/favoritesSlice';
 interface LoginProps {}
 
 const Main: React.FC<LoginProps> = ({}) => {
@@ -17,21 +17,26 @@ const Main: React.FC<LoginProps> = ({}) => {
 
   React.useEffect(() => {
     dispatch(addCompanies({ page: 1, limit: 12 }));
+    dispatch(addFavorites({ page: 1, limit: 12 }));
   }, [dispatch]);
   return (
     <Container>
       <Header />
       <Switch>
         <Route exact path="/dashboard">
-          <PageHeader />
+          <PageHeader>Dashboard</PageHeader>
           <DashboardScreen />
         </Route>
+        <Route exact path="/favorites">
+          <PageHeader>Favorites</PageHeader>
+          <SearchScreen page="favorites" />
+        </Route>
         <Route exact path="/audience">
-          <PageHeader name="search" />
+          <PageHeader name="search">Search</PageHeader>
           <SearchScreen />
         </Route>
         <Route path="/audience/:number">
-          <PageHeader name="company" />
+          <PageHeader name="company">Corparate Profile</PageHeader>
           <CompanyPage />
         </Route>
       </Switch>

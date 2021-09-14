@@ -1,15 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { Text } from '../../../ui/Text';
 import { Title } from '../../../ui/Title';
 import { Wrapper } from '../../../ui/Wrapper';
 import ProspectCard from './ProspectCard';
 import FavoritesCard from './FavoritesCard';
 import ReportsCard from './ReportsCard';
+import { useSelector } from 'react-redux';
+import { getFavoritesState } from '../../../store/store';
 
-interface CompanyPageProps {}
-const DashboardScreen: React.FC<CompanyPageProps> = ({}) => {
+interface Props {}
+const DashboardScreen: React.FC<Props> = ({}) => {
+  const favorites = useSelector(getFavoritesState);
   return (
     <Wrapper>
       <Container>
@@ -25,19 +27,20 @@ const DashboardScreen: React.FC<CompanyPageProps> = ({}) => {
           <Block>
             <SpaceBetween>
               <Title>Favorites</Title>
-              <StyledLink to="/audience">see more</StyledLink>
+              <StyledLink to="/favorites">see more</StyledLink>
             </SpaceBetween>
             <Flex>
-              <FavoritesCard />
+              {favorites.favorites.map(
+                (company, index) =>
+                  index < 6 && <FavoritesCard company={company} key={index} />
+              )}
             </Flex>
           </Block>
           <Block>
             <SpaceBetween>
               <Title>Reports</Title>
             </SpaceBetween>
-            <Flex>
-              <ReportsCard />
-            </Flex>
+            <ReportsCard />
           </Block>
         </Flex>
       </Container>
@@ -63,7 +66,7 @@ const SpaceBetween = styled.div`
   align-items: center;
   margin-bottom: 16px;
 `;
-const StyledLink = styled(Link)`
+const StyledLink = styled(NavLink)`
   text-align: right;
   color: #2baee0;
 `;

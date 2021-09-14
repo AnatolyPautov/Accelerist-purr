@@ -1,68 +1,89 @@
-import React, { HtmlHTMLAttributes } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import { ReactSVG } from 'react-svg';
 import styled from 'styled-components';
-import { getCompaniesState, useAppDispatch } from '../../../store/store';
+import {
+  getCompaniesState,
+  getFavoritesState,
+  useAppDispatch,
+} from '../../../store/store';
 import CompanyItem from '../../../components/companyItem';
 import { Row } from '../../../ui/Row';
 import UploadIcon from '../../../assets/icons/UploadIcon';
 import MailIcon from '../../../assets/icons/MailIcon';
 import FolderPlusIcon from '../../../assets/icons/FolderPlusIcon';
 import Pagination from './Pagination';
+import { Subtitle } from '../../../ui/Subtitle';
 
-interface BoardProps {}
-const SearchList: React.FC<BoardProps> = ({}) => {
-  const stateCompany = useSelector(getCompaniesState);
+interface BoardProps {
+  page?: string;
+}
+const SearchList: React.FC<BoardProps> = ({ page }) => {
+  const stateCompanies = useSelector(getCompaniesState);
+  const stateFavorites = useSelector(getFavoritesState);
 
-  const fieldRef = React.useRef<any>(null);
+  const Ref = React.useRef<any>(null);
   React.useEffect(() => {
-    if (fieldRef.current) {
-      fieldRef.current.scrollIntoView({
+    if (Ref.current) {
+      Ref.current.scrollIntoView({
         behavior: 'smooth',
       });
     }
   }, []);
   return (
-    <div ref={fieldRef}>
-      <p>Found {stateCompany.totalCompanies} companies</p>
-      <Panel>
-        <Row>
-          <Action>
-            <Icon>
-              <FolderPlusIcon />
-            </Icon>
-            <p>
-              Save<span> List</span>
-            </p>
-          </Action>
-          <Action>
-            <Icon>
-              <UploadIcon />
-            </Icon>
-            <p>
-              Export<span> to Excel</span>
-            </p>
-          </Action>
-          <Action>
-            <Icon>
-              <MailIcon />
-            </Icon>
-            <p>
-              <span>Accelerist </span>Support
-            </p>
-          </Action>
-        </Row>
+    <div ref={Ref}>
+      <Top>
+        <div>
+          <Subtitle>
+            {!page && 'Found'}
+            {!page
+              ? stateCompanies.totalCompanies
+              : stateFavorites.totalCompanies}{' '}
+            companies
+          </Subtitle>
+          {!page && (
+            <Panel>
+              <Action>
+                <Icon>
+                  <FolderPlusIcon />
+                </Icon>
+                <p>
+                  Save<span> List</span>
+                </p>
+              </Action>
+              <Action>
+                <Icon>
+                  <UploadIcon />
+                </Icon>
+                <p>
+                  Export<span> to Excel</span>
+                </p>
+              </Action>
+              <Action>
+                <Icon>
+                  <MailIcon />
+                </Icon>
+                <p>
+                  <span>Accelerist </span>Support
+                </p>
+              </Action>
+            </Panel>
+          )}
+        </div>
         <PaginationTop>
-          <Pagination />
+          <Pagination page={page} />
         </PaginationTop>
-      </Panel>
+      </Top>
       <CompaniesContainer>
-        {stateCompany.companies.map((company, index) => (
-          <CompanyItem company={company} key={index} />
-        ))}
+        {!page
+          ? stateCompanies.companies.map((company, index) => (
+              <CompanyItem company={company} key={index} />
+            ))
+          : stateFavorites.favorites.map((company, index) => (
+              <CompanyItem company={company} key={index} />
+            ))}
       </CompaniesContainer>
       <PaginationBottom>
-        <Pagination />
+        <Pagination page={page} />
       </PaginationBottom>
     </div>
   );
@@ -74,11 +95,16 @@ const CompaniesContainer = styled.div`
   flex-wrap: wrap;
   align-items: center;
 `;
-const Panel = styled.div`
-  margin-top: 18px;
+const Top = styled.div`
   max-width: 1096px;
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
+`;
+const Panel = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 24px;
 `;
 const Action = styled.div`
   height: 30px;

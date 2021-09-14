@@ -9,6 +9,10 @@ export const requestGetCompanies = (data: any) => {
     }&revenueMax=${revenueMax || ''}`
   );
 };
+export const requestGetFavorites = (data: any) => {
+  const { page, limit } = data;
+  return Api.get(`companies/favorites?page=${page}&limit=${limit}`);
+};
 export const requestGetCompany = (id: any) => {
   return Api.get(`companies/${id}`);
 };

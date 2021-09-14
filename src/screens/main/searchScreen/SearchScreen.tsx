@@ -7,16 +7,17 @@ import { Wrapper } from '../../../ui/Wrapper';
 import Filtres from './Filters';
 import SearchList from './SearchList';
 
-interface Props {}
-const SearchScreen: React.FC<Props> = ({}) => {
+interface Props {
+  page?: string;
+}
+const SearchScreen: React.FC<Props> = ({ page }) => {
   const stateCompany = useSelector(getCompaniesState);
-
   return (
     <Wrapper>
       {/* <ModalSupport /> */}
       <Container>
         <Filtres />
-        {stateCompany.loading ? <Spinner /> : <SearchList />}
+        {stateCompany.loading ? <Spinner /> : <SearchList page={page} />}
       </Container>
     </Wrapper>
   );

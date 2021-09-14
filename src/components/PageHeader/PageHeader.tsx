@@ -13,9 +13,8 @@ import { Wrapper } from '../../ui/Wrapper';
 interface SearchListProps {
   name?: string;
 }
-const PageHeader: React.FC<SearchListProps> = ({ name }) => {
+const PageHeader: React.FC<SearchListProps> = ({ name, children }) => {
   const history = useHistory();
-
   const renderSwitch = () => {
     switch (name) {
       case 'company':
@@ -25,7 +24,7 @@ const PageHeader: React.FC<SearchListProps> = ({ name }) => {
               <ReactSVG src={prev} />
             </PrevArrow>
             <SearchBlock>
-              <SearchTitle>Corparate Profile</SearchTitle>
+              <SearchTitle>{children}</SearchTitle>
               <Support onClick={() => null}>
                 <MailIcon />
                 <Text containerStyled={TextMargin}>Accelerist Support</Text>
@@ -36,7 +35,7 @@ const PageHeader: React.FC<SearchListProps> = ({ name }) => {
       case 'search':
         return (
           <SearchHeader>
-            <SearchTitle>Search</SearchTitle>
+            <SearchTitle>{children}</SearchTitle>
             <SearchInput
               width="715"
               background="#F1F4F5"
@@ -47,7 +46,7 @@ const PageHeader: React.FC<SearchListProps> = ({ name }) => {
       default:
         return (
           <SearchHeader>
-            <SearchTitle>Dashboard</SearchTitle>
+            <SearchTitle>{children}</SearchTitle>
           </SearchHeader>
         );
     }

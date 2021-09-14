@@ -1,15 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Text } from '../../../ui/Text';
+import * as Types from '../../../types/types';
 
-interface Props {}
-const FavoritesCard: React.FC<Props> = ({}) => {
+interface Props {
+  company: Types.Company;
+}
+const FavoritesCard: React.FC<Props> = ({ company }) => {
   return (
     <Card>
       <CompanyAva>
         <Ava></Ava>
         <div>
-          <Text>Name</Text>
+          <Text>{company.name}</Text>
           <Text>Priority Ranking 12</Text>
         </div>
       </CompanyAva>

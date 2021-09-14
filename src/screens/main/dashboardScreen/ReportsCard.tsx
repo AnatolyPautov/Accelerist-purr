@@ -53,6 +53,7 @@ const Card = styled.div`
   border-radius: 6px;
   padding: 24px;
   width: 536px;
+  height: 498px;
 `;
 const Data = styled.div`
   display: flex;

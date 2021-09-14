@@ -4,11 +4,15 @@ import companySlice from './companySlice';
 import createSagaMiddleware from 'redux-saga';
 import { watcherSaga } from '../sagas/rootSaga';
 import { createSelector } from 'reselect';
+import favoritesSlice from './favoritesSlice';
 
 const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
-  reducer: companySlice,
+  reducer: {
+    companies: companySlice,
+    favorites: favoritesSlice,
+  },
   devTools: true,
   middleware: [...getDefaultMiddleware({ thunk: false }), sagaMiddleware],
 });
@@ -19,9 +23,15 @@ type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 
-export const selectCompaniesState = (state: RootState) => state;
+const selectCompaniesState = (state: RootState) => state.companies;
 export const getCompaniesState = createSelector(
   selectCompaniesState,
+  (data) => data
+);
+
+const selectFavoritesState = (state: RootState) => state.favorites;
+export const getFavoritesState = createSelector(
+  selectFavoritesState,
   (data) => data
 );
 
