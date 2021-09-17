@@ -9,11 +9,15 @@ import { Text } from '../../ui/Text';
 import { css } from 'styled-components';
 import MailIcon from '../../assets/icons/MailIcon';
 import { Wrapper } from '../../ui/Wrapper';
+import { getProspectsState } from '../../store/store';
+import { useSelector } from 'react-redux';
 
 interface SearchListProps {
   name?: string;
 }
 const PageHeader: React.FC<SearchListProps> = ({ name, children }) => {
+  const prospects = useSelector(getProspectsState);
+
   const history = useHistory();
   const renderSwitch = () => {
     switch (name) {
@@ -43,9 +47,25 @@ const PageHeader: React.FC<SearchListProps> = ({ name, children }) => {
             />
           </SearchHeader>
         );
+      case 'prospect':
+        return (
+          <SearchHeader>
+            <PrevArrow onClick={() => history.goBack()}>
+              <ReactSVG src={prev} />
+            </PrevArrow>
+            <SearchTitle>
+              {prospects.currentProspect.name || 'Name'}
+            </SearchTitle>
+          </SearchHeader>
+        );
       default:
         return (
           <SearchHeader>
+            {name !== 'dashboard' && (
+              <PrevArrow onClick={() => history.goBack()}>
+                <ReactSVG src={prev} />
+              </PrevArrow>
+            )}
             <SearchTitle>{children}</SearchTitle>
           </SearchHeader>
         );

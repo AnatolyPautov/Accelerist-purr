@@ -1,43 +1,51 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import * as Types from '../types/types';
 
-interface FavoritesSliceState {
-  favorites: Types.Company[];
+interface ProspectsSliceState {
+  prospects: Types.Company[];
   totalItems: number;
   currentPage: number;
   totalPages: number;
   itemCount: number;
+  currentProspect: any;
   loading: boolean;
 }
 
-const initialState: FavoritesSliceState = {
-  favorites: [],
+const initialState: ProspectsSliceState = {
+  prospects: [],
   totalItems: 32,
   currentPage: 1,
   totalPages: 1,
   itemCount: 12,
+  currentProspect: {
+    name: 'Name',
+  },
   loading: false,
 };
 
-export const favoritesSlice = createSlice({
-  name: 'favorites',
+export const prospectsSlice = createSlice({
+  name: 'prospects',
   initialState,
   reducers: {
-    addFavorites(state, { payload }) {
+    addProspects(state, { payload }) {
       state.loading = true;
     },
-    setFavorites(state, { payload }) {
+    setProspects(state, { payload }) {
       console.log(payload);
-      state.favorites = payload.items;
+      state.prospects = payload.items;
       state.totalItems = payload.meta.totalItems;
       state.currentPage = Number(payload.meta.currentPage);
       state.totalPages = payload.meta.totalPages;
       state.itemCount = payload.meta.itemCount;
       state.loading = false;
     },
+    setCurrentProspect(state, { payload }) {
+      state.currentProspect.name = payload;
+    },
   },
 });
 
-export const { addFavorites, setFavorites } = favoritesSlice.actions;
+export const { addProspects, setProspects, setCurrentProspect } =
+  prospectsSlice.actions;
 
-export default favoritesSlice.reducer;
+export default prospectsSlice.reducer;

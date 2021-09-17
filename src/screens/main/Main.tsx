@@ -10,6 +10,7 @@ import { addCompanies } from '../../store/companySlice';
 import SearchScreen from './searchScreen';
 import DashboardScreen from './dashboardScreen';
 import { addFavorites } from '../../store/favoritesSlice';
+import { addProspects } from '../../store/prospectsSlice';
 interface LoginProps {}
 
 const Main: React.FC<LoginProps> = ({}) => {
@@ -18,18 +19,27 @@ const Main: React.FC<LoginProps> = ({}) => {
   React.useEffect(() => {
     dispatch(addCompanies({ page: 1, limit: 12 }));
     dispatch(addFavorites({ page: 1, limit: 12 }));
+    dispatch(addProspects({ page: 1, limit: 15 }));
   }, [dispatch]);
   return (
     <Container>
       <Header />
       <Switch>
         <Route exact path="/dashboard">
-          <PageHeader>Dashboard</PageHeader>
+          <PageHeader name="dashboard">Dashboard</PageHeader>
           <DashboardScreen />
         </Route>
         <Route exact path="/favorites">
           <PageHeader>Favorites</PageHeader>
           <SearchScreen page="favorites" />
+        </Route>
+        <Route exact path="/prospects">
+          <PageHeader>Prospects</PageHeader>
+          <SearchScreen page="prospects" />
+        </Route>
+        <Route path="/prospects/:number">
+          <PageHeader name="prospect"></PageHeader>
+          <SearchScreen page="prospect" />
         </Route>
         <Route exact path="/audience">
           <PageHeader name="search">Search</PageHeader>

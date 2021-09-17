@@ -3,7 +3,7 @@ import * as Types from '../types/types';
 
 interface CompaniesSliceState {
   companies: Types.Company[];
-  totalCompanies: number;
+  totalItems: number;
   currentPage: number;
   totalPages: number;
   itemCount: number;
@@ -14,7 +14,7 @@ interface CompaniesSliceState {
 
 const initialState: CompaniesSliceState = {
   companies: [],
-  totalCompanies: 2054,
+  totalItems: 2054,
   currentPage: 1,
   totalPages: 1,
   itemCount: 12,
@@ -52,7 +52,7 @@ export const companiesSlice = createSlice({
     setCompanies(state, { payload }) {
       console.log(payload.items);
       state.companies = payload.items;
-      state.totalCompanies = payload.meta.totalItems;
+      state.totalItems = payload.meta.totalItems;
       state.currentPage = Number(payload.meta.currentPage);
       state.totalPages = payload.meta.totalPages;
       state.itemCount = payload.meta.itemCount;

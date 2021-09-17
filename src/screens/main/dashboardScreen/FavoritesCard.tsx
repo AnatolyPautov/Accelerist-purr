@@ -10,7 +10,7 @@ const FavoritesCard: React.FC<Props> = ({ company }) => {
   return (
     <Card>
       <CompanyAva>
-        <Ava></Ava>
+        <Logo>Logo</Logo>
         <div>
           <Text>{company.name}</Text>
           <Text>Priority Ranking 12</Text>
@@ -38,7 +38,10 @@ const CompanyAva = styled.div`
   align-items: center;
   margin-bottom: 20px;
 `;
-const Ava = styled.div`
+const Logo = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid #e8e8e8;
   border-radius: 6px;
   width: 48px;

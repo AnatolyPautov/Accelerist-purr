@@ -13,6 +13,10 @@ export const requestGetFavorites = (data: any) => {
   const { page, limit } = data;
   return Api.get(`companies/favorites?page=${page}&limit=${limit}`);
 };
+export const requestGetProspects = (data: any) => {
+  const { page, limit, sort } = data;
+  return Api.get(`saved-list?page=${page}&limit=${limit}&sort=${sort || ''}`);
+};
 export const requestGetCompany = (id: any) => {
   return Api.get(`companies/${id}`);
 };

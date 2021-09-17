@@ -5,12 +5,14 @@ import styled from 'styled-components';
 import {
   getCompaniesState,
   getFavoritesState,
+  getProspectsState,
   useAppDispatch,
 } from '../../../store/store';
 import prev from '../../../assets/icons/arrow-left.svg';
 import next from '../../../assets/icons/arrow-right.svg';
 import { addCompanies } from '../../../store/companySlice';
 import { addFavorites } from '../../../store/favoritesSlice';
+import { addProspects } from '../../../store/prospectsSlice';
 
 interface Props {
   page?: string;
@@ -18,92 +20,74 @@ interface Props {
 const Pagination: React.FC<Props> = ({ page }) => {
   const companies = useSelector(getCompaniesState);
   const favorites = useSelector(getFavoritesState);
+  const prospects = useSelector(getProspectsState);
 
   const dispatch = useAppDispatch();
 
+  const setState = () => {
+    if (page === 'favorites') {
+      return favorites;
+    } else if (page === 'prospects') {
+      return prospects;
+    } else {
+      return companies;
+    }
+  };
+
+  const setNumberItems = (state: any) => {
+    return (
+      12 * state.currentPage +
+      1 -
+      12 +
+      ' - ' +
+      (state.currentPage === state.totalPages
+        ? state.totalItems
+        : 12 * state.currentPage) +
+      ' of ' +
+      state.totalItems
+    );
+  };
+
+  const flipping = (plus: boolean, state: any) => {
+    let numberPage = plus ? state.currentPage + 1 : state.currentPage - 1;
+    switch (page) {
+      case 'favorites':
+        return dispatch(
+          addFavorites({
+            page: numberPage,
+            limit: 12,
+          })
+        );
+      case 'prospects':
+        return dispatch(
+          addProspects({
+            page: numberPage,
+            limit: 15,
+          })
+        );
+      default:
+        return dispatch(
+          addCompanies({
+            page: numberPage,
+            limit: 12,
+            q: companies.searchParams.q,
+          })
+        );
+    }
+  };
   return (
     <PaginationContainer>
-      {!page
-        ? companies.currentPage !== 1 && (
-            <Arrow
-              onClick={() =>
-                dispatch(
-                  addCompanies({
-                    page: companies.currentPage - 1,
-                    limit: 12,
-                    q: companies.searchParams.q,
-                  })
-                )
-              }
-            >
-              <ReactSVG src={prev} />
-            </Arrow>
-          )
-        : favorites.currentPage !== 1 && (
-            <Arrow
-              onClick={() =>
-                dispatch(
-                  addFavorites({
-                    page: favorites.currentPage - 1,
-                    limit: 12,
-                  })
-                )
-              }
-            >
-              <ReactSVG src={prev} />
-            </Arrow>
-          )}
-      <PagesText>
-        {!page
-          ? 12 * companies.currentPage +
-            1 -
-            12 +
-            ' - ' +
-            (companies.currentPage === companies.totalPages
-              ? companies.totalCompanies
-              : 12 * companies.currentPage) +
-            ' of ' +
-            companies.totalCompanies
-          : 12 * favorites.currentPage +
-            1 -
-            12 +
-            ' - ' +
-            (favorites.currentPage === favorites.totalPages
-              ? favorites.totalCompanies
-              : 12 * favorites.currentPage) +
-            ' of ' +
-            favorites.totalCompanies}
-      </PagesText>
-      {!page
-        ? companies.currentPage !== companies.totalPages && (
-            <Arrow
-              onClick={() =>
-                dispatch(
-                  addCompanies({
-                    page: companies.currentPage + 1,
-                    limit: 12,
-                    q: companies.searchParams.q,
-                  })
-                )
-              }
-            >
-              <ReactSVG src={next} />
-            </Arrow>
-          )
-        : favorites.currentPage !== favorites.totalPages && (
-            <Arrow
-              onClick={() =>
-                dispatch(
-                  addFavorites({
-                    page: favorites.currentPage + 1,
-                    limit: 12,
-                  })
-                )
-              }
-            >
-              <ReactSVG src={next} />
-            </Arrow>
-          )}
+      {setState().currentPage !== 1 && (
+        <Arrow onClick={() => flipping(false, setState())}>
+          <ReactSVG src={prev} />
+        </Arrow>
+      )}
+      <PagesText>{setNumberItems(setState())}</PagesText>
+      {setState().currentPage !== setState().totalPages && (
+        <Arrow onClick={() => flipping(true, setState())}>
+          <ReactSVG src={next} />
+        </Arrow>
+      )}
     </PaginationContainer>
   );
 };

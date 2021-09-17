@@ -7,21 +7,27 @@ import ProspectCard from './ProspectCard';
 import FavoritesCard from './FavoritesCard';
 import ReportsCard from './ReportsCard';
 import { useSelector } from 'react-redux';
-import { getFavoritesState } from '../../../store/store';
+import { getFavoritesState, getProspectsState } from '../../../store/store';
 
 interface Props {}
 const DashboardScreen: React.FC<Props> = ({}) => {
   const favorites = useSelector(getFavoritesState);
+  const prospects = useSelector(getProspectsState);
+
   return (
     <Wrapper>
       <Container>
         <SpaceBetween>
           <Title mb="16">Prospects</Title>
-          <StyledLink to="/audience">see more</StyledLink>
+          <StyledLink to="/prospects">see more</StyledLink>
         </SpaceBetween>
         <Flex>
-          <ProspectCard />
-          <ProspectCard />
+          <ProspectCard
+            item={prospects.prospects[prospects.prospects.length - 1]}
+          />
+          <ProspectCard
+            item={prospects.prospects[prospects.prospects.length - 2]}
+          />
         </Flex>
         <Flex>
           <Block>
@@ -57,7 +63,7 @@ const Container = styled.div`
 const Flex = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 40px;
+  margin-bottom: 16px;
 `;
 const SpaceBetween = styled.div`
   width: 100%;

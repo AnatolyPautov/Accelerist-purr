@@ -1,13 +1,38 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import { addCompanies } from '../../../store/companySlice';
+import { setCurrentProspect } from '../../../store/prospectsSlice';
+import { useAppDispatch } from '../../../store/store';
 import { Subtitle } from '../../../ui/Subtitle';
 import { Text } from '../../../ui/Text';
 
-interface Props {}
-const ProspectCard: React.FC<Props> = ({}) => {
+interface Props {
+  item: any;
+}
+const ProspectCard: React.FC<Props> = ({ item }) => {
+  const { name, prospectsAvailable, id, lastAuthor, filters } = item;
+
+  const dispatch = useAppDispatch();
+
+  const openOneProspect = () => {
+    dispatch(setCurrentProspect(name));
+    dispatch(
+      addCompanies({
+        page: 1,
+        limit: 12,
+        q: filters.q,
+        revenueMin:
+          typeof filters.revenueMin === 'string' ? null : filters.revenueMin,
+        revenueMax:
+          typeof filters.revenueMax === 'string' ? null : filters.revenueMax,
+      })
+    );
+  };
+
   return (
-    <Card>
-      <Subtitle mb="9">Race for the Cure</Subtitle>
+    <Card to={`/prospects/${id}`} onClick={() => openOneProspect()}>
+      <Subtitle mb="9">{name || 'Name'}</Subtitle>
       <Line />
       <Text mb="8">Filters</Text>
       <Filters>
@@ -16,7 +41,7 @@ const ProspectCard: React.FC<Props> = ({}) => {
       <Data>
         <DataItem>
           <Text mb="8">№ of Prospects Available</Text>
-          <DataValue>230</DataValue>
+          <DataValue>{prospectsAvailable}</DataValue>
         </DataItem>
         <DataItem>
           <Text mb="8">№ of Prospects Available</Text>
@@ -27,8 +52,8 @@ const ProspectCard: React.FC<Props> = ({}) => {
         <Owner>
           <Ava></Ava>
           <div>
-            <TextBold>Name</TextBold>
-            <Text>Owner</Text>
+            <TextBold>{lastAuthor.firstName}</TextBold>
+            <Text>{lastAuthor.role}</Text>
           </div>
         </Owner>
         <LastActivity>
@@ -42,12 +67,13 @@ const ProspectCard: React.FC<Props> = ({}) => {
   );
 };
 
-const Card = styled.div`
+const Card = styled(NavLink)`
   background: #ffffff;
   border-radius: 6px;
   padding: 24px;
   width: 536px;
-  &:first-child {
+  margin-bottom: 24px;
+  &:nth-child(2n + 1) {
     margin-right: 24px;
   }
 `;
