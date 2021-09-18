@@ -1,4 +1,8 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import {
+  configureStore,
+  getDefaultMiddleware,
+  combineReducers,
+} from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import companySlice from './companySlice';
 import createSagaMiddleware from 'redux-saga';
@@ -7,16 +11,27 @@ import { createSelector } from 'reselect';
 import favoritesSlice from './favoritesSlice';
 import prospectsSlice from './prospectsSlice';
 import userSlice from './userSlice';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+
+const persistConfig = {
+  key: 'root',
+  storage,
+};
+
+const rootReducer = combineReducers({
+  companies: companySlice,
+  favorites: favoritesSlice,
+  prospects: prospectsSlice,
+  user: userSlice,
+});
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
-  reducer: {
-    companies: companySlice,
-    favorites: favoritesSlice,
-    prospects: prospectsSlice,
-    user: userSlice,
-  },
+  reducer: persistedReducer,
   devTools: true,
   middleware: [...getDefaultMiddleware({ thunk: false }), sagaMiddleware],
 });

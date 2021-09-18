@@ -8,6 +8,10 @@ import store from './store/store';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './styles/theme';
 import Context from './context';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistStore } from 'redux-persist';
+
+let persistor = persistStore(store);
 
 function Main() {
   const [filterActive, setFilterActive] = React.useState<boolean>(false);
@@ -17,7 +21,9 @@ function Main() {
         <BrowserRouter>
           <Context.Provider value={{ filterActive, setFilterActive }}>
             <Provider store={store}>
-              <App />
+              <PersistGate persistor={persistor}>
+                <App />
+              </PersistGate>
             </Provider>
           </Context.Provider>
         </BrowserRouter>
