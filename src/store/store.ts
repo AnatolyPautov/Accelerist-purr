@@ -6,6 +6,7 @@ import { watcherSaga } from '../sagas/rootSaga';
 import { createSelector } from 'reselect';
 import favoritesSlice from './favoritesSlice';
 import prospectsSlice from './prospectsSlice';
+import userSlice from './userSlice';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -14,6 +15,7 @@ const store = configureStore({
     companies: companySlice,
     favorites: favoritesSlice,
     prospects: prospectsSlice,
+    user: userSlice,
   },
   devTools: true,
   middleware: [...getDefaultMiddleware({ thunk: false }), sagaMiddleware],
@@ -42,5 +44,8 @@ export const getProspectsState = createSelector(
   selectProspectsState,
   (data) => data
 );
+
+const selectUserState = (state: RootState) => state.user;
+export const getUserState = createSelector(selectUserState, (data) => data);
 
 export default store;

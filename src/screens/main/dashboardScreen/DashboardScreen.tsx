@@ -8,12 +8,16 @@ import FavoritesCard from './FavoritesCard';
 import ReportsCard from './ReportsCard';
 import { useSelector } from 'react-redux';
 import { getFavoritesState, getProspectsState } from '../../../store/store';
+import Spinner from '../../../ui/Spinner';
 
 interface Props {}
 const DashboardScreen: React.FC<Props> = ({}) => {
   const favorites = useSelector(getFavoritesState);
   const prospects = useSelector(getProspectsState);
-
+  /*  {setState().loading ? <Spinner /> : renderItems()} */
+  if (prospects.loading) {
+    return <Spinner />;
+  }
   return (
     <Wrapper>
       <Container>

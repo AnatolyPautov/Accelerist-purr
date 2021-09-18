@@ -16,9 +16,9 @@ const Auth: React.FC<LoginProps> = ({}) => {
       </AuthHeader>
       <AuthContainer>
         <Switch>
-          <Route exact path="/" render={() => <Redirect to="/signup" />} />
           <Route path="/signup" component={Registration} />
-          <Route path="/login" component={Login} />
+          <Route path="/signin" component={Login} />
+          <Redirect to="/signin" />
         </Switch>
       </AuthContainer>
     </Container>

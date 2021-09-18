@@ -7,6 +7,7 @@ interface Props extends DOMAttributes<HTMLButtonElement> {
   containerStyled?: CSSProp;
   search?: boolean;
   isLoading?: boolean;
+  disabled?: any;
 }
 
 export const Button: FC<Props> = ({
@@ -33,12 +34,13 @@ interface StyledButtonProps {
   search?: boolean;
 }
 const StyledButton = styled.button<StyledButtonProps>`
+  height: 46px;
   border-radius: 6px;
   padding: 12px 24px;
   outline: none;
+  transition: 0.3s;
   cursor: pointer;
   width: 146px;
-  transition: 0.3s;
   border: 1px solid ${({ search }) => (search ? 'none' : '#e8e8e8')};
   background: ${({ search }) => (search ? '#2BAEE0' : 'transparent')};
   color: ${({ search }) => (search ? '#fff' : '#122434')};

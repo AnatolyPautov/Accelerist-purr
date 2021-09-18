@@ -1,26 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Form, Field } from 'react-final-form';
+import { Form, Field, FormProps } from 'react-final-form';
 import * as Types from '../../../types/types';
 import { ReactSVG } from 'react-svg';
-import linkedin from '../../assets/icons/linkedin.svg';
-import eyeoff from '../../assets/icons/eye-off.svg';
-import eye from '../../assets/icons/eye.svg';
+import linkedin from '../../../assets/icons/linkedin.svg';
 import { Tab } from '../../../ui/Tab';
 import { useHistory } from 'react-router';
+import { Text } from '../../../ui/Text';
+import InputField from '../../../ui/InputField';
+import { signUpRoutine } from '../../../store/userSlice';
+import { FormApi } from 'final-form';
+import { getUserState, useAppDispatch } from '../../../store/store';
+import {
+  composeValidators,
+  validateEmail,
+  validateInput,
+} from '../../../utils/validation/validate';
+import { AuthButton } from '../../../ui/AuthButton';
+import { useSelector } from 'react-redux';
 
 interface LoginProps {}
 
 const Registration: React.FC<LoginProps> = ({}) => {
-  const [showPassword, setShowPassword] = React.useState<boolean>(true);
+  const dispatch = useAppDispatch();
+  const user = useSelector(getUserState);
 
-  const onSubmit = (values: any) => {
-    if (values) {
-      /* setJoined(true); */
-    }
+  const onSubmit = (values: FormProps, form: FormApi<FormProps>) => {
+    dispatch(signUpRoutine({ email: values.email, password: values.password }));
   };
 
-  const required = (value: string) => (value ? undefined : 'Required');
   const history = useHistory();
   return (
     <Form
@@ -32,56 +40,36 @@ const Registration: React.FC<LoginProps> = ({}) => {
             <Tab active={true} onClick={() => history.push('/signup')}>
               Register
             </Tab>
-            <Tab onClick={() => history.push('/login')}>Login</Tab>
+            <Tab onClick={() => history.push('/signin')}>Login</Tab>
           </TabContainer>
           <Inputs>
-            <label>Email</label>
+            <Text>Email</Text>
             <Field
               name="email"
-              validate={required}
-              render={({ input, meta }) => (
-                <InputContainer>
-                  <Input
-                    {...input}
-                    meta={meta}
-                    type="email"
-                    placeholder="Enter email"
-                  />
-                  {meta.error && meta.touched && <Error>{meta.error}</Error>}
-                </InputContainer>
-              )}
+              validate={composeValidators(validateInput, validateEmail)}
+              placeholder="Enter email"
+              type="email"
+              component={InputField}
             />
-            <label>Password</label>
+            <Text>Password</Text>
             <Field
               name="password"
-              validate={required}
-              render={({ input, meta }) => (
-                <InputContainer>
-                  <Input
-                    {...input}
-                    meta={meta}
-                    type={showPassword ? 'password' : 'text'}
-                    placeholder="Enter password"
-                  />
-                  <Eye onClick={() => setShowPassword(!showPassword)}>
-                    {showPassword ? (
-                      <ReactSVG src={eyeoff} />
-                    ) : (
-                      <ReactSVG src={eye} />
-                    )}
-                  </Eye>
-                  {meta.error && meta.touched && <Error>{meta.error}</Error>}
-                </InputContainer>
-              )}
+              validate={validateInput}
+              placeholder="Enter password"
+              type="password"
+              component={InputField}
             />
           </Inputs>
           <Desc>
             I agree that by clicking <strong>“Registration”</strong> I accept
             the Terms Of Service and Privacy Policy
           </Desc>
-          <AythBtn type="submit" disabled={!values.password || !values.email}>
-            Registration
-          </AythBtn>
+          <AuthButton
+            disabled={!values.password || !values.email}
+            isLoading={user.isLoading}
+          >
+            Login
+          </AuthButton>
           <Desc>or continue with</Desc>
           <Linkedin>
             <a href="https://ru.linkedin.com/">
@@ -135,41 +123,6 @@ const TabContainer = styled.div`
 const Inputs = styled.div`
   margin-bottom: 40px;
 `;
-const InputContainer = styled.div`
-  position: relative;
-`;
-type InputProps = {
-  meta: any;
-  type: string;
-};
-const Input = styled.input<InputProps>`
-  display: block;
-  width: 100%;
-  padding: 10px 30px 10px 16px;
-  outline: none;
-  font-size: 16px;
-  line-height: 155%;
-  border: 1px solid
-    ${({ meta }) => (meta.error && meta.touched ? '#F05658' : '#e8e8e8')};
-  background: ${({ meta }) =>
-    meta.error && meta.touched ? '#FFF2F2' : 'transparent'};
-  border-radius: 6px;
-  margin-top: 4px;
-  margin-bottom: ${({ type }) => (type === 'email' ? '24px' : '0')};
-  &:focus {
-    border: 1px solid
-      ${({ meta }) => (meta.error && meta.touched ? '#F05658' : '#2baee0')};
-  }
-`;
-const Eye = styled.button`
-  background: transparent;
-  position: absolute;
-  top: 13px;
-  right: 16px;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-`;
 const Desc = styled.p`
   font-size: 12px;
   line-height: 150%;
@@ -177,40 +130,9 @@ const Desc = styled.p`
   color: #737373;
   margin-bottom: 16px;
 `;
-type AythBtnProps = {
-  disabled: boolean;
-};
-const AythBtn = styled.button<AythBtnProps>`
-  margin-bottom: 32px;
-  padding: 12px 0;
-  outline: none;
-  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
-  background: ${({ disabled }) =>
-    disabled ? 'rgb(206, 237, 249)' : '#2baee0'};
-  color: ${({ disabled }) => (disabled ? 'rgba(43, 174, 224, 0.3)' : 'white')};
-  border-radius: 6px;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 145%;
-  transition: 0.3s;
-  &:hover {
-    background: ${({ disabled }) =>
-      disabled ? 'rgb(206, 237, 249)' : '#51c2ee'};
-  }
-`;
 const Linkedin = styled.div`
   display: flex;
   justify-content: center;
 `;
 
-const Error = styled.div`
-  position: absolute;
-  bottom: -29px;
-  left: 0;
-  width: 100%;
-  height: 30px;
-  color: red;
-  font-size: 12px;
-  line-height: 150%;
-`;
 export default Registration;

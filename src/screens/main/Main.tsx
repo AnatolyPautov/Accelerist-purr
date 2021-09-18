@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Route } from 'react-router';
+import { Redirect, Route } from 'react-router';
 import Header from '../../components/header';
 import PageHeader from '../../components/pageHeader';
 import { Switch } from 'react-router-dom';
@@ -49,6 +49,7 @@ const Main: React.FC<LoginProps> = ({}) => {
           <PageHeader name="company">Corparate Profile</PageHeader>
           <CompanyPage />
         </Route>
+        <Redirect to="/dashboard" />
       </Switch>
     </Container>
   );

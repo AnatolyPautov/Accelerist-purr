@@ -110,7 +110,7 @@ const SearchList: React.FC<BoardProps> = ({ page }) => {
     } else if (page === 'prospect') {
       return (
         <div>
-          <Subtitle mb="24">{favorites.totalItems} companies</Subtitle>
+          <Subtitle mb="24">{companies.totalItems} companies</Subtitle>
           <Text mb="8">Filters</Text>
           <Filters>
             <Category>Travel Industry</Category>

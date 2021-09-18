@@ -19,8 +19,16 @@ export type Filter = {
   q: string;
 };
 export type User = {
+  id: string;
   email: string;
-  name: string;
-  password: string;
-  token: string;
+  createdAt: string;
+  firstName: string;
+  lastName: string;
+  loggedInAt: string;
+  role: string;
+  teamId: string;
+  updatedAt: string;
+  imported: boolean;
+  isAuthorized: boolean;
+  isReceivingNotifications: boolean;
 };
