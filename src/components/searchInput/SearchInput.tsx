@@ -52,6 +52,7 @@ const SearchContainer = styled.div<SearchContainerProps>`
   width: 100%;
   max-width: ${({ width }) => (width ? width + 'px' : '365px')};
   flex: 1 1 auto;
+  margin-right: 40px;
   @media (max-width: 1110px) {
     display: ${({ searchList }) => (searchList ? 'block' : 'none')};
   }

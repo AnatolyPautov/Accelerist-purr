@@ -71,6 +71,8 @@ const Pagination: React.FC<Props> = ({ page }) => {
             page: numberPage,
             limit: 12,
             q: companies.searchParams.q,
+            revenueMin: companies.searchParams.revenueMin,
+            revenueMax: companies.searchParams.revenueMax,
           })
         );
     }

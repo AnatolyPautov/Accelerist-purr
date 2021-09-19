@@ -12,7 +12,6 @@ import { PayloadAction } from '@reduxjs/toolkit';
 export function* signUpRequestHandler({ payload }: any): SagaIterator {
   try {
     const { data, ...responseInfo } = yield call(signUp, { ...payload });
-    console.log({ data, ...responseInfo });
     if (responseInfo.status !== 200 && data.message) {
       console.log({ data, ...responseInfo });
       yield put(requestFailed(data.message));
@@ -21,6 +20,7 @@ export function* signUpRequestHandler({ payload }: any): SagaIterator {
     yield put(signUpRoutine.success({ ...data }));
   } catch (e: any) {
     console.log(e.response.data);
+    yield put(requestFailed(e.response.data.message));
   }
 }
 export function* signInRequestHandler({ payload }: any): SagaIterator {

@@ -69,7 +69,6 @@ const Filtres: React.FC<BoardProps> = ({}) => {
           render={({ handleSubmit, values, form }) => {
             return (
               <div>
-                {console.log(values)}
                 <Subtitle mb="16">Company</Subtitle>
                 <CompanyContainer>
                   <CompanyBlock>

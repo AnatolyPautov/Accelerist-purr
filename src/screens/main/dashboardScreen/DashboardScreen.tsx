@@ -14,25 +14,29 @@ interface Props {}
 const DashboardScreen: React.FC<Props> = ({}) => {
   const favorites = useSelector(getFavoritesState);
   const prospects = useSelector(getProspectsState);
-  /*  {setState().loading ? <Spinner /> : renderItems()} */
+
   if (prospects.loading) {
     return <Spinner />;
   }
   return (
     <Wrapper>
       <Container>
-        <SpaceBetween>
-          <Title mb="16">Prospects</Title>
-          <StyledLink to="/prospects">see more</StyledLink>
-        </SpaceBetween>
-        <Flex>
-          <ProspectCard
-            item={prospects.prospects[prospects.prospects.length - 1]}
-          />
-          <ProspectCard
-            item={prospects.prospects[prospects.prospects.length - 2]}
-          />
-        </Flex>
+        {prospects.prospects.length !== 0 && (
+          <div>
+            <SpaceBetween>
+              <Title mb="16">Prospects</Title>
+              <StyledLink to="/prospects">see more</StyledLink>
+            </SpaceBetween>
+            <Flex>
+              <ProspectCard
+                item={prospects.prospects[prospects.prospects.length - 1]}
+              />
+              <ProspectCard
+                item={prospects.prospects[prospects.prospects.length - 2]}
+              />
+            </Flex>
+          </div>
+        )}
         <Flex>
           <Block>
             <SpaceBetween>

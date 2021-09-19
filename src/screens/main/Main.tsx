@@ -26,7 +26,7 @@ const Main: React.FC<LoginProps> = ({}) => {
       <Header />
       <Switch>
         <Route exact path="/dashboard">
-          <PageHeader name="dashboard">Dashboard</PageHeader>
+          <PageHeader page="dashboard">Dashboard</PageHeader>
           <DashboardScreen />
         </Route>
         <Route exact path="/favorites">
@@ -38,15 +38,15 @@ const Main: React.FC<LoginProps> = ({}) => {
           <SearchScreen page="prospects" />
         </Route>
         <Route path="/prospects/:number">
-          <PageHeader name="prospect"></PageHeader>
+          <PageHeader page="prospect"></PageHeader>
           <SearchScreen page="prospect" />
         </Route>
         <Route exact path="/audience">
-          <PageHeader name="search">Search</PageHeader>
+          <PageHeader page="search">Search</PageHeader>
           <SearchScreen />
         </Route>
         <Route path="/audience/:number">
-          <PageHeader name="company">Corparate Profile</PageHeader>
+          <PageHeader page="company">Corparate Profile</PageHeader>
           <CompanyPage />
         </Route>
         <Redirect to="/dashboard" />

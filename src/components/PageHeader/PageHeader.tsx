@@ -13,14 +13,14 @@ import { getProspectsState } from '../../store/store';
 import { useSelector } from 'react-redux';
 
 interface SearchListProps {
-  name?: string;
+  page?: string;
 }
-const PageHeader: React.FC<SearchListProps> = ({ name, children }) => {
+const PageHeader: React.FC<SearchListProps> = ({ page, children }) => {
   const prospects = useSelector(getProspectsState);
 
   const history = useHistory();
   const renderSwitch = () => {
-    switch (name) {
+    switch (page) {
       case 'company':
         return (
           <Row containerStyled={RowWidth}>
@@ -61,7 +61,7 @@ const PageHeader: React.FC<SearchListProps> = ({ name, children }) => {
       default:
         return (
           <SearchHeader>
-            {name !== 'dashboard' && (
+            {page !== 'dashboard' && (
               <PrevArrow onClick={() => history.goBack()}>
                 <ReactSVG src={prev} />
               </PrevArrow>

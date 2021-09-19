@@ -5,6 +5,7 @@ import SearchInput from '../searchInput';
 import { Wrapper } from '../../ui/Wrapper';
 import MenuRight from './MenuRight';
 import LogoMain from '../../assets/icons/LogoMain';
+import Profile from './Profile';
 
 interface BoardProps {}
 const Header: React.FC<BoardProps> = ({}) => {
@@ -23,6 +24,7 @@ const Header: React.FC<BoardProps> = ({}) => {
         </NavBlock>
         <NavBlock>
           <SearchInput />
+          <Profile />
           <HeaderBurger
             menuActive={menuActive}
             onClick={() => setMenuActive(!menuActive)}

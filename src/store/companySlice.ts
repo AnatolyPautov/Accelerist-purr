@@ -38,6 +38,20 @@ const initialState: CompaniesSliceState = {
   },
   searchParams: {
     q: '',
+    deleteIds: [],
+    industry: [],
+    location: [],
+    scope: '',
+    totalAnnualContributors: '',
+    revenueMin: '',
+    revenueMax: '',
+    csrFocusIds: [],
+    affinities: [],
+    gender: '',
+    ethnicities: [],
+    ageRanges: [],
+    income: [],
+    sdgGoals: [],
   },
 };
 
@@ -48,6 +62,8 @@ export const companiesSlice = createSlice({
     addCompanies(state, { payload }) {
       state.loading = true;
       state.searchParams.q = payload.q;
+      state.searchParams.revenueMin = payload.revenueMin;
+      state.searchParams.revenueMax = payload.revenueMax;
     },
     setCompanies(state, { payload }) {
       console.log(payload.items);

@@ -17,6 +17,20 @@ export type Company = {
 };
 export type Filter = {
   q: string;
+  deleteIds: Array<string>;
+  industry: Array<string>;
+  location: Array<string>;
+  scope: string;
+  totalAnnualContributors: string;
+  revenueMin: string;
+  revenueMax: string;
+  csrFocusIds: Array<number>;
+  affinities: Array<string>;
+  gender: string;
+  ethnicities: Array<string>;
+  ageRanges: Array<string>;
+  income: Array<string>;
+  sdgGoals: Array<string>;
 };
 export type User = {
   id: string;

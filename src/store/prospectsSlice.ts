@@ -42,10 +42,21 @@ export const prospectsSlice = createSlice({
     setCurrentProspect(state, { payload }) {
       state.currentProspect.name = payload;
     },
+    createProspect(state, { payload }) {
+      state.loading = true;
+    },
+    successCreateProspect(state, { payload }) {
+      state.loading = false;
+    },
   },
 });
 
-export const { addProspects, setProspects, setCurrentProspect } =
-  prospectsSlice.actions;
+export const {
+  addProspects,
+  setProspects,
+  setCurrentProspect,
+  createProspect,
+  successCreateProspect,
+} = prospectsSlice.actions;
 
 export default prospectsSlice.reducer;

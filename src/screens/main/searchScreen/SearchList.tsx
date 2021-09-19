@@ -14,8 +14,7 @@ import FolderPlusIcon from '../../../assets/icons/FolderPlusIcon';
 import Pagination from './Pagination';
 import { Subtitle } from '../../../ui/Subtitle';
 import ProspectCard from '../dashboardScreen/ProspectCard';
-import { addProspects } from '../../../store/prospectsSlice';
-import Spinner from '../../../ui/Spinner';
+import { addProspects, createProspect } from '../../../store/prospectsSlice';
 import { Text } from '../../../ui/Text';
 
 interface BoardProps {
@@ -30,22 +29,11 @@ const SearchList: React.FC<BoardProps> = ({ page }) => {
 
   const Ref = React.useRef<any>(null);
   React.useEffect(() => {
-    if (Ref.current) {
-      Ref.current.scrollIntoView({
-        behavior: 'smooth',
-      });
-    }
+    Ref.current.scrollIntoView({
+      behavior: 'smooth',
+    });
   }, []);
 
-  const setState = () => {
-    if (page === 'favorites') {
-      return favorites;
-    } else if (page === 'prospects') {
-      return prospects;
-    } else {
-      return companies;
-    }
-  };
   const renderItems = () => {
     if (page === 'favorites') {
       return favorites.favorites.map((company, index) => (
@@ -130,7 +118,9 @@ const SearchList: React.FC<BoardProps> = ({ page }) => {
         <div>
           <Subtitle>{'Found ' + companies.totalItems} companies</Subtitle>
           <Panel>
-            <Action>
+            <Action
+              onClick={() => dispatch(createProspect(companies.searchParams))}
+            >
               <Icon>
                 <FolderPlusIcon />
               </Icon>
@@ -168,9 +158,7 @@ const SearchList: React.FC<BoardProps> = ({ page }) => {
           <Pagination page={page} />
         </PaginationTop>
       </Top>
-      <ItemContainer>
-        {setState().loading ? <Spinner /> : renderItems()}
-      </ItemContainer>
+      <ItemContainer>{renderItems()}</ItemContainer>
       <PaginationBottom>
         <Pagination page={page} />
       </PaginationBottom>

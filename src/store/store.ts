@@ -33,7 +33,7 @@ const sagaMiddleware = createSagaMiddleware();
 const store = configureStore({
   reducer: persistedReducer,
   devTools: true,
-  middleware: [...getDefaultMiddleware({ thunk: false }), sagaMiddleware],
+  middleware: [sagaMiddleware],
 });
 sagaMiddleware.run(watcherSaga);
 

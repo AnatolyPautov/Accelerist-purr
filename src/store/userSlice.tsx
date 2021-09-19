@@ -6,7 +6,7 @@ export const signInRoutine = createRoutine('SIGN_IN_ROUTINE');
 export const signUpRoutine = createRoutine('SIGN_UP_ROUTINE');
 
 interface UserSliceState {
-  user: Types.User;
+  user: Types.User | null;
   token: string;
   isAuth: boolean;
   isLoading: boolean;
@@ -45,34 +45,35 @@ export const userSlice = createSlice({
       state.errors = payload;
       state.isLoading = false;
     },
+    logOut(state) {
+      state.user = null;
+      state.token = '';
+      state.isAuth = false;
+      state.errors = '';
+    },
   },
   extraReducers: {
     [signInRoutine.TRIGGER]: (state, action) => {
       state.isLoading = true;
     },
     [signInRoutine.SUCCESS]: (state, { payload }) => {
-      console.log(payload);
       state.token = payload.accessToken;
       state.user = { ...payload.user };
       state.isAuth = true;
       state.isLoading = false;
-      console.log(state.user);
     },
     [signUpRoutine.TRIGGER]: (state, action) => {
       state.isLoading = true;
     },
     [signUpRoutine.SUCCESS]: (state, { payload }) => {
-      return (
-        payload.token && {
-          user: { ...payload },
-          isAuth: true,
-          isLoading: false,
-        }
-      );
+      state.token = payload.accessToken;
+      state.user = { ...payload.user };
+      state.isAuth = true;
+      state.isLoading = false;
     },
   },
 });
 
-export const { requestFailed, cleanErrors } = userSlice.actions;
+export const { requestFailed, cleanErrors, logOut } = userSlice.actions;
 
 export default userSlice.reducer;
