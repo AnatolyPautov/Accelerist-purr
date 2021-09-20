@@ -4,13 +4,18 @@ import { useAppDispatch } from '../../store/store';
 import { logOut } from '../../store/userSlice';
 import { Text } from '../../ui/Text';
 
-interface Props {}
-const Profile: React.FC<Props> = ({}) => {
+interface Props {
+  responsive?: boolean;
+}
+const Profile: React.FC<Props> = ({ responsive }) => {
   const [listActive, setListActive] = React.useState<boolean>(false);
 
   const dispatch = useAppDispatch();
   return (
-    <ProfileContainer onClick={() => setListActive(!listActive)}>
+    <ProfileContainer
+      responsive={responsive}
+      onClick={() => setListActive(!listActive)}
+    >
       <ProfileAccount>
         <ProfileLogo>-_-</ProfileLogo>
         <Text color="#122434">United Nations</Text>
@@ -25,8 +30,11 @@ const Profile: React.FC<Props> = ({}) => {
   );
 };
 
-const ProfileContainer = styled.div`
+const ProfileContainer = styled.div<{ responsive?: boolean }>`
   position: relative;
+  @media (max-width: 1170px) {
+    display: ${({ responsive }) => (responsive ? 'block' : 'none')};
+  }
 `;
 const ProfileAccount = styled.button`
   background: transparent;
@@ -35,6 +43,10 @@ const ProfileAccount = styled.button`
   display: flex;
   align-items: center;
   width: 177px;
+  &:hover div,
+  &:focus div {
+    border: 1px solid #2baee0;
+  }
 `;
 const ProfileLogo = styled.div`
   width: 36px;
@@ -56,6 +68,9 @@ const ProfileList = styled.div<{ listActive: boolean }>`
   background-color: white;
   border-radius: 6px;
   padding: 24px;
+  @media (max-width: 1170px) {
+    top: -180px;
+  }
 `;
 const ProfileText = styled.p`
   cursor: pointer;

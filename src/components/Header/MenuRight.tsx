@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import Navbar from '../navbar';
+import Profile from './Profile';
 
 interface BoardProps {
   menuActive: boolean;
@@ -11,10 +12,11 @@ const MenuRight: React.FC<BoardProps> = ({ menuActive, setMenuActive }) => {
     <Menu menuActive={menuActive}>
       <MenuBlock menuActive={menuActive}>
         <Navbar
-          responsive={'responsive'}
+          responsive={true}
           menuActive={menuActive}
           setMenuActive={setMenuActive}
         />
+        <Profile responsive={true} />
       </MenuBlock>
     </Menu>
   );
@@ -44,7 +46,10 @@ type MenuBlockProps = {
   menuActive: boolean;
 };
 const MenuBlock = styled.div<MenuBlockProps>`
-  padding: 100px 0 0 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 100px 0 40px 40px;
   height: 100%;
   background: white;
   width: 330px;

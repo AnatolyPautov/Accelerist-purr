@@ -53,7 +53,7 @@ const SearchContainer = styled.div<SearchContainerProps>`
   max-width: ${({ width }) => (width ? width + 'px' : '365px')};
   flex: 1 1 auto;
   margin-right: 40px;
-  @media (max-width: 1110px) {
+  @media (max-width: 1170px) {
     display: ${({ searchList }) => (searchList ? 'block' : 'none')};
   }
 `;

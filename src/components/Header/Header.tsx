@@ -112,7 +112,7 @@ const HeaderBurger = styled.button<HeaderBurgerProps>`
         menuActive ? 'rotate(-45deg)' : 'none'};
     }
   }
-  @media (max-width: 1110px) {
+  @media (max-width: 1170px) {
     display: block;
   }
 `;

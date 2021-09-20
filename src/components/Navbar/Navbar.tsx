@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import React from 'react';
 interface NavbarProps {
-  responsive?: string;
+  responsive?: boolean;
   menuActive?: boolean;
   setMenuActive(menuActive: boolean): void;
 }
@@ -59,19 +59,19 @@ const Navbar: React.FC<NavbarProps> = ({
   );
 };
 type NavContainerProps = {
-  responsive?: string;
+  responsive?: boolean;
   menuActive?: boolean;
 };
 const NavContainer = styled.nav<NavContainerProps>`
   display: ${({ responsive }) => (responsive ? 'block' : 'flex')};
   align-items: center;
   justify-content: center;
-  @media (max-width: 1110px) {
+  @media (max-width: 1170px) {
     display: ${({ menuActive }) => (menuActive ? 'block' : 'none')};
   }
 `;
 type StyledLinkProps = {
-  responsive?: string;
+  responsive?: boolean;
 };
 const StyledLink = styled(NavLink)<StyledLinkProps>`
   display: block;
