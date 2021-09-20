@@ -11,10 +11,10 @@ import { addCompany } from '../../store/companySlice';
 import { numberWithCommas } from '../../utils/NumberWithCommas';
 import * as Types from '../../types/types';
 
-interface CompanyItemProps {
+interface CompanyCardProps {
   company: Types.Company;
 }
-const CompanyItem: React.FC<CompanyItemProps> = ({ company }) => {
+const CompanyCard: React.FC<CompanyCardProps> = ({ company }) => {
   const { name, city, state, street, zipCode, revenue, id, fax, score, like } =
     company;
   const address = street + '. ' + city + ', ' + state + ' ' + zipCode;
@@ -243,4 +243,4 @@ const LinkBtn = styled(Link)`
   }
 `;
 
-export default CompanyItem;
+export default CompanyCard;

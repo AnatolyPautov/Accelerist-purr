@@ -6,20 +6,20 @@ import PageHeader from '../../components/pageHeader';
 import { Switch } from 'react-router-dom';
 import CompanyPage from './companyScreen';
 import { useAppDispatch } from '../../store/store';
-import { addCompanies } from '../../store/companySlice';
 import SearchScreen from './searchScreen';
 import DashboardScreen from './dashboardScreen';
 import { addFavorites } from '../../store/favoritesSlice';
 import { addProspects } from '../../store/prospectsSlice';
-interface LoginProps {}
+import ProspectsScreen from './prospectsScreen';
+import FavoritesScreen from './favoritesScreen';
+interface Props {}
 
-const Main: React.FC<LoginProps> = ({}) => {
+const Main: React.FC<Props> = ({}) => {
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
-    dispatch(addCompanies({ page: 1, limit: 12 }));
     dispatch(addFavorites({ page: 1, limit: 12 }));
-    dispatch(addProspects({ page: 1, limit: 15 }));
+    dispatch(addProspects({ page: 1, limit: 12 }));
   }, [dispatch]);
   return (
     <Container>
@@ -31,11 +31,11 @@ const Main: React.FC<LoginProps> = ({}) => {
         </Route>
         <Route exact path="/favorites">
           <PageHeader>Favorites</PageHeader>
-          <SearchScreen page="favorites" />
+          <FavoritesScreen />
         </Route>
         <Route exact path="/prospects">
           <PageHeader>Prospects</PageHeader>
-          <SearchScreen page="prospects" />
+          <ProspectsScreen />
         </Route>
         <Route path="/prospects/:number">
           <PageHeader page="prospect"></PageHeader>

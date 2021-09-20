@@ -7,12 +7,12 @@ import {
   getFavoritesState,
   getProspectsState,
   useAppDispatch,
-} from '../../../store/store';
-import prev from '../../../assets/icons/arrow-left.svg';
-import next from '../../../assets/icons/arrow-right.svg';
-import { addCompanies } from '../../../store/companySlice';
-import { addFavorites } from '../../../store/favoritesSlice';
-import { addProspects } from '../../../store/prospectsSlice';
+} from '../../store/store';
+import prev from '../../assets/icons/arrow-left.svg';
+import next from '../../assets/icons/arrow-right.svg';
+import { addCompanies } from '../../store/companySlice';
+import { addFavorites } from '../../store/favoritesSlice';
+import { addProspects } from '../../store/prospectsSlice';
 
 interface Props {
   page?: string;
@@ -62,7 +62,7 @@ const Pagination: React.FC<Props> = ({ page }) => {
         return dispatch(
           addProspects({
             page: numberPage,
-            limit: 15,
+            limit: 12,
           })
         );
       default:

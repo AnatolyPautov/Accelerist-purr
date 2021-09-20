@@ -1,6 +1,8 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import React from 'react';
+import { useAppDispatch } from '../../store/store';
+import { addCompanies } from '../../store/companySlice';
 interface NavbarProps {
   responsive?: boolean;
   menuActive?: boolean;
@@ -11,6 +13,8 @@ const Navbar: React.FC<NavbarProps> = ({
   menuActive,
   setMenuActive,
 }) => {
+  const dispatch = useAppDispatch();
+
   return (
     <NavContainer responsive={responsive} menuActive={menuActive}>
       <StyledLink
@@ -22,7 +26,10 @@ const Navbar: React.FC<NavbarProps> = ({
       </StyledLink>
       <StyledLink
         responsive={responsive}
-        onClick={() => setMenuActive(false)}
+        onClick={() => {
+          setMenuActive(false);
+          dispatch(addCompanies({ page: 1, limit: 12 }));
+        }}
         to="/audience"
       >
         Audience

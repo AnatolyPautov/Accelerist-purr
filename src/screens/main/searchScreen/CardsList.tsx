@@ -1,20 +1,14 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import {
-  getCompaniesState,
-  getFavoritesState,
-  getProspectsState,
-  useAppDispatch,
-} from '../../../store/store';
-import CompanyItem from '../../../components/companyItem';
+import { getCompaniesState, useAppDispatch } from '../../../store/store';
+import CompanyCard from '../../../components/companyCard';
 import UploadIcon from '../../../assets/icons/UploadIcon';
 import MailIcon from '../../../assets/icons/MailIcon';
 import FolderPlusIcon from '../../../assets/icons/FolderPlusIcon';
-import Pagination from './Pagination';
+import Pagination from '../../../components/pagination/Pagination';
 import { Subtitle } from '../../../ui/Subtitle';
-import ProspectCard from '../dashboardScreen/ProspectCard';
-import { addProspects, createProspect } from '../../../store/prospectsSlice';
+import { createProspect } from '../../../store/prospectsSlice';
 import { Text } from '../../../ui/Text';
 
 interface BoardProps {
@@ -22,8 +16,6 @@ interface BoardProps {
 }
 const SearchList: React.FC<BoardProps> = ({ page }) => {
   const companies = useSelector(getCompaniesState);
-  const favorites = useSelector(getFavoritesState);
-  const prospects = useSelector(getProspectsState);
 
   const dispatch = useAppDispatch();
 
@@ -33,69 +25,8 @@ const SearchList: React.FC<BoardProps> = ({ page }) => {
       behavior: 'smooth',
     });
   }, []);
-
-  const renderItems = () => {
-    if (page === 'favorites') {
-      return favorites.favorites.map((company, index) => (
-        <CompanyItem company={company} key={index} />
-      ));
-    } else if (page === 'prospects') {
-      return prospects.prospects.map((item, index) => (
-        <ProspectCard item={item} key={index} />
-      ));
-    } else {
-      return companies.companies.map((company, index) => (
-        <CompanyItem company={company} key={index} />
-      ));
-    }
-  };
   const renderTop = () => {
-    if (page === 'favorites') {
-      return <Subtitle>{favorites.totalItems} companies</Subtitle>;
-    } else if (page === 'prospects') {
-      return (
-        <Sort>
-          <SortText>Sort by</SortText>
-          <SortTabs>
-            <input type="radio" name="tab-btn" id="tab-btn-1" value="" />
-            <label
-              htmlFor="tab-btn-1"
-              onClick={() =>
-                dispatch(addProspects({ page: 1, limit: 15, sort: 'alphabet' }))
-              }
-            >
-              Alphabet
-            </label>
-            <input type="radio" name="tab-btn" id="tab-btn-2" value="" />
-            <label
-              htmlFor="tab-btn-2"
-              onClick={() =>
-                dispatch(
-                  addProspects({ page: 1, limit: 15, sort: 'available' })
-                )
-              }
-            >
-              Prospects Available
-            </label>
-            <input type="radio" name="tab-btn" id="tab-btn-3" value="" />
-            <label
-              htmlFor="tab-btn-3"
-              onClick={() =>
-                dispatch(
-                  addProspects({
-                    page: 1,
-                    limit: 15,
-                    sort: 'last-activity',
-                  })
-                )
-              }
-            >
-              Last Activity
-            </label>
-          </SortTabs>
-        </Sort>
-      );
-    } else if (page === 'prospect') {
+    if (page === 'prospect') {
       return (
         <div>
           <Subtitle mb="24">{companies.totalItems} companies</Subtitle>
@@ -158,7 +89,11 @@ const SearchList: React.FC<BoardProps> = ({ page }) => {
           <Pagination page={page} />
         </PaginationTop>
       </Top>
-      <ItemContainer>{renderItems()}</ItemContainer>
+      <ItemContainer>
+        {companies.companies.map((company, index) => (
+          <CompanyCard company={company} key={index} />
+        ))}
+      </ItemContainer>
       <PaginationBottom>
         <Pagination page={page} />
       </PaginationBottom>
@@ -166,17 +101,17 @@ const SearchList: React.FC<BoardProps> = ({ page }) => {
   );
 };
 
-const ItemContainer = styled.div`
-  margin-top: 27px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-`;
 const Top = styled.div`
   max-width: 1096px;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+`;
+const ItemContainer = styled.div`
+  margin-top: 27px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 `;
 const Panel = styled.div`
   display: flex;
@@ -222,43 +157,10 @@ const PaginationBottom = styled.div`
     display: block;
   }
 `;
-const Sort = styled.div`
-  display: flex;
-  align-items: center;
-`;
-const SortText = styled.div`
-  font-size: 12px;
-  line-height: 150%;
-  color: #737373;
-  margin-right: 26px;
-`;
-const SortTabs = styled.div`
-  display: flex;
-  align-items: center;
-  input[type='radio'] {
-    display: none;
-  }
-  label {
-    background: transparent;
-    font-size: 12px;
-    line-height: 150%;
-    font-family: 'Rubik', sans-serif;
-    color: #122434;
-    margin-right: 22px;
-    cursor: pointer;
-    padding-bottom: 2px;
-    &:first-child {
-      margin-left: 26px;
-    }
-  }
-  input[type='radio']:checked + label {
-    border-bottom: 2px solid #2baee0;
-  }
-`;
 const Filters = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 26px;
+  margin-bottom: 29px;
 `;
 const Category = styled.div`
   border: 1px solid #caf0ff;

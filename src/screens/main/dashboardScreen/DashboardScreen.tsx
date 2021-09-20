@@ -3,12 +3,12 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { Title } from '../../../ui/Title';
 import { Wrapper } from '../../../ui/Wrapper';
-import ProspectCard from './ProspectCard';
 import FavoritesCard from './FavoritesCard';
 import ReportsCard from './ReportsCard';
 import { useSelector } from 'react-redux';
 import { getFavoritesState, getProspectsState } from '../../../store/store';
 import Spinner from '../../../ui/Spinner';
+import ProspectCard from '../../../components/prospectCard';
 
 interface Props {}
 const DashboardScreen: React.FC<Props> = ({}) => {
@@ -83,6 +83,9 @@ const SpaceBetween = styled.div`
 const StyledLink = styled(NavLink)`
   text-align: right;
   color: #2baee0;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const Block = styled.div`

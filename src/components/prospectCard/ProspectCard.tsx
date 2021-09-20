@@ -1,11 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { addCompanies } from '../../../store/companySlice';
-import { setCurrentProspect } from '../../../store/prospectsSlice';
-import { useAppDispatch } from '../../../store/store';
-import { Subtitle } from '../../../ui/Subtitle';
-import { Text } from '../../../ui/Text';
+import { addCompanies } from '../../store/companySlice';
+import { setCurrentProspect } from '../../store/prospectsSlice';
+import { useAppDispatch } from '../../store/store';
+import { Subtitle } from '../../ui/Subtitle';
+import { Text } from '../../ui/Text';
 
 interface Props {
   item: any;
