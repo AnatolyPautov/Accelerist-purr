@@ -9,6 +9,10 @@ import { useSelector } from 'react-redux';
 import { getFavoritesState, getProspectsState } from '../../../store/store';
 import Spinner from '../../../ui/Spinner';
 import ProspectCard from '../../../components/prospectCard';
+import { ReactSVG } from 'react-svg';
+import emptyHeart from '../../../assets/icons/heart-favorite.svg';
+import { Subtitle } from '../../../ui/Subtitle';
+import { Text } from '../../../ui/Text';
 
 interface Props {}
 const DashboardScreen: React.FC<Props> = ({}) => {
@@ -28,12 +32,10 @@ const DashboardScreen: React.FC<Props> = ({}) => {
               <StyledLink to="/prospects">see more</StyledLink>
             </SpaceBetween>
             <Flex>
-              <ProspectCard
-                item={prospects.prospects[prospects.prospects.length - 1]}
-              />
-              <ProspectCard
-                item={prospects.prospects[prospects.prospects.length - 2]}
-              />
+              {prospects.prospects.map(
+                (item, index) =>
+                  index < 2 && <ProspectCard item={item} key={index} />
+              )}
             </Flex>
           </div>
         )}
@@ -43,12 +45,23 @@ const DashboardScreen: React.FC<Props> = ({}) => {
               <Title>Favorites</Title>
               <StyledLink to="/favorites">see more</StyledLink>
             </SpaceBetween>
-            <Flex>
-              {favorites.favorites.map(
-                (company, index) =>
-                  index < 6 && <FavoritesCard company={company} key={index} />
-              )}
-            </Flex>
+            {favorites.favorites.length !== 0 ? (
+              <Flex>
+                {favorites.favorites.map(
+                  (company, index) =>
+                    index < 6 && <FavoritesCard company={company} key={index} />
+                )}
+              </Flex>
+            ) : (
+              <FavoriteEmpty>
+                <ReactSVG src={emptyHeart} />
+                <Subtitle mb="8">No favorite company</Subtitle>
+                <Text color="#BFBFBF" mb="32">
+                  Go to the search page and add to favorites
+                </Text>
+                <SearchButton>Search</SearchButton>
+              </FavoriteEmpty>
+            )}
           </Block>
           <Block>
             <SpaceBetween>
@@ -94,5 +107,36 @@ const Block = styled.div`
     margin-right: 24px;
   }
 `;
-
+const FavoriteEmpty = styled(Block)`
+  height: 498px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  h3 {
+    margin-top: 40px;
+  }
+`;
+const SearchButton = styled.button`
+  outline: none;
+  width: 244px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #2baee0;
+  border-radius: 6px;
+  background: #ffffff;
+  cursor: pointer;
+  font-family: 'Rubik';
+  transition: 0.2s;
+  &:hover {
+    background: #ebf9ff;
+    color: #2baee0;
+  }
+  &:focus {
+    background: #caf0ff;
+    color: #2baee0;
+  }
+`;
 export default DashboardScreen;

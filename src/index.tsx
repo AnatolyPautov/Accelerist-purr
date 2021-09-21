@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import store from './store/store';
@@ -10,6 +10,7 @@ import { theme } from './styles/theme';
 import Context from './context';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
+import ScrollToTop from './utils/ScrollToTop';
 
 let persistor = persistStore(store);
 
@@ -18,15 +19,20 @@ function Main() {
   return (
     <ThemeProvider theme={theme}>
       <React.StrictMode>
-        <BrowserRouter>
-          <Context.Provider value={{ filterActive, setFilterActive }}>
+        <Router>
+          <Context.Provider
+            value={{
+              filterActive,
+              setFilterActive,
+            }}
+          >
             <Provider store={store}>
               <PersistGate persistor={persistor}>
                 <App />
               </PersistGate>
             </Provider>
           </Context.Provider>
-        </BrowserRouter>
+        </Router>
       </React.StrictMode>
     </ThemeProvider>
   );

@@ -6,10 +6,12 @@ import { Wrapper } from '../../ui/Wrapper';
 import MenuRight from './MenuRight';
 import LogoMain from '../../assets/icons/LogoMain';
 import Profile from './Profile';
+import Context from '../../context';
 
 interface BoardProps {}
 const Header: React.FC<BoardProps> = ({}) => {
   const [menuActive, setMenuActive] = React.useState<boolean>(false);
+
   return (
     <HeaderContainer>
       <Wrapper containerStyled={StyldedWrapper}>
