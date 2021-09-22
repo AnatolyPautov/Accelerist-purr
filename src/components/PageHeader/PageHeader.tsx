@@ -19,7 +19,7 @@ const PageHeader: React.FC<SearchListProps> = ({ page, children }) => {
   const prospects = useSelector(getProspectsState);
 
   const history = useHistory();
-  const renderSwitch = () => {
+  const renderHeader = () => {
     switch (page) {
       case 'company':
         return (
@@ -73,7 +73,7 @@ const PageHeader: React.FC<SearchListProps> = ({ page, children }) => {
   };
   return (
     <Container>
-      <Wrapper>{renderSwitch()}</Wrapper>
+      <Wrapper>{renderHeader()}</Wrapper>
     </Container>
   );
 };

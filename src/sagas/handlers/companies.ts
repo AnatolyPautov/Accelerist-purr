@@ -2,12 +2,13 @@ import { call, put } from 'redux-saga/effects';
 import {
   requestGetCompanies,
   requestGetCompany,
+  requestGetDislike,
   requestGetLike,
 } from '../requests/companies';
 import * as Types from '../../types/types';
 import { SagaIterator } from 'redux-saga';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { setCompanies, setCompany, setLike } from '../../store/companySlice';
+import { setCompanies, setCompany, updateLike } from '../../store/companySlice';
 
 export function* handleGetCompanies({ payload }: any): SagaIterator {
   try {
@@ -34,7 +35,17 @@ export function* handleGetLike({
 }: PayloadAction<string>): SagaIterator {
   try {
     yield call(requestGetLike, payload);
-    yield put(setLike(payload));
+    yield put(updateLike({ id: payload, like: true }));
+  } catch (e) {
+    console.log(e);
+  }
+}
+export function* handleGetDislike({
+  payload,
+}: PayloadAction<string>): SagaIterator {
+  try {
+    yield call(requestGetDislike, payload);
+    yield put(updateLike({ id: payload, like: false }));
   } catch (e) {
     console.log(e);
   }

@@ -1,16 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ReactSVG } from 'react-svg';
-import heart from '../../assets/icons/heart.svg';
-import heartLike from '../../assets/icons/heart-like.svg';
 import { useHistory } from 'react-router';
 import { Text } from '../../ui/Text';
 import { Subtitle } from '../../ui/Subtitle';
 import { useAppDispatch } from '../../store/store';
-import { addCompany, addLike } from '../../store/companySlice';
+import { addCompany, addLike, addDislike } from '../../store/companySlice';
 import { numberWithCommas } from '../../utils/NumberWithCommas';
 import * as Types from '../../types/types';
 import { ButtonNow } from '../../ui/ButtonNow';
+import { HeartIcon } from '../../assets/icons/HeartIcon';
 
 interface CompanyCardProps {
   company: Types.Company;
@@ -52,8 +50,13 @@ const CompanyCard: React.FC<CompanyCardProps> = ({ company }) => {
             </RevenueBlock>
           </Data>
           <Buttons>
-            <ButtonNow variant="like" onClick={() => dispatch(addLike(id))}>
-              <ReactSVG src={like ? heartLike : heart} />
+            <ButtonNow
+              variant="like"
+              onClick={() =>
+                like ? dispatch(addDislike(id)) : dispatch(addLike(id))
+              }
+            >
+              <HeartIcon isLike={like} />
             </ButtonNow>
             <ButtonNow
               onClick={() => {
@@ -67,8 +70,13 @@ const CompanyCard: React.FC<CompanyCardProps> = ({ company }) => {
         </Info>
       </FlexRow>
       <ButtonsResponsive>
-        <ButtonNow variant="like" onClick={() => dispatch(addLike(id))}>
-          <ReactSVG src={like ? heartLike : heart} />
+        <ButtonNow
+          variant="like"
+          onClick={() =>
+            like ? dispatch(addDislike(id)) : dispatch(addLike(id))
+          }
+        >
+          <HeartIcon isLike={like} />
         </ButtonNow>
         <ButtonNow
           onClick={() => {

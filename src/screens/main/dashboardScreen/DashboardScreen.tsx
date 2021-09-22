@@ -6,7 +6,11 @@ import { Wrapper } from '../../../ui/Wrapper';
 import FavoritesCard from './FavoritesCard';
 import ReportsCard from './ReportsCard';
 import { useSelector } from 'react-redux';
-import { getFavoritesState, getProspectsState } from '../../../store/store';
+import {
+  getFavoritesState,
+  getProspectsState,
+  useAppDispatch,
+} from '../../../store/store';
 import ProspectCard from '../../../components/prospectCard';
 import { ReactSVG } from 'react-svg';
 import emptyHeart from '../../../assets/icons/heart-favorite.svg';
@@ -15,6 +19,8 @@ import { Text } from '../../../ui/Text';
 import { Loader } from '../../../ui/Loader';
 import { ButtonNow } from '../../../ui/ButtonNow';
 import { useHistory } from 'react-router';
+import { addFavorites } from '../../../store/favoritesSlice';
+import { addProspects } from '../../../store/prospectsSlice';
 
 interface Props {}
 const DashboardScreen: React.FC<Props> = ({}) => {
@@ -22,6 +28,12 @@ const DashboardScreen: React.FC<Props> = ({}) => {
   const prospects = useSelector(getProspectsState);
 
   const history = useHistory();
+  const dispatch = useAppDispatch();
+
+  React.useEffect(() => {
+    dispatch(addFavorites({ page: 1, limit: 12 }));
+    dispatch(addProspects({ page: 1, limit: 12 }));
+  }, [dispatch]);
 
   if (prospects.loading) {
     return <Loader size="big" variant="secondary" />;

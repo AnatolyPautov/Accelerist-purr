@@ -16,7 +16,6 @@ interface BoardProps {
   page?: string;
 }
 const SearchList: React.FC<BoardProps> = ({ page }) => {
-  const [likeModal, setLikeModal] = React.useState<boolean>(false);
   const companies = useSelector(getCompaniesState);
 
   const dispatch = useAppDispatch();
@@ -85,7 +84,7 @@ const SearchList: React.FC<BoardProps> = ({ page }) => {
 
   return (
     <div ref={Ref}>
-      {likeModal && <ModalLike />}
+      {companies.showlikeModal && <ModalLike />}
       <Top>
         {renderTop()}
         <PaginationTop>

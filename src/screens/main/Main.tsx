@@ -15,12 +15,6 @@ import FavoritesScreen from './favoritesScreen';
 interface Props {}
 
 const Main: React.FC<Props> = ({}) => {
-  const dispatch = useAppDispatch();
-
-  React.useEffect(() => {
-    dispatch(addFavorites({ page: 1, limit: 12 }));
-    dispatch(addProspects({ page: 1, limit: 12 }));
-  }, [dispatch]);
   return (
     <Container>
       <Header />

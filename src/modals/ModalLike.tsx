@@ -3,23 +3,33 @@ import styled from 'styled-components';
 import { ReactSVG } from 'react-svg';
 import heart from '../assets/icons/heart-likeModal.svg';
 import cross from '../assets/icons/close-cross.svg';
+import { ButtonNow } from '../ui/ButtonNow';
+import { closeLikeModal } from '../store/companySlice';
+import { useAppDispatch } from '../store/store';
 
 interface Props {}
 
 const ModalLike: React.FC<Props> = ({}) => {
+  const dispatch = useAppDispatch();
   return (
-    <Background>
+    <Background onClick={() => dispatch(closeLikeModal())}>
       <ModalWrapper>
-        <Modal>
+        <Modal onClick={(e) => e.stopPropagation()}>
           <ModalHeader>
             <ReactSVG src={heart} />
-            <CloseСross>
+            <CloseСross onClick={() => dispatch(closeLikeModal())}>
               <ReactSVG src={cross} />
             </CloseСross>
           </ModalHeader>
           <ModalBody>
             <Title>United Nations has been added to favorites</Title>
             <Text>You can see the list of favorites on the dashboard page</Text>
+            <ButtonNow
+              variant="second"
+              onClick={() => dispatch(closeLikeModal())}
+            >
+              Done
+            </ButtonNow>
           </ModalBody>
         </Modal>
       </ModalWrapper>

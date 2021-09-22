@@ -8,6 +8,7 @@ interface CompaniesSliceState {
   totalPages: number;
   itemCount: number;
   loading: boolean;
+  showlikeModal: boolean;
   currentCompany: Types.Company;
   searchParams: Types.Filter;
 }
@@ -19,6 +20,7 @@ const initialState: CompaniesSliceState = {
   totalPages: 1,
   itemCount: 12,
   loading: false,
+  showlikeModal: false,
   currentCompany: {
     name: '',
     revenue: 0,
@@ -78,17 +80,25 @@ export const companiesSlice = createSlice({
       state.loading = true;
     },
     setCompany(state, { payload }) {
-      console.log(payload);
       state.currentCompany = payload;
       state.loading = false;
     },
-    addLike(state, { payload }) {
-      state.loading = true;
+    addLike(state, { payload }) {},
+    addDislike(state, { payload }) {},
+    updateLike(state, { payload }) {
+      const updateCompanies = state.companies.map((company) => {
+        if (company.id === payload.id)
+          return { ...company, like: payload.like };
+        return company;
+      });
+      state.companies = updateCompanies;
+
+      if (payload.like) {
+        state.showlikeModal = true;
+      }
     },
-    setLike(state, { payload }) {
-      console.log(payload);
-      state.currentCompany = payload;
-      state.loading = false;
+    closeLikeModal(state) {
+      state.showlikeModal = false;
     },
   },
 });
@@ -99,7 +109,9 @@ export const {
   addCompany,
   setCompany,
   addLike,
-  setLike,
+  addDislike,
+  updateLike,
+  closeLikeModal,
 } = companiesSlice.actions;
 
 export default companiesSlice.reducer;

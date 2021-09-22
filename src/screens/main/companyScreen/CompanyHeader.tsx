@@ -4,12 +4,12 @@ import { css } from 'styled-components';
 import { ReactSVG } from 'react-svg';
 import facebook from '../../../assets/icons/facebook.svg';
 import twitter from '../../../assets/icons/twitter.svg';
-import heart from '../../../assets/icons/heart.svg';
 import { Row } from '../../../ui/Row';
 import { Text } from '../../../ui/Text';
 import { Title } from '../../../ui/Title';
 import { useSelector } from 'react-redux';
 import { getCompaniesState } from '../../../store/store';
+import { HeartIcon } from '../../../assets/icons/HeartIcon';
 
 interface CompanyPageProps {}
 const CompanyHeader: React.FC<CompanyPageProps> = ({}) => {
@@ -29,7 +29,7 @@ const CompanyHeader: React.FC<CompanyPageProps> = ({}) => {
         <div>
           <Row>
             <Title mb={'4'}>{name}</Title>
-            <ReactSVG src={heart} />
+            <HeartIcon />
           </Row>
           <Text mb={'22'}>
             Administration, Business Support and Waste Management Services

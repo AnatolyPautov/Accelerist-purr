@@ -16,3 +16,6 @@ export const requestGetCompany = (id: string) => {
 export const requestGetLike = (id: string) => {
   return Api.get(`companies/${id}/like`);
 };
+export const requestGetDislike = (id: string) => {
+  return Api.get(`companies/${id}/dislike`);
+};
