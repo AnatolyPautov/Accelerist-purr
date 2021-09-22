@@ -123,11 +123,5 @@ const FormDropdown = styled(Field)`
   border-radius: 6px;
   padding: 10px 30px 10px 16px;
 `;
-const Ssdfsdf = styled.div`
-  width: 100%;
-  border: 1px solid #e8e8e8;
-  border-radius: 6px;
-  padding: 10px 30px 10px 16px;
-`;
 
 export default ModalSupport;

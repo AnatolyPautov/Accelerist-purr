@@ -3,25 +3,28 @@ import styled from 'styled-components';
 import { Loader } from './Loader';
 
 interface Props extends DOMAttributes<HTMLButtonElement> {
-  isLoading: boolean;
-  disabled: boolean;
+  isLoading?: boolean;
+  disabled?: boolean;
+  variant?: 'first' | 'like';
 }
 
 export const AuthButton: FC<Props> = ({
   children,
   isLoading,
   disabled,
+  variant,
   ...all
 }) => {
   return (
-    <StyledButton {...all} type="submit" disabled={disabled}>
+    <StyledButton {...all} variant={variant} disabled={disabled}>
       {isLoading ? <Loader /> : children}
     </StyledButton>
   );
 };
 
 interface StyledButtonProps {
-  disabled: boolean;
+  disabled?: boolean;
+  variant?: string;
 }
 const StyledButton = styled.button<StyledButtonProps>`
   height: 46px;

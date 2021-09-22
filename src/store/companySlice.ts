@@ -82,10 +82,24 @@ export const companiesSlice = createSlice({
       state.currentCompany = payload;
       state.loading = false;
     },
+    addLike(state, { payload }) {
+      state.loading = true;
+    },
+    setLike(state, { payload }) {
+      console.log(payload);
+      state.currentCompany = payload;
+      state.loading = false;
+    },
   },
 });
 
-export const { addCompanies, setCompanies, addCompany, setCompany } =
-  companiesSlice.actions;
+export const {
+  addCompanies,
+  setCompanies,
+  addCompany,
+  setCompany,
+  addLike,
+  setLike,
+} = companiesSlice.actions;
 
 export default companiesSlice.reducer;

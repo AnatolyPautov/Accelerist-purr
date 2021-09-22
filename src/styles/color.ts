@@ -8,4 +8,8 @@ export const COLORS = {
   darkGray: '#737373',
   white: '#FFFFFF',
   line: '#E8E8E8',
+  substrate: '#f9f9f9',
+  disabledGray: '#f0f0f0',
+  lightGray: '#c4c4c4',
+  selected: '#e9f9ff',
 };

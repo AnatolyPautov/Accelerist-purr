@@ -6,9 +6,10 @@ import { setCurrentProspect } from '../../store/prospectsSlice';
 import { useAppDispatch } from '../../store/store';
 import { Subtitle } from '../../ui/Subtitle';
 import { Text } from '../../ui/Text';
+import * as Types from '../../types/types';
 
 interface Props {
-  item: any;
+  item: Types.Prospect;
 }
 const ProspectCard: React.FC<Props> = ({ item }) => {
   const { name, prospectsAvailable, id, lastAuthor, filters } = item;
@@ -27,15 +28,27 @@ const ProspectCard: React.FC<Props> = ({ item }) => {
       })
     );
   };
+  const renderFilteres = () => {
+    if (filters) {
+      return Object.entries(filters).map(([key, ...value], index) => {
+        if (index < 6) {
+          if (key === 'revenueMax') {
+            return <Category key={key + index}>{`> ${value}`}</Category>;
+          } else if (key === 'revenueMin') {
+            return <Category key={key + index}>{`< ${value}`}</Category>;
+          } else return <Category key={key + index}>{value}</Category>;
+        }
+      });
+    }
+    return null;
+  };
 
   return (
     <Card to={`/prospects/${id}`} onClick={() => openOneProspect()}>
       <Subtitle mb="9">{name || 'Name'}</Subtitle>
       <Line />
       <Text mb="8">Filters</Text>
-      <Filters>
-        <Category>Travel Industry</Category>
-      </Filters>
+      <Filters>{renderFilteres()}</Filters>
       <Data>
         <DataItem>
           <Text mb="8">№ of Prospects Available</Text>

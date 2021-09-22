@@ -7,20 +7,24 @@ import FavoritesCard from './FavoritesCard';
 import ReportsCard from './ReportsCard';
 import { useSelector } from 'react-redux';
 import { getFavoritesState, getProspectsState } from '../../../store/store';
-import Spinner from '../../../ui/Spinner';
 import ProspectCard from '../../../components/prospectCard';
 import { ReactSVG } from 'react-svg';
 import emptyHeart from '../../../assets/icons/heart-favorite.svg';
 import { Subtitle } from '../../../ui/Subtitle';
 import { Text } from '../../../ui/Text';
+import { Loader } from '../../../ui/Loader';
+import { ButtonNow } from '../../../ui/ButtonNow';
+import { useHistory } from 'react-router';
 
 interface Props {}
 const DashboardScreen: React.FC<Props> = ({}) => {
   const favorites = useSelector(getFavoritesState);
   const prospects = useSelector(getProspectsState);
 
+  const history = useHistory();
+
   if (prospects.loading) {
-    return <Spinner />;
+    return <Loader size="big" variant="secondary" />;
   }
   return (
     <Wrapper>
@@ -59,7 +63,9 @@ const DashboardScreen: React.FC<Props> = ({}) => {
                 <Text color="#BFBFBF" mb="32">
                   Go to the search page and add to favorites
                 </Text>
-                <SearchButton>Search</SearchButton>
+                <ButtonNow onClick={() => history.push(`/audience`)}>
+                  Search
+                </ButtonNow>
               </FavoriteEmpty>
             )}
           </Block>
@@ -108,6 +114,8 @@ const Block = styled.div`
   }
 `;
 const FavoriteEmpty = styled(Block)`
+  background: white;
+  border-radius: 6px;
   height: 498px;
   display: flex;
   flex-direction: column;
@@ -115,28 +123,6 @@ const FavoriteEmpty = styled(Block)`
   align-items: center;
   h3 {
     margin-top: 40px;
-  }
-`;
-const SearchButton = styled.button`
-  outline: none;
-  width: 244px;
-  height: 36px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #2baee0;
-  border-radius: 6px;
-  background: #ffffff;
-  cursor: pointer;
-  font-family: 'Rubik';
-  transition: 0.2s;
-  &:hover {
-    background: #ebf9ff;
-    color: #2baee0;
-  }
-  &:focus {
-    background: #caf0ff;
-    color: #2baee0;
   }
 `;
 export default DashboardScreen;

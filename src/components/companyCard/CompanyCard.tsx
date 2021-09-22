@@ -3,13 +3,14 @@ import styled from 'styled-components';
 import { ReactSVG } from 'react-svg';
 import heart from '../../assets/icons/heart.svg';
 import heartLike from '../../assets/icons/heart-like.svg';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router';
 import { Text } from '../../ui/Text';
 import { Subtitle } from '../../ui/Subtitle';
 import { useAppDispatch } from '../../store/store';
-import { addCompany } from '../../store/companySlice';
+import { addCompany, addLike } from '../../store/companySlice';
 import { numberWithCommas } from '../../utils/NumberWithCommas';
 import * as Types from '../../types/types';
+import { ButtonNow } from '../../ui/ButtonNow';
 
 interface CompanyCardProps {
   company: Types.Company;
@@ -20,6 +21,7 @@ const CompanyCard: React.FC<CompanyCardProps> = ({ company }) => {
   const address = street + '. ' + city + ', ' + state + ' ' + zipCode;
 
   const dispatch = useAppDispatch();
+  const history = useHistory();
 
   return (
     <Company>
@@ -50,28 +52,32 @@ const CompanyCard: React.FC<CompanyCardProps> = ({ company }) => {
             </RevenueBlock>
           </Data>
           <Buttons>
-            <LikeBtn>
+            <ButtonNow variant="like" onClick={() => dispatch(addLike(id))}>
               <ReactSVG src={like ? heartLike : heart} />
-            </LikeBtn>
-            <LinkBtn
-              onClick={() => dispatch(addCompany(id))}
-              to={`/audience/${id}`}
+            </ButtonNow>
+            <ButtonNow
+              onClick={() => {
+                dispatch(addCompany(id));
+                history.push(`/audience/${id}`);
+              }}
             >
               Profile
-            </LinkBtn>
+            </ButtonNow>
           </Buttons>
         </Info>
       </FlexRow>
       <ButtonsResponsive>
-        <LikeBtn>
+        <ButtonNow variant="like" onClick={() => dispatch(addLike(id))}>
           <ReactSVG src={like ? heartLike : heart} />
-        </LikeBtn>
-        <LinkBtn
-          onClick={() => dispatch(addCompany(id))}
-          to={`/audience/${id}`}
+        </ButtonNow>
+        <ButtonNow
+          onClick={() => {
+            dispatch(addCompany(id));
+            history.push(`/audience/${id}`);
+          }}
         >
           Profile
-        </LinkBtn>
+        </ButtonNow>
       </ButtonsResponsive>
     </Company>
   );
@@ -81,6 +87,7 @@ const Company = styled.div`
   background-color: white;
   width: 100%;
   max-width: 536px;
+  height: 268px;
   padding: 26px 32px;
   border-radius: 6px;
   margin-bottom: 24px;
@@ -200,46 +207,6 @@ const ButtonsResponsive = styled(Buttons)`
   display: none;
   @media (max-width: 1170px) {
     display: flex;
-  }
-`;
-const LikeBtn = styled.button`
-  padding: 9px 9px 6px 9px;
-  border: 1px solid #e8e8e8;
-  border-radius: 6px;
-  cursor: pointer;
-  background: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 8px;
-  outline: none;
-  &:hover {
-    border: 1px solid #bfbfbf;
-  }
-  &:focus {
-    border: 1px solid #f05658;
-  }
-`;
-const LinkBtn = styled(Link)`
-  padding: 10px;
-  border: 1px solid #2baee0;
-  border-radius: 6px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  font-size: 12px;
-  line-height: 150%;
-  color: #122434;
-  transition: 0.2s;
-  &:hover {
-    background: #ebf9ff;
-    color: #2baee0;
-  }
-  &:focus {
-    background: #caf0ff;
-    color: #2baee0;
   }
 `;
 

@@ -2,12 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import * as Types from '../types/types';
 
 interface ProspectsSliceState {
-  prospects: Types.Company[];
+  prospects: Types.Prospect[];
   totalItems: number;
   currentPage: number;
   totalPages: number;
   itemCount: number;
-  currentProspect: any;
+  currentProspect: Types.Prospect;
   loading: boolean;
 }
 
@@ -18,7 +18,42 @@ const initialState: ProspectsSliceState = {
   totalPages: 1,
   itemCount: 12,
   currentProspect: {
+    id: '',
     name: 'Name',
+    createdAt: '',
+    filters: {
+      q: '',
+      deleteIds: [],
+      industry: [],
+      location: [],
+      scope: '',
+      totalAnnualContributors: '',
+      revenueMin: '',
+      revenueMax: '',
+      csrFocusIds: [],
+      affinities: [],
+      gender: '',
+      ethnicities: [],
+      ageRanges: [],
+      income: [],
+      sdgGoals: [],
+    },
+    lastAuthor: {
+      id: '',
+      email: '',
+      createdAt: '',
+      firstName: '',
+      lastName: '',
+      loggedInAt: '',
+      role: '',
+      teamId: '',
+      updatedAt: '',
+      imported: false,
+      isAuthorized: false,
+      isReceivingNotifications: true,
+    },
+    prospectsAvailable: 0,
+    updatedAt: '',
   },
   loading: false,
 };

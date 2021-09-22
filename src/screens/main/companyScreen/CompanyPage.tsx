@@ -12,10 +12,10 @@ import { Title } from '../../../ui/Title';
 import CompanyHeader from './CompanyHeader';
 import { useSelector } from 'react-redux';
 import { getCompaniesState } from '../../../store/store';
-import Spinner from '../../../ui/Spinner';
 import { numberWithCommas } from '../../../utils/NumberWithCommas';
 import { TextBold } from '../../../ui/TextBold';
 import { Wrapper } from '../../../ui/Wrapper';
+import { Loader } from '../../../ui/Loader';
 
 interface CompanyPageProps {}
 const CompanyPage: React.FC<CompanyPageProps> = ({}) => {
@@ -35,7 +35,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({}) => {
   const address = street + '. ' + city + ', ' + state + ' ' + zipCode;
 
   if (stateCompany.loading) {
-    return <Spinner />;
+    return <Loader size="big" variant="secondary" />;
   } else
     return (
       <Wrapper>

@@ -5,7 +5,7 @@ import Pagination from '../../../components/pagination';
 import ProspectCard from '../../../components/prospectCard';
 import { addProspects } from '../../../store/prospectsSlice';
 import { getProspectsState, useAppDispatch } from '../../../store/store';
-import Spinner from '../../../ui/Spinner';
+import { Loader } from '../../../ui/Loader';
 import { Wrapper } from '../../../ui/Wrapper';
 
 interface Props {}
@@ -49,7 +49,7 @@ const ProspectsScreen: React.FC<Props> = ({}) => {
                   dispatch(
                     addProspects({
                       page: 1,
-                      limit: 15,
+                      limit: 12,
                       sort: 'last-activity',
                     })
                   )
@@ -65,7 +65,7 @@ const ProspectsScreen: React.FC<Props> = ({}) => {
         </Top>
         <ItemContainer>
           {prospects.loading ? (
-            <Spinner />
+            <Loader size="big" variant="secondary" />
           ) : (
             prospects.prospects.map((item, index) => (
               <ProspectCard item={item} key={index} />

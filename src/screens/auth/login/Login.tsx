@@ -14,7 +14,7 @@ import { FormApi } from 'final-form';
 import { getUserState, useAppDispatch } from '../../../store/store';
 import { signInRoutine } from '../../../store/userSlice';
 import { useSelector } from 'react-redux';
-import { Loader } from '../../../ui/Loader';
+
 import {
   composeValidators,
   validateEmail,

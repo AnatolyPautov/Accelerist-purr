@@ -10,11 +10,13 @@ import Pagination from '../../../components/pagination/Pagination';
 import { Subtitle } from '../../../ui/Subtitle';
 import { createProspect } from '../../../store/prospectsSlice';
 import { Text } from '../../../ui/Text';
+import ModalLike from '../../../modals/ModalLike';
 
 interface BoardProps {
   page?: string;
 }
 const SearchList: React.FC<BoardProps> = ({ page }) => {
+  const [likeModal, setLikeModal] = React.useState<boolean>(false);
   const companies = useSelector(getCompaniesState);
 
   const dispatch = useAppDispatch();
@@ -83,6 +85,7 @@ const SearchList: React.FC<BoardProps> = ({ page }) => {
 
   return (
     <div ref={Ref}>
+      {likeModal && <ModalLike />}
       <Top>
         {renderTop()}
         <PaginationTop>

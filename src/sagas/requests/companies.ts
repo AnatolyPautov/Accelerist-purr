@@ -10,6 +10,9 @@ export const requestGetCompanies = (data: any) => {
     }&revenueMax=${revenueMax || ''}`
   );
 };
-export const requestGetCompany = (id: any) => {
+export const requestGetCompany = (id: string) => {
   return Api.get(`companies/${id}`);
+};
+export const requestGetLike = (id: string) => {
+  return Api.get(`companies/${id}/like`);
 };

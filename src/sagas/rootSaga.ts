@@ -1,8 +1,12 @@
 import { takeLatest } from 'redux-saga/effects';
-import { handleGetCompanies, handleGetCompany } from './handlers/companies';
+import {
+  handleGetCompanies,
+  handleGetCompany,
+  handleGetLike,
+} from './handlers/companies';
 import { signInRoutine, signUpRoutine } from '../store/userSlice';
 import { signInRequestHandler, signUpRequestHandler } from './handlers/user';
-import { addCompanies, addCompany } from '../store/companySlice';
+import { addCompanies, addCompany, addLike } from '../store/companySlice';
 import { addFavorites } from '../store/favoritesSlice';
 import { addProspects, createProspect } from '../store/prospectsSlice';
 import { handleGetFavorites } from './handlers/favorites';
@@ -13,6 +17,7 @@ export function* watcherSaga() {
   yield takeLatest(addFavorites.type, handleGetFavorites);
   yield takeLatest(addProspects.type, handleGetProspects);
   yield takeLatest(addCompany.type, handleGetCompany);
+  yield takeLatest(addLike.type, handleGetLike);
 
   yield takeLatest(createProspect.type, handleCreateProspect);
 

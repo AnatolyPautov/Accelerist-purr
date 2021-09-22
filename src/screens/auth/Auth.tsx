@@ -6,9 +6,9 @@ import authBg from '../../assets/images/authBg.jpg';
 import { Redirect, Route, Switch } from 'react-router';
 import Registration from './registration';
 import Login from './login';
-interface LoginProps {}
+interface Props {}
 
-const Auth: React.FC<LoginProps> = ({}) => {
+const Auth: React.FC<Props> = ({}) => {
   return (
     <Container>
       <AuthHeader>

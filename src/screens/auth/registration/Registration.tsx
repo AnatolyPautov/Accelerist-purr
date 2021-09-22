@@ -68,7 +68,7 @@ const Registration: React.FC<LoginProps> = ({}) => {
             disabled={!values.password || !values.email}
             isLoading={user.isLoading}
           >
-            Login
+            Registration
           </AuthButton>
           <Desc>or continue with</Desc>
           <Linkedin>

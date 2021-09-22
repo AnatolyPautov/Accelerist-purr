@@ -46,3 +46,12 @@ export type User = {
   isAuthorized: boolean;
   isReceivingNotifications: boolean;
 };
+export type Prospect = {
+  id: string;
+  createdAt: string;
+  filters: Filter;
+  lastAuthor: User;
+  name: string | undefined;
+  prospectsAvailable: number;
+  updatedAt: string;
+};

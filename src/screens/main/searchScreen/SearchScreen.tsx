@@ -1,11 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { getCompaniesState } from '../../../store/store';
-import Spinner from '../../../ui/Spinner';
+import { getCompaniesState, useAppDispatch } from '../../../store/store';
 import { Wrapper } from '../../../ui/Wrapper';
 import Filtres from './Filters';
 import CardsList from './CardsList';
+import { Loader } from '../../../ui/Loader';
+import { addCompanies } from '../../../store/companySlice';
 
 interface Props {
   page?: string;
@@ -13,12 +14,21 @@ interface Props {
 const SearchScreen: React.FC<Props> = ({ page }) => {
   const companies = useSelector(getCompaniesState);
 
+  const dispatch = useAppDispatch();
+  React.useEffect(() => {
+    if (!page) {
+      dispatch(addCompanies({ page: 1, limit: 12 }));
+    }
+  }, [dispatch]);
   return (
     <Wrapper>
-      {/* <ModalSupport /> */}
       <Container>
         {!page && <Filtres />}
-        {companies.loading ? <Spinner /> : <CardsList page={page} />}
+        {companies.loading ? (
+          <Loader size="big" variant="secondary" />
+        ) : (
+          <CardsList page={page} />
+        )}
       </Container>
     </Wrapper>
   );
