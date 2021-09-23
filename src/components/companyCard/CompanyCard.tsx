@@ -27,20 +27,20 @@ const CompanyCard: React.FC<CompanyCardProps> = ({ company }) => {
     <>
       {/* {active && <ModalLike />} */}
       <Company>
-        <FlexRow>
+        <Body>
           <LogoRanking>
             <Logo>Logo</Logo>
             <Ranking>
               <Text>Priority Ranking</Text>
-              <p>{score}</p>
+              <p>12</p>
             </Ranking>
           </LogoRanking>
           <Info>
-            <TextBlock>
+            <div>
               <Subtitle mb="12">{name}</Subtitle>
               <Text>{address}</Text>
               <Text>{fax || 'the phone number is missing'}</Text>
-            </TextBlock>
+            </div>
             <Data>
               <CSRFocusBlock>
                 <Text>CSR Focus</Text>
@@ -53,44 +53,26 @@ const CompanyCard: React.FC<CompanyCardProps> = ({ company }) => {
                 <Revenue>$ {numberWithCommas(revenue)}</Revenue>
               </RevenueBlock>
             </Data>
-            <Buttons>
-              <ButtonNow
-                variant="like"
-                onClick={() =>
-                  like ? dispatch(addDislike(id)) : dispatch(addLike(id))
-                }
-              >
-                <HeartIcon isLike={like} />
-              </ButtonNow>
-              <ButtonNow
-                onClick={() => {
-                  dispatch(addCompany(id));
-                  history.push(`/audience/${id}`);
-                }}
-              >
-                Profile
-              </ButtonNow>
-            </Buttons>
           </Info>
-        </FlexRow>
-        <ButtonsResponsive>
-          <ButtonNow
-            variant="like"
-            onClick={() =>
-              like ? dispatch(addDislike(id)) : dispatch(addLike(id))
-            }
-          >
-            <HeartIcon isLike={like} />
-          </ButtonNow>
-          <ButtonNow
-            onClick={() => {
-              dispatch(addCompany(id));
-              history.push(`/audience/${id}`);
-            }}
-          >
-            Profile
-          </ButtonNow>
-        </ButtonsResponsive>
+          <Buttons>
+            <ButtonNow
+              variant="like"
+              onClick={() =>
+                like ? dispatch(addDislike(id)) : dispatch(addLike(id))
+              }
+            >
+              <HeartIcon isLike={like} />
+            </ButtonNow>
+            <ButtonNow
+              onClick={() => {
+                dispatch(addCompany(id));
+                history.push(`/audience/${id}`);
+              }}
+            >
+              Profile
+            </ButtonNow>
+          </Buttons>
+        </Body>
       </Company>
     </>
   );
@@ -110,35 +92,48 @@ const Company = styled.div`
       margin-right: 0;
     }
   }
-  @media (max-width: 1170px) {
+  @media (max-width: 768px) {
     max-width: 340px;
-    padding: 16px 24px;
+    height: 284px;
+    padding: 24px 16px;
   }
 `;
-const FlexRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  @media (max-width: 1170px) {
-    margin-bottom: 16px;
+const Body = styled.div`
+  display: grid;
+  grid-gap: 24px 16px;
+  grid-template-areas:
+    'avatar info'
+    'avatar buttons';
+  @media (max-width: 768px) {
+    grid-template-areas:
+      'avatar info'
+      'buttons buttons';
+    grid-gap: 16px;
   }
 `;
 const LogoRanking = styled.div`
+  grid-area: avatar;
   border: 1px solid #e8e8e8;
   border-radius: 6px;
-  margin-right: 16px;
-  width: 100%;
-  max-width: 166px;
-  @media (max-width: 1170px) {
-    max-width: 124px;
+  width: 168px;
+  @media (max-width: 768px) {
+    width: 124px;
   }
 `;
 const Info = styled.div`
+  grid-area: info;
   width: 100%;
-  @media (max-width: 1170px) {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  height: 156px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  @media (max-width: 768px) {
+    height: 100%;
   }
+`;
+const Buttons = styled.div`
+  grid-area: buttons;
+  display: flex;
 `;
 const Logo = styled.div`
   height: 156px;
@@ -146,7 +141,7 @@ const Logo = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  @media (max-width: 1170px) {
+  @media (max-width: 768px) {
     height: 124px;
   }
 `;
@@ -155,27 +150,23 @@ const Ranking = styled.div`
   height: 59px;
   text-align: center;
 `;
-const TextBlock = styled.div`
-  min-height: 73px;
-`;
 const Data = styled.div`
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #e8e8e8;
-  margin: 28px 0 24px;
   width: 100%;
-  @media (max-width: 1170px) {
+  @media (max-width: 768px) {
     display: block;
     border: none;
-    margin: 0;
   }
 `;
 const CSRFocusBlock = styled.div`
   padding: 0 5px 12px 0;
   width: 50%;
-  @media (max-width: 1170px) {
+  @media (max-width: 768px) {
     padding: 0;
     width: 100%;
+    margin-bottom: 17px;
   }
 `;
 const RevenueBlock = styled.div`
@@ -185,7 +176,7 @@ const RevenueBlock = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  @media (max-width: 1170px) {
+  @media (max-width: 768px) {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -209,18 +200,4 @@ const Category = styled(Revenue)`
   margin-top: 0;
   margin-right: 16px;
 `;
-const Buttons = styled.div`
-  display: flex;
-  justify-content: space-between;
-  @media (max-width: 1170px) {
-    display: none;
-  }
-`;
-const ButtonsResponsive = styled(Buttons)`
-  display: none;
-  @media (max-width: 1170px) {
-    display: flex;
-  }
-`;
-
 export default CompanyCard;

@@ -7,10 +7,12 @@ import MenuRight from './MenuRight';
 import LogoMain from '../../assets/icons/LogoMain';
 import Profile from './Profile';
 import { NavLink } from 'react-router-dom';
+import { useLocation } from 'react-router';
 
 interface BoardProps {}
 const Header: React.FC<BoardProps> = ({}) => {
   const [menuActive, setMenuActive] = React.useState<boolean>(false);
+  const { pathname } = useLocation();
 
   return (
     <HeaderContainer>
@@ -25,7 +27,7 @@ const Header: React.FC<BoardProps> = ({}) => {
           <Navbar setMenuActive={setMenuActive} />
         </NavBlock>
         <NavBlock>
-          <SearchInput />
+          {pathname !== '/audience' && <SearchInput />}
           <Profile />
           <HeaderBurger
             menuActive={menuActive}

@@ -38,16 +38,20 @@ const StyledButton = styled.button<StyledButtonProps>`
         return `
         padding: 10px;
         width: 244px;
-        height: 40px;
+        height: 36px;
         border: 1px solid ${theme.colors.blue};
         color: ${theme.colors.black};
+        @media (max-width: 768px) {
+          width: 100%;
+        }
       `;
       case 'like':
         return `
+        flex-shrink: 0;
         margin-right: 8px;
         border: 1px solid ${theme.colors.line};
-        width: 40px;
-        height: 40px;
+        width: 36px;
+        height: 36px;
       `;
       case 'second':
         return `

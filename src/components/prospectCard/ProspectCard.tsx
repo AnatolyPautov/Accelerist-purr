@@ -48,7 +48,7 @@ const ProspectCard: React.FC<Props> = ({ item }) => {
     <Card to={`/prospects/${id}`} onClick={() => openOneProspect()}>
       <Subtitle mb="9">{name || 'Name'}</Subtitle>
       <Line />
-      <Text mb="8">Filters</Text>
+      <Text mb="8">{Object.keys(filters).length !== 0 && 'Filters'}</Text>
       <Filters>{renderFilteres()}</Filters>
       <Data>
         <DataItem>
