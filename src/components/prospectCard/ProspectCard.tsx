@@ -17,7 +17,7 @@ const ProspectCard: React.FC<Props> = ({ item }) => {
   const dispatch = useAppDispatch();
 
   const openOneProspect = () => {
-    dispatch(setCurrentProspect(name));
+    dispatch(setCurrentProspect({ id, name, filters }));
     dispatch(
       addCompanies({
         page: 1,
@@ -36,7 +36,8 @@ const ProspectCard: React.FC<Props> = ({ item }) => {
             return <Category key={key + index}>{`> ${value}`}</Category>;
           } else if (key === 'revenueMin') {
             return <Category key={key + index}>{`< ${value}`}</Category>;
-          } else return <Category key={key + index}>{value}</Category>;
+          } else
+            return <Category key={key + index}>{`${key} : ${value}`}</Category>;
         }
       });
     }
@@ -95,6 +96,7 @@ const Line = styled.div`
   margin-bottom: 16px;
 `;
 const Filters = styled.div`
+  height: 30px;
   display: flex;
   align-items: center;
   margin-bottom: 29px;

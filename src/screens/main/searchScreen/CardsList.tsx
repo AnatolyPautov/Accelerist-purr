@@ -1,22 +1,27 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { getCompaniesState, useAppDispatch } from '../../../store/store';
+import {
+  getCompaniesState,
+  getProspectsState,
+  useAppDispatch,
+} from '../../../store/store';
 import CompanyCard from '../../../components/companyCard';
 import UploadIcon from '../../../assets/icons/UploadIcon';
 import MailIcon from '../../../assets/icons/MailIcon';
 import FolderPlusIcon from '../../../assets/icons/FolderPlusIcon';
 import Pagination from '../../../components/pagination/Pagination';
 import { Subtitle } from '../../../ui/Subtitle';
-import { createProspect } from '../../../store/prospectsSlice';
 import { Text } from '../../../ui/Text';
 import ModalLike from '../../../modals/ModalLike';
+import { createProspect } from '../../../store/companySlice';
 
 interface BoardProps {
   page?: string;
 }
 const SearchList: React.FC<BoardProps> = ({ page }) => {
   const companies = useSelector(getCompaniesState);
+  const prospects = useSelector(getProspectsState);
 
   const dispatch = useAppDispatch();
 
@@ -26,15 +31,34 @@ const SearchList: React.FC<BoardProps> = ({ page }) => {
       behavior: 'smooth',
     });
   }, []);
+
+  const renderFilteres = () => {
+    if (prospects.currentProspect.filters) {
+      return Object.entries(prospects.currentProspect.filters).map(
+        ([key, ...value], index) => {
+          if (index < 6) {
+            if (key === 'revenueMax') {
+              return <Category key={key + index}>{`> ${value}`}</Category>;
+            } else if (key === 'revenueMin') {
+              return <Category key={key + index}>{`< ${value}`}</Category>;
+            } else
+              return (
+                <Category key={key + index}>{`${key} : ${value}`}</Category>
+              );
+          }
+        }
+      );
+    }
+    return null;
+  };
+
   const renderTop = () => {
     if (page === 'prospect') {
       return (
         <div>
           <Subtitle mb="24">{companies.totalItems} companies</Subtitle>
           <Text mb="8">Filters</Text>
-          <Filters>
-            <Category>Travel Industry</Category>
-          </Filters>
+          <Filters>{renderFilteres()}</Filters>
           <Action>
             <Icon>
               <UploadIcon />
@@ -51,7 +75,14 @@ const SearchList: React.FC<BoardProps> = ({ page }) => {
           <Subtitle>{'Found ' + companies.totalItems} companies</Subtitle>
           <Panel>
             <Action
-              onClick={() => dispatch(createProspect(companies.searchParams))}
+              onClick={() =>
+                dispatch(
+                  createProspect({
+                    filters: companies.searchParams,
+                    total: companies.totalItems,
+                  })
+                )
+              }
             >
               <Icon>
                 <FolderPlusIcon />

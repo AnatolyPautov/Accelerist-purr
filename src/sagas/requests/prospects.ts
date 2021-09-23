@@ -6,10 +6,14 @@ export const requestGetProspects = (data: any) => {
   return Api.get(`saved-list?page=${page}&limit=${limit}&sort=${sort || ''}`);
 };
 export const requestCreateProspect = (data: any) => {
+  const { filters, total } = data;
   return Api.post('saved-list', {
     filters: {
-      ...data,
+      ...filters,
     },
-    prospectsAvailable: 1863,
+    prospectsAvailable: total,
   });
+};
+export const requestRemoveProspect = (id: string) => {
+  return Api.delete(`saved-list/${id}`);
 };

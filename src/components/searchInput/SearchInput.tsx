@@ -16,11 +16,16 @@ const SearchInput: React.FC<SearchInputProps> = ({
   background,
   searchList,
 }) => {
-  const [text, setText] = React.useState<string>();
+  const [text, setText] = React.useState<string>('');
   const { filterActive, setFilterActive } = React.useContext(Context);
 
   const dispatch = useAppDispatch();
 
+  const keyPressHandler = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter' && text) {
+      dispatch(addCompanies({ page: 1, limit: 12, q: text }));
+    }
+  };
   return (
     <SearchContainer searchList={searchList} width={width}>
       <Input
@@ -29,6 +34,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
         placeholder="Search"
         value={text}
         background={background}
+        onKeyPress={(e) => keyPressHandler(e)}
       />
       {searchList && (
         <Setting onClick={() => setFilterActive(!filterActive)}>
@@ -57,7 +63,6 @@ const SearchContainer = styled.div<SearchContainerProps>`
     display: ${({ searchList }) => (searchList ? 'block' : 'none')};
   }
 `;
-
 type InputProps = {
   background?: string;
 };

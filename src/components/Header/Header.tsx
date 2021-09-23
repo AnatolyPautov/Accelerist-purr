@@ -6,7 +6,7 @@ import { Wrapper } from '../../ui/Wrapper';
 import MenuRight from './MenuRight';
 import LogoMain from '../../assets/icons/LogoMain';
 import Profile from './Profile';
-import Context from '../../context';
+import { NavLink } from 'react-router-dom';
 
 interface BoardProps {}
 const Header: React.FC<BoardProps> = ({}) => {
@@ -16,7 +16,7 @@ const Header: React.FC<BoardProps> = ({}) => {
     <HeaderContainer>
       <Wrapper containerStyled={StyldedWrapper}>
         <NavBlock>
-          <HeaderLogo>
+          <HeaderLogo to="/dashboard">
             <LogoMain />
           </HeaderLogo>
           <MobileHeaderLogo>
@@ -63,7 +63,8 @@ const NavBlock = styled.div`
   justify-content: space-between;
   position: relative;
 `;
-const HeaderLogo = styled.div`
+const HeaderLogo = styled(NavLink)`
+  cursor: pointer;
   margin-right: 50px;
   @media (max-width: 525px) {
     display: none;

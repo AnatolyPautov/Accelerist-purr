@@ -20,6 +20,7 @@ const SearchScreen: React.FC<Props> = ({ page }) => {
       dispatch(addCompanies({ page: 1, limit: 12 }));
     }
   }, [dispatch]);
+
   return (
     <Wrapper>
       <Container>

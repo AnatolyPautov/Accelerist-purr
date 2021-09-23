@@ -92,13 +92,18 @@ export const companiesSlice = createSlice({
         return company;
       });
       state.companies = updateCompanies;
-
       if (payload.like) {
         state.showlikeModal = true;
       }
     },
     closeLikeModal(state) {
       state.showlikeModal = false;
+    },
+    createProspect(state, { payload }) {
+      state.loading = true;
+    },
+    successCreateProspect(state, { payload }) {
+      state.loading = false;
     },
   },
 });
@@ -112,6 +117,8 @@ export const {
   addDislike,
   updateLike,
   closeLikeModal,
+  createProspect,
+  successCreateProspect,
 } = companiesSlice.actions;
 
 export default companiesSlice.reducer;

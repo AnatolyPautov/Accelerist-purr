@@ -12,11 +12,16 @@ import {
   addCompany,
   addDislike,
   addLike,
+  createProspect,
 } from '../store/companySlice';
 import { addFavorites } from '../store/favoritesSlice';
-import { addProspects, createProspect } from '../store/prospectsSlice';
+import { addProspects, removeProspect } from '../store/prospectsSlice';
 import { handleGetFavorites } from './handlers/favorites';
-import { handleCreateProspect, handleGetProspects } from './handlers/prospects';
+import {
+  handleCreateProspect,
+  handleGetProspects,
+  handleRemoveProspect,
+} from './handlers/prospects';
 
 export function* watcherSaga() {
   yield takeLatest(addCompanies.type, handleGetCompanies);
@@ -27,6 +32,8 @@ export function* watcherSaga() {
   yield takeLatest(addDislike.type, handleGetDislike);
 
   yield takeLatest(createProspect.type, handleCreateProspect);
+
+  yield takeLatest(removeProspect.type, handleRemoveProspect);
 
   yield takeLatest(signUpRoutine.TRIGGER, signUpRequestHandler);
   yield takeLatest(signInRoutine.TRIGGER, signInRequestHandler);

@@ -75,12 +75,14 @@ export const prospectsSlice = createSlice({
       state.loading = false;
     },
     setCurrentProspect(state, { payload }) {
-      state.currentProspect.name = payload;
+      state.currentProspect.id = payload.id;
+      state.currentProspect.name = payload.name;
+      state.currentProspect.filters = payload.filters;
     },
-    createProspect(state, { payload }) {
+    removeProspect(state, { payload }) {
       state.loading = true;
     },
-    successCreateProspect(state, { payload }) {
+    successRemoveProspect(state, { payload }) {
       state.loading = false;
     },
   },
@@ -90,8 +92,8 @@ export const {
   addProspects,
   setProspects,
   setCurrentProspect,
-  createProspect,
-  successCreateProspect,
+  removeProspect,
+  successRemoveProspect,
 } = prospectsSlice.actions;
 
 export default prospectsSlice.reducer;

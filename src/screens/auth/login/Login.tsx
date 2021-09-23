@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Form, Field, FormProps, FormRenderProps } from 'react-final-form';
-import * as Types from '../../../types/types';
+import { Form, Field, FormProps } from 'react-final-form';
 import { ReactSVG } from 'react-svg';
 import linkedin from '../../../assets/icons/linkedin.svg';
 import { NavLink } from 'react-router-dom';
@@ -28,7 +27,7 @@ const Login: React.FC<LoginProps> = ({}) => {
   const dispatch = useAppDispatch();
   const user = useSelector(getUserState);
 
-  const onSubmit = (values: FormProps, form: FormApi<FormProps>) => {
+  const onSubmit = (values: FormProps) => {
     dispatch(signInRoutine({ email: values.email, password: values.password }));
   };
   const history = useHistory();

@@ -9,11 +9,13 @@ import { numberWithCommas } from '../../utils/NumberWithCommas';
 import * as Types from '../../types/types';
 import { ButtonNow } from '../../ui/ButtonNow';
 import { HeartIcon } from '../../assets/icons/HeartIcon';
+import ModalLike from '../../modals/ModalLike';
 
 interface CompanyCardProps {
   company: Types.Company;
 }
 const CompanyCard: React.FC<CompanyCardProps> = ({ company }) => {
+  const [active, setActive] = React.useState<boolean>(true);
   const { name, city, state, street, zipCode, revenue, id, fax, score, like } =
     company;
   const address = street + '. ' + city + ', ' + state + ' ' + zipCode;
@@ -22,72 +24,75 @@ const CompanyCard: React.FC<CompanyCardProps> = ({ company }) => {
   const history = useHistory();
 
   return (
-    <Company>
-      <FlexRow>
-        <LogoRanking>
-          <Logo>Logo</Logo>
-          <Ranking>
-            <Text>Priority Ranking</Text>
-            <p>{score}</p>
-          </Ranking>
-        </LogoRanking>
-        <Info>
-          <TextBlock>
-            <Subtitle mb="12">{name}</Subtitle>
-            <Text>{address}</Text>
-            <Text>{fax || 'the phone number is missing'}</Text>
-          </TextBlock>
-          <Data>
-            <CSRFocusBlock>
-              <Text>CSR Focus</Text>
-              <Categories>
-                <Category>No Information</Category>
-              </Categories>
-            </CSRFocusBlock>
-            <RevenueBlock>
-              <Text>Revenue</Text>
-              <Revenue>$ {numberWithCommas(revenue)}</Revenue>
-            </RevenueBlock>
-          </Data>
-          <Buttons>
-            <ButtonNow
-              variant="like"
-              onClick={() =>
-                like ? dispatch(addDislike(id)) : dispatch(addLike(id))
-              }
-            >
-              <HeartIcon isLike={like} />
-            </ButtonNow>
-            <ButtonNow
-              onClick={() => {
-                dispatch(addCompany(id));
-                history.push(`/audience/${id}`);
-              }}
-            >
-              Profile
-            </ButtonNow>
-          </Buttons>
-        </Info>
-      </FlexRow>
-      <ButtonsResponsive>
-        <ButtonNow
-          variant="like"
-          onClick={() =>
-            like ? dispatch(addDislike(id)) : dispatch(addLike(id))
-          }
-        >
-          <HeartIcon isLike={like} />
-        </ButtonNow>
-        <ButtonNow
-          onClick={() => {
-            dispatch(addCompany(id));
-            history.push(`/audience/${id}`);
-          }}
-        >
-          Profile
-        </ButtonNow>
-      </ButtonsResponsive>
-    </Company>
+    <>
+      {/* {active && <ModalLike />} */}
+      <Company>
+        <FlexRow>
+          <LogoRanking>
+            <Logo>Logo</Logo>
+            <Ranking>
+              <Text>Priority Ranking</Text>
+              <p>{score}</p>
+            </Ranking>
+          </LogoRanking>
+          <Info>
+            <TextBlock>
+              <Subtitle mb="12">{name}</Subtitle>
+              <Text>{address}</Text>
+              <Text>{fax || 'the phone number is missing'}</Text>
+            </TextBlock>
+            <Data>
+              <CSRFocusBlock>
+                <Text>CSR Focus</Text>
+                <Categories>
+                  <Category>No Information</Category>
+                </Categories>
+              </CSRFocusBlock>
+              <RevenueBlock>
+                <Text>Revenue</Text>
+                <Revenue>$ {numberWithCommas(revenue)}</Revenue>
+              </RevenueBlock>
+            </Data>
+            <Buttons>
+              <ButtonNow
+                variant="like"
+                onClick={() =>
+                  like ? dispatch(addDislike(id)) : dispatch(addLike(id))
+                }
+              >
+                <HeartIcon isLike={like} />
+              </ButtonNow>
+              <ButtonNow
+                onClick={() => {
+                  dispatch(addCompany(id));
+                  history.push(`/audience/${id}`);
+                }}
+              >
+                Profile
+              </ButtonNow>
+            </Buttons>
+          </Info>
+        </FlexRow>
+        <ButtonsResponsive>
+          <ButtonNow
+            variant="like"
+            onClick={() =>
+              like ? dispatch(addDislike(id)) : dispatch(addLike(id))
+            }
+          >
+            <HeartIcon isLike={like} />
+          </ButtonNow>
+          <ButtonNow
+            onClick={() => {
+              dispatch(addCompany(id));
+              history.push(`/audience/${id}`);
+            }}
+          >
+            Profile
+          </ButtonNow>
+        </ButtonsResponsive>
+      </Company>
+    </>
   );
 };
 

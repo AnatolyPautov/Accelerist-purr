@@ -9,7 +9,7 @@ import { useAppDispatch } from '../store/store';
 
 interface Props {}
 
-const ModalLike: React.FC<Props> = ({}) => {
+const ModalDelete: React.FC<Props> = ({}) => {
   const dispatch = useAppDispatch();
 
   const onCloseModal = ({ key }: KeyboardEvent) => {
@@ -127,4 +127,4 @@ const Text = styled.div`
   margin-bottom: 32px;
 `;
 
-export default ModalLike;
+export default ModalDelete;

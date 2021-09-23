@@ -10,9 +10,13 @@ export const Tab: FC<Props> = ({ children, active, ...all }) => {
   return (
     <>
       {active ? (
-        <TabActive {...all}>{children}</TabActive>
+        <TabActive type="button" {...all}>
+          {children}
+        </TabActive>
       ) : (
-        <TabBtn {...all}>{children}</TabBtn>
+        <TabBtn type="button" {...all}>
+          {children}
+        </TabBtn>
       )}
     </>
   );
