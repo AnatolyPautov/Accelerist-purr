@@ -23,10 +23,10 @@ export const favoritesSlice = createSlice({
   name: 'favorites',
   initialState,
   reducers: {
-    addFavorites(state, { payload }) {
+    addFavorites(state, { payload }: PayloadAction<Types.GetCompaniesProps>) {
       state.loading = true;
     },
-    setFavorites(state, { payload }) {
+    setFavorites(state, { payload }: PayloadAction<Types.CompaniesData>) {
       console.log(payload);
       state.favorites = payload.items;
       state.totalItems = payload.meta.totalItems;

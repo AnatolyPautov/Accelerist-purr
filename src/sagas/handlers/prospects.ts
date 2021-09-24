@@ -13,7 +13,9 @@ import {
 import { successCreateProspect } from '../../store/companySlice';
 import { PayloadAction } from '@reduxjs/toolkit';
 
-export function* handleGetProspects({ payload }: any): SagaIterator {
+export function* handleGetProspects({
+  payload,
+}: PayloadAction<Types.GetProspectsProps>): SagaIterator {
   try {
     const response = yield call(requestGetProspects, payload);
     const { data } = response;
@@ -22,11 +24,13 @@ export function* handleGetProspects({ payload }: any): SagaIterator {
     console.log(e);
   }
 }
-export function* handleCreateProspect({ payload }: any): SagaIterator {
+export function* handleCreateProspect({
+  payload,
+}: PayloadAction<Types.CreateProspectsProps>): SagaIterator {
   try {
     const response = yield call(requestCreateProspect, payload);
     console.log(response);
-    yield put(successCreateProspect({}));
+    yield put(successCreateProspect());
   } catch (e) {
     console.log(e);
   }
@@ -37,7 +41,7 @@ export function* handleRemoveProspect({
   try {
     const response = yield call(requestRemoveProspect, payload);
     console.log(response);
-    yield put(successRemoveProspect({}));
+    yield put(successRemoveProspect());
   } catch (e) {
     console.log(e);
   }

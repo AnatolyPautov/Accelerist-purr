@@ -1,7 +1,7 @@
 import Api from '../../service/Service';
 import * as Types from '../../types/types';
 
-export const requestGetCompanies = (data: any) => {
+export const requestGetCompanies = (data: Types.GetCompaniesProps) => {
   const { page, limit, q, revenueMax, revenueMin } = data;
 
   return Api.get(

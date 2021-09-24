@@ -22,9 +22,9 @@ const ProspectCard: React.FC<Props> = ({ item }) => {
       addCompanies({
         page: 1,
         limit: 12,
-        q: filters.q === 'test' ? null : filters.q,
-        revenueMin: filters.revenueMin === 'string' ? null : filters.revenueMin,
-        revenueMax: filters.revenueMax === 'string' ? null : filters.revenueMax,
+        q: filters.q === 'test' ? '' : filters.q,
+        revenueMin: filters.revenueMin === 'string' ? '' : filters.revenueMin,
+        revenueMax: filters.revenueMax === 'string' ? '' : filters.revenueMax,
       })
     );
   };

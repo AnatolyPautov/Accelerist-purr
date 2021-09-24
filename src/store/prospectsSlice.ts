@@ -62,10 +62,10 @@ export const prospectsSlice = createSlice({
   name: 'prospects',
   initialState,
   reducers: {
-    addProspects(state, { payload }) {
+    addProspects(state, { payload }: PayloadAction<Types.GetProspectsProps>) {
       state.loading = true;
     },
-    setProspects(state, { payload }) {
+    setProspects(state, { payload }: PayloadAction<Types.ProspectsData>) {
       console.log(payload);
       state.prospects = payload.items;
       state.totalItems = payload.meta.totalItems;
@@ -74,15 +74,20 @@ export const prospectsSlice = createSlice({
       state.itemCount = payload.meta.itemCount;
       state.loading = false;
     },
-    setCurrentProspect(state, { payload }) {
+    setCurrentProspect(
+      state,
+      {
+        payload,
+      }: PayloadAction<{ id: string; name?: string; filters: Types.Filter }>
+    ) {
       state.currentProspect.id = payload.id;
       state.currentProspect.name = payload.name;
       state.currentProspect.filters = payload.filters;
     },
-    removeProspect(state, { payload }) {
+    removeProspect(state, { payload }: PayloadAction<string>) {
       state.loading = true;
     },
-    successRemoveProspect(state, { payload }) {
+    successRemoveProspect(state) {
       state.loading = false;
     },
   },

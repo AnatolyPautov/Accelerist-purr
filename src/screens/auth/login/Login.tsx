@@ -9,7 +9,6 @@ import { useHistory } from 'react-router';
 import { CheckBox } from '../../../ui/Checkbox';
 import { Text } from '../../../ui/Text';
 import InputField from '../../../ui/InputField';
-import { FormApi } from 'final-form';
 import { getUserState, useAppDispatch } from '../../../store/store';
 import { signInRoutine } from '../../../store/userSlice';
 import { useSelector } from 'react-redux';

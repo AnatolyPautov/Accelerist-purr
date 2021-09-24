@@ -61,13 +61,13 @@ export const companiesSlice = createSlice({
   name: 'companies',
   initialState,
   reducers: {
-    addCompanies(state, { payload }) {
+    addCompanies(state, { payload }: PayloadAction<Types.GetCompaniesProps>) {
       state.loading = true;
       state.searchParams.q = payload.q;
       state.searchParams.revenueMin = payload.revenueMin;
       state.searchParams.revenueMax = payload.revenueMax;
     },
-    setCompanies(state, { payload }) {
+    setCompanies(state, { payload }: PayloadAction<Types.CompaniesData>) {
       console.log(payload.items);
       state.companies = payload.items;
       state.totalItems = payload.meta.totalItems;
@@ -76,16 +76,19 @@ export const companiesSlice = createSlice({
       state.itemCount = payload.meta.itemCount;
       state.loading = false;
     },
-    addCompany(state, { payload }) {
+    addCompany(state, { payload }: PayloadAction<string>) {
       state.loading = true;
     },
-    setCompany(state, { payload }) {
+    setCompany(state, { payload }: PayloadAction<Types.Company>) {
       state.currentCompany = payload;
       state.loading = false;
     },
-    addLike(state, { payload }) {},
-    addDislike(state, { payload }) {},
-    updateLike(state, { payload }) {
+    addLike(state, { payload }: PayloadAction<string>) {},
+    addDislike(state, { payload }: PayloadAction<string>) {},
+    updateLike(
+      state,
+      { payload }: PayloadAction<{ id: string; like: boolean }>
+    ) {
       const updateCompanies = state.companies.map((company) => {
         if (company.id === payload.id)
           return { ...company, like: payload.like };
@@ -99,10 +102,13 @@ export const companiesSlice = createSlice({
     closeLikeModal(state) {
       state.showlikeModal = false;
     },
-    createProspect(state, { payload }) {
+    createProspect(
+      state,
+      { payload }: PayloadAction<Types.CreateProspectsProps>
+    ) {
       state.loading = true;
     },
-    successCreateProspect(state, { payload }) {
+    successCreateProspect(state) {
       state.loading = false;
     },
   },

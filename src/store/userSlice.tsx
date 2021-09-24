@@ -56,7 +56,11 @@ export const userSlice = createSlice({
     [signInRoutine.TRIGGER]: (state, action) => {
       state.isLoading = true;
     },
-    [signInRoutine.SUCCESS]: (state, { payload }) => {
+    [signInRoutine.SUCCESS]: (
+      state,
+      { payload }: PayloadAction<{ accessToken: string; user: Types.User }>
+    ) => {
+      console.log(payload);
       state.token = payload.accessToken;
       state.user = { ...payload.user };
       state.isAuth = true;
@@ -65,7 +69,10 @@ export const userSlice = createSlice({
     [signUpRoutine.TRIGGER]: (state, action) => {
       state.isLoading = true;
     },
-    [signUpRoutine.SUCCESS]: (state, { payload }) => {
+    [signUpRoutine.SUCCESS]: (
+      state,
+      { payload }: PayloadAction<{ accessToken: string; user: Types.User }>
+    ) => {
       state.token = payload.accessToken;
       state.user = { ...payload.user };
       state.isAuth = true;
