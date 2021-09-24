@@ -14,7 +14,7 @@ import Pagination from '../../../components/pagination/Pagination';
 import { Subtitle } from '../../../ui/Subtitle';
 import { Text } from '../../../ui/Text';
 import ModalLike from '../../../modals/ModalLike';
-import { createProspect } from '../../../store/companySlice';
+import { createProspect } from '../../../store/companiesSlice';
 
 interface BoardProps {
   page?: string;

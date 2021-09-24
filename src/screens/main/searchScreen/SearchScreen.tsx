@@ -6,7 +6,7 @@ import { Wrapper } from '../../../ui/Wrapper';
 import Filtres from './Filters';
 import CardsList from './CardsList';
 import { Loader } from '../../../ui/Loader';
-import { addCompanies } from '../../../store/companySlice';
+import { addCompanies } from '../../../store/companiesSlice';
 
 interface Props {
   page?: string;

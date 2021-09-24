@@ -8,7 +8,11 @@ import {
 import * as Types from '../../types/types';
 import { SagaIterator } from 'redux-saga';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { setCompanies, setCompany, updateLike } from '../../store/companySlice';
+import {
+  setCompanies,
+  setCompany,
+  updateLike,
+} from '../../store/companiesSlice';
 
 export function* handleGetCompanies({
   payload,

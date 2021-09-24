@@ -1,6 +1,6 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
-import companySlice from './companySlice';
+import companiesSlice from './companiesSlice';
 import createSagaMiddleware from 'redux-saga';
 import { watcherSaga } from '../sagas/rootSaga';
 import { createSelector } from 'reselect';
@@ -16,7 +16,7 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  companies: companySlice,
+  companies: companiesSlice,
   favorites: favoritesSlice,
   prospects: prospectsSlice,
   user: userSlice,

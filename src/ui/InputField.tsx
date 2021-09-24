@@ -4,12 +4,18 @@ import { FieldRenderProps } from 'react-final-form';
 import { ReactSVG } from 'react-svg';
 import eyeoff from '../assets/icons/eye-off.svg';
 import eye from '../assets/icons/eye.svg';
+import { useSelector } from 'react-redux';
+import { getUserState, useAppDispatch } from '../store/store';
+import { cleanErrors } from '../store/userSlice';
 
 export interface AuthInput extends FieldRenderProps<string> {}
 
 const InputField: React.FC<AuthInput> = ({ input, meta, ...props }) => {
   const [showPassword, setShowPassword] = React.useState<boolean>(true);
 
+  const dispatch = useAppDispatch();
+
+  const user = useSelector(getUserState);
   return (
     <InputContainer>
       {input.type === 'email' ? (
@@ -17,8 +23,9 @@ const InputField: React.FC<AuthInput> = ({ input, meta, ...props }) => {
           {...props}
           onBlur={(event) => input.onBlur(event)}
           onChange={input.onChange}
+          onClick={() => dispatch(cleanErrors())}
           value={input.value}
-          hasError={meta.error && meta.touched}
+          hasError={(meta.error && meta.touched) || user.errors}
           type={input.type}
         />
       ) : (
@@ -27,8 +34,9 @@ const InputField: React.FC<AuthInput> = ({ input, meta, ...props }) => {
             {...props}
             onBlur={(event) => input.onBlur(event)}
             onChange={input.onChange}
+            onClick={() => dispatch(cleanErrors())}
             value={input.value}
-            hasError={meta.error && meta.touched}
+            hasError={(meta.error && meta.touched) || user.errors}
             type={showPassword ? 'password' : 'text'}
           />
           <Eye type="button" onClick={() => setShowPassword(!showPassword)}>
@@ -36,7 +44,8 @@ const InputField: React.FC<AuthInput> = ({ input, meta, ...props }) => {
           </Eye>
         </div>
       )}
-      {meta.error && meta.touched && <Error>{meta.error}</Error>}
+      {(meta.error && meta.touched && <Error>{meta.error}</Error>) ||
+        (user.errors && <Error>{user.errors}</Error>)}
     </InputContainer>
   );
 };

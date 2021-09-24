@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import CompanyCard from '../../../components/companyCard';
 import Pagination from '../../../components/pagination';
 import { getFavoritesState } from '../../../store/store';
+import { Loader } from '../../../ui/Loader';
 import { Subtitle } from '../../../ui/Subtitle';
 import { Wrapper } from '../../../ui/Wrapper';
 
@@ -21,9 +22,13 @@ const FavoritesScreen: React.FC<Props> = ({}) => {
           </PaginationTop>
         </Top>
         <ItemContainer>
-          {favorites.favorites.map((company, index) => (
-            <CompanyCard company={company} key={index} />
-          ))}
+          {favorites.loading ? (
+            <Loader size="big" variant="secondary" />
+          ) : (
+            favorites.favorites.map((company, index) => (
+              <CompanyCard company={company} key={index} />
+            ))
+          )}
         </ItemContainer>
         <PaginationBottom>
           <Pagination page="favorites" />

@@ -13,7 +13,7 @@ import {
   addDislike,
   addLike,
   createProspect,
-} from '../store/companySlice';
+} from '../store/companiesSlice';
 import { addFavorites } from '../store/favoritesSlice';
 import { addProspects, removeProspect } from '../store/prospectsSlice';
 import { handleGetFavorites } from './handlers/favorites';

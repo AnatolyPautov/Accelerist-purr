@@ -4,7 +4,7 @@ import { ReactSVG } from 'react-svg';
 import heart from '../assets/icons/heart-likeModal.svg';
 import cross from '../assets/icons/close-cross.svg';
 import { ButtonNow } from '../ui/ButtonNow';
-import { closeLikeModal } from '../store/companySlice';
+import { closeLikeModal } from '../store/companiesSlice';
 import { useAppDispatch } from '../store/store';
 
 interface Props {}

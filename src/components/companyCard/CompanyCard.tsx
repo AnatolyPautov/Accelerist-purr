@@ -4,7 +4,7 @@ import { useHistory } from 'react-router';
 import { Text } from '../../ui/Text';
 import { Subtitle } from '../../ui/Subtitle';
 import { useAppDispatch } from '../../store/store';
-import { addCompany, addLike, addDislike } from '../../store/companySlice';
+import { addCompany, addLike, addDislike } from '../../store/companiesSlice';
 import { numberWithCommas } from '../../utils/NumberWithCommas';
 import * as Types from '../../types/types';
 import { ButtonNow } from '../../ui/ButtonNow';
@@ -16,7 +16,7 @@ interface CompanyCardProps {
 }
 const CompanyCard: React.FC<CompanyCardProps> = ({ company }) => {
   const [active, setActive] = React.useState<boolean>(true);
-  const { name, city, state, street, zipCode, revenue, id, fax, score, like } =
+  const { name, city, state, street, zipCode, revenue, id, fax, like } =
     company;
   const address = street + '. ' + city + ', ' + state + ' ' + zipCode;
 

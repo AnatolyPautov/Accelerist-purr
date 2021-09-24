@@ -55,6 +55,7 @@ export const userSlice = createSlice({
   extraReducers: {
     [signInRoutine.TRIGGER]: (state, action) => {
       state.isLoading = true;
+      state.errors = '';
     },
     [signInRoutine.SUCCESS]: (
       state,

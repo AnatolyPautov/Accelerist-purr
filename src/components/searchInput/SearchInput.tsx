@@ -1,9 +1,10 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import SearchIcon from '../../assets/icons/SearchIcon';
 import SettingsSearchIcon from '../../assets/icons/SettingsSearchIcon';
 import Context from '../../context';
-import { addCompanies } from '../../store/companySlice';
+import { addCompanies } from '../../store/companiesSlice';
 import { useAppDispatch } from '../../store/store';
 
 interface SearchInputProps {
@@ -18,6 +19,8 @@ const SearchInput: React.FC<SearchInputProps> = ({
 }) => {
   const [text, setText] = React.useState<string>('');
   const { filterActive, setFilterActive } = React.useContext(Context);
+
+  const history = useHistory();
 
   const dispatch = useAppDispatch();
 
@@ -42,7 +45,9 @@ const SearchInput: React.FC<SearchInputProps> = ({
         </Setting>
       )}
       <Search
-        onClick={() => dispatch(addCompanies({ page: 1, limit: 12, q: text }))}
+        onClick={() => {
+          dispatch(addCompanies({ page: 1, limit: 12, q: text }));
+        }}
       >
         <SearchIcon />
       </Search>

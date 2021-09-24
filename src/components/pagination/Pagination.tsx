@@ -10,7 +10,7 @@ import {
 } from '../../store/store';
 import prev from '../../assets/icons/arrow-left.svg';
 import next from '../../assets/icons/arrow-right.svg';
-import { addCompanies } from '../../store/companySlice';
+import { addCompanies } from '../../store/companiesSlice';
 import { addFavorites } from '../../store/favoritesSlice';
 import { addProspects } from '../../store/prospectsSlice';
 

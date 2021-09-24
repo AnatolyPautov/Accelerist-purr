@@ -10,7 +10,7 @@ import {
   requestGetProspects,
   requestRemoveProspect,
 } from '../requests/prospects';
-import { successCreateProspect } from '../../store/companySlice';
+import { successCreateProspect } from '../../store/companiesSlice';
 import { PayloadAction } from '@reduxjs/toolkit';
 
 export function* handleGetProspects({

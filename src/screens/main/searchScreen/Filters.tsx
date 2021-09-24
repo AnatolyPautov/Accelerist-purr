@@ -13,7 +13,7 @@ import RangeSlider from '../../../ui/RangeSlider';
 import { Button } from '../../../ui/Button';
 import Context from '../../../context';
 import { getCompaniesState, useAppDispatch } from '../../../store/store';
-import { addCompanies } from '../../../store/companySlice';
+import { addCompanies } from '../../../store/companiesSlice';
 import { useSelector } from 'react-redux';
 
 interface BoardProps {}

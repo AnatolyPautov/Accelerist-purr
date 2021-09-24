@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import React from 'react';
 import { useAppDispatch } from '../../store/store';
-import { addCompanies } from '../../store/companySlice';
+import { addCompanies } from '../../store/companiesSlice';
 interface NavbarProps {
   responsive?: boolean;
   menuActive?: boolean;

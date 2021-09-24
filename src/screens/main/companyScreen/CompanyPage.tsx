@@ -46,9 +46,6 @@ const CompanyPage: React.FC<CompanyPageProps> = ({}) => {
               <Title mb={'24'}>Business Description Products</Title>
               <Subtitle mb={'16'}>Description</Subtitle>
               <Desc>{descriptionList}</Desc>
-              {/* <Subtitle mb={'16'}>Products & Brand Descriptions</Subtitle>
-              <Desc>
-              </Desc> */}
               <Subtitle mb={'16'}>Structure</Subtitle>
               <Desc>Sole proprietorship</Desc>
               <Subtitle mb={'16'}>Reported</Subtitle>
