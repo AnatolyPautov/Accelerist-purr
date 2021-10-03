@@ -8,6 +8,7 @@ interface CompaniesSliceState {
   totalPages: number;
   itemCount: number;
   loading: boolean;
+  btnLoading: string;
   showlikeModal: boolean;
   currentCompany: Types.Company;
   searchParams: Types.Filter;
@@ -15,11 +16,12 @@ interface CompaniesSliceState {
 
 const initialState: CompaniesSliceState = {
   companies: [],
-  totalItems: 2054,
-  currentPage: 1,
-  totalPages: 1,
-  itemCount: 12,
+  totalItems: 0,
+  currentPage: 0,
+  totalPages: 0,
+  itemCount: 0,
   loading: false,
+  btnLoading: '',
   showlikeModal: false,
   currentCompany: {
     name: '',
@@ -83,8 +85,12 @@ export const companiesSlice = createSlice({
       state.currentCompany = payload;
       state.loading = false;
     },
-    addLike(state, { payload }: PayloadAction<string>) {},
-    addDislike(state, { payload }: PayloadAction<string>) {},
+    addLike(state, { payload }: PayloadAction<string>) {
+      state.btnLoading = 'start';
+    },
+    addDislike(state, { payload }: PayloadAction<string>) {
+      state.btnLoading = 'start';
+    },
     updateLike(
       state,
       { payload }: PayloadAction<{ id: string; like: boolean }>
@@ -95,6 +101,7 @@ export const companiesSlice = createSlice({
         return company;
       });
       state.companies = updateCompanies;
+      state.btnLoading = 'end';
       if (payload.like) {
         state.showlikeModal = true;
       }

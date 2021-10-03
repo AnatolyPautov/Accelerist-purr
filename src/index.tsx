@@ -10,7 +10,6 @@ import { theme } from './styles/theme';
 import Context from './context';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
-import ScrollToTop from './utils/ScrollToTop';
 
 let persistor = persistStore(store);
 

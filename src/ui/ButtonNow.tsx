@@ -1,19 +1,22 @@
 import React, { DOMAttributes, FC } from 'react';
 import styled from 'styled-components';
+import { Loader } from './Loader';
 
 interface Props extends DOMAttributes<HTMLButtonElement> {
   disabled?: any;
   variant?: 'first' | 'like' | 'second';
+  isLoading?: boolean;
 }
 
 export const ButtonNow: FC<Props> = ({
   children,
   variant = 'first',
+  isLoading,
   ...all
 }) => {
   return (
     <StyledButton variant={variant} {...all}>
-      {children}
+      {isLoading ? <Loader variant="secondary" /> : children}
     </StyledButton>
   );
 };

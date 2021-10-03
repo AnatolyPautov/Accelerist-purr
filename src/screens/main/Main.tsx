@@ -5,11 +5,8 @@ import Header from '../../components/header';
 import PageHeader from '../../components/pageHeader';
 import { Switch } from 'react-router-dom';
 import CompanyPage from './companyScreen';
-import { useAppDispatch } from '../../store/store';
 import SearchScreen from './searchScreen';
 import DashboardScreen from './dashboardScreen';
-import { addFavorites } from '../../store/favoritesSlice';
-import { addProspects } from '../../store/prospectsSlice';
 import ProspectsScreen from './prospectsScreen';
 import FavoritesScreen from './favoritesScreen';
 interface Props {}

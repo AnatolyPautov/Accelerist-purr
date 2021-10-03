@@ -3,29 +3,46 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router';
 import { Text } from '../../ui/Text';
 import { Subtitle } from '../../ui/Subtitle';
-import { useAppDispatch } from '../../store/store';
+import { getCompaniesState, useAppDispatch } from '../../store/store';
 import { addCompany, addLike, addDislike } from '../../store/companiesSlice';
 import { numberWithCommas } from '../../utils/NumberWithCommas';
 import * as Types from '../../types/types';
 import { ButtonNow } from '../../ui/ButtonNow';
 import { HeartIcon } from '../../assets/icons/HeartIcon';
-import ModalLike from '../../modals/ModalLike';
+import { useSelector } from 'react-redux';
 
 interface CompanyCardProps {
   company: Types.Company;
 }
 const CompanyCard: React.FC<CompanyCardProps> = ({ company }) => {
-  const [active, setActive] = React.useState<boolean>(true);
+  const [btnLoading, setBtnLoading] = React.useState<boolean>(false);
+
   const { name, city, state, street, zipCode, revenue, id, fax, like } =
     company;
   const address = street + '. ' + city + ', ' + state + ' ' + zipCode;
 
+  const companies = useSelector(getCompaniesState);
+
   const dispatch = useAppDispatch();
   const history = useHistory();
 
+  const updateLike = () => {
+    setBtnLoading(true);
+    if (like) {
+      dispatch(addDislike(id));
+    } else {
+      dispatch(addLike(id));
+    }
+  };
+
+  React.useEffect(() => {
+    if (companies.btnLoading === 'end') {
+      setBtnLoading(false);
+    }
+  });
+
   return (
     <>
-      {/* {active && <ModalLike />} */}
       <Company>
         <Body>
           <LogoRanking>
@@ -57,9 +74,8 @@ const CompanyCard: React.FC<CompanyCardProps> = ({ company }) => {
           <Buttons>
             <ButtonNow
               variant="like"
-              onClick={() =>
-                like ? dispatch(addDislike(id)) : dispatch(addLike(id))
-              }
+              isLoading={btnLoading}
+              onClick={() => updateLike()}
             >
               <HeartIcon isLike={like} />
             </ButtonNow>

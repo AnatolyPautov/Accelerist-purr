@@ -13,10 +13,10 @@ interface ProspectsSliceState {
 
 const initialState: ProspectsSliceState = {
   prospects: [],
-  totalItems: 32,
-  currentPage: 1,
-  totalPages: 1,
-  itemCount: 12,
+  totalItems: 0,
+  currentPage: 0,
+  totalPages: 0,
+  itemCount: 0,
   currentProspect: {
     id: '',
     name: 'Name',
