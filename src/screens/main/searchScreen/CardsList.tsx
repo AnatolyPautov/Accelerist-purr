@@ -6,11 +6,11 @@ import {
   getProspectsState,
   useAppDispatch,
 } from '../../../store/store';
-import CompanyCard from '../../../components/companyCard';
+import CompanyCard from '../../../components/CompanyCard';
 import UploadIcon from '../../../assets/icons/UploadIcon';
 import MailIcon from '../../../assets/icons/MailIcon';
 import FolderPlusIcon from '../../../assets/icons/FolderPlusIcon';
-import Pagination from '../../../components/pagination/Pagination';
+import Pagination from '../../../components/Pagination';
 import { Subtitle } from '../../../ui/Subtitle';
 import { Text } from '../../../ui/Text';
 import ModalLike from '../../../modals/ModalLike';

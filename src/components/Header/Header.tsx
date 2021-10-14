@@ -1,13 +1,13 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import Navbar from '../navbar';
-import SearchInput from '../searchInput';
+import Navbar from '../Navbar';
+import SearchInput from '../SearchInput';
 import { Wrapper } from '../../ui/Wrapper';
-import MenuRight from './MenuRight';
 import LogoMain from '../../assets/icons/LogoMain';
 import Profile from './Profile';
 import { NavLink } from 'react-router-dom';
 import { useLocation } from 'react-router';
+import MenuRight from './MenuRight';
 
 interface BoardProps {}
 const Header: React.FC<BoardProps> = ({}) => {

@@ -11,7 +11,7 @@ import {
   getProspectsState,
   useAppDispatch,
 } from '../../../store/store';
-import ProspectCard from '../../../components/prospectCard';
+import ProspectCard from '../../../components/ProspectCard';
 import { ReactSVG } from 'react-svg';
 import emptyHeart from '../../../assets/icons/heart-favorite.svg';
 import { Subtitle } from '../../../ui/Subtitle';

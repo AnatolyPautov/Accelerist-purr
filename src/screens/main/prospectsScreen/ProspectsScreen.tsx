@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import Pagination from '../../../components/pagination';
-import ProspectCard from '../../../components/prospectCard';
+import Pagination from '../../../components/Pagination';
+import ProspectCard from '../../../components/ProspectCard';
 import { addProspects } from '../../../store/prospectsSlice';
 import { getProspectsState, useAppDispatch } from '../../../store/store';
 import { Loader } from '../../../ui/Loader';

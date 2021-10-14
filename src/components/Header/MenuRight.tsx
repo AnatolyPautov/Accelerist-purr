@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import Navbar from '../navbar';
+import Navbar from '../Navbar';
 import Profile from './Profile';
 
 interface BoardProps {

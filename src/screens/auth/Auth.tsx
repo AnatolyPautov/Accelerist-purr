@@ -4,8 +4,8 @@ import { ReactSVG } from 'react-svg';
 import logo from '../../assets/icons/authLogo.svg';
 import authBg from '../../assets/images/authBg.jpg';
 import { Redirect, Route, Switch } from 'react-router';
-import Registration from './registration';
-import Login from './login';
+import Registration from './Registration';
+import Login from './Login';
 interface Props {}
 
 const Auth: React.FC<Props> = ({}) => {

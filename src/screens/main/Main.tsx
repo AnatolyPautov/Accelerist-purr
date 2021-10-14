@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Redirect, Route } from 'react-router';
-import Header from '../../components/header';
-import PageHeader from '../../components/pageHeader';
+import Header from '../../components/Header';
+import PageHeader from '../../components/PageHeader';
 import { Switch } from 'react-router-dom';
-import CompanyPage from './companyScreen';
-import SearchScreen from './searchScreen';
-import DashboardScreen from './dashboardScreen';
-import ProspectsScreen from './prospectsScreen';
-import FavoritesScreen from './favoritesScreen';
+import CompanyPage from './CompanyScreen';
+import SearchScreen from './SearchScreen';
+import DashboardScreen from './DashboardScreen';
+import ProspectsScreen from './ProspectsScreen';
+import FavoritesScreen from './FavoritesScreen';
 interface Props {}
 
 const Main: React.FC<Props> = ({}) => {

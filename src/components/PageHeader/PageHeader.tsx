@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import SearchInput from '../searchInput';
+import SearchInput from '../SearchInput';
 import prev from '../../assets/icons/arrow-left.svg';
 import { ReactSVG } from 'react-svg';
 import { useHistory } from 'react-router-dom';
