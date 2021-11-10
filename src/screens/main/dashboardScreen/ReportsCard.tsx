@@ -1,10 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Subtitle } from '../../../ui/Subtitle';
-import { Text } from '../../../ui/Text';
+import React from "react";
+import styled from "styled-components";
+import { Subtitle } from "../../../ui/Subtitle";
+import { Text } from "../../../ui/Text";
 
-interface Props {}
-const ReportsCard: React.FC<Props> = ({}) => {
+const ReportsCard = () => {
   return (
     <Card>
       <Data>
@@ -117,7 +116,7 @@ const Info = styled.div`
   justify-content: space-between;
   position: relative;
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -12px;
     left: 0;

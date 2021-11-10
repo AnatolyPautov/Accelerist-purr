@@ -1,25 +1,23 @@
-import React from 'react';
-import styled from 'styled-components';
-import { ReactSVG } from 'react-svg';
-import heart from '../assets/icons/heart-likeModal.svg';
-import cross from '../assets/icons/close-cross.svg';
-import { ButtonNow } from '../ui/ButtonNow';
-import { closeLikeModal } from '../store/companiesSlice';
-import { useAppDispatch } from '../store/store';
+import React from "react";
+import styled from "styled-components";
+import { ReactSVG } from "react-svg";
+import heart from "../assets/icons/heart-likeModal.svg";
+import cross from "../assets/icons/close-cross.svg";
+import { ButtonNow } from "../ui/ButtonNow";
+import { closeLikeModal } from "../store/companiesSlice";
+import { useAppDispatch } from "../store/store";
 
-interface Props {}
-
-const ModalDelete: React.FC<Props> = ({}) => {
+const ModalDelete = () => {
   const dispatch = useAppDispatch();
 
   const onCloseModal = ({ key }: KeyboardEvent) => {
-    if (key === 'Escape') {
+    if (key === "Escape") {
       dispatch(closeLikeModal());
     }
   };
 
   React.useEffect(() => {
-    document.addEventListener('keydown', onCloseModal);
+    document.addEventListener("keydown", onCloseModal);
   });
   return (
     <Background onClick={() => dispatch(closeLikeModal())}>
@@ -49,7 +47,7 @@ const ModalDelete: React.FC<Props> = ({}) => {
 
 const Background = styled.div`
   position: fixed;
-  content: '';
+  content: "";
   top: 0;
   left: 0;
   width: 100%;
@@ -85,7 +83,7 @@ const Modal = styled.div`
 `;
 const CloseСross = styled.div`
   position: absolute;
-  content: '';
+  content: "";
   top: 0;
   right: 0;
   width: 24px;

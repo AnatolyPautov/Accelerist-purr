@@ -1,15 +1,14 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import styled from 'styled-components';
-import CompanyCard from '../../../components/CompanyCard';
-import Pagination from '../../../components/Pagination';
-import { getFavoritesState } from '../../../store/store';
-import { Loader } from '../../../ui/Loader';
-import { Subtitle } from '../../../ui/Subtitle';
-import { Wrapper } from '../../../ui/Wrapper';
+import React from "react";
+import { useSelector } from "react-redux";
+import styled from "styled-components";
+import CompanyCard from "../../../components/CompanyCard";
+import Pagination from "../../../components/Pagination";
+import { getFavoritesState } from "../../../store/store";
+import { Loader } from "../../../ui/Loader";
+import { Subtitle } from "../../../ui/Subtitle";
+import { Wrapper } from "../../../ui/Wrapper";
 
-interface Props {}
-const FavoritesScreen: React.FC<Props> = ({}) => {
+const FavoritesScreen = () => {
   const favorites = useSelector(getFavoritesState);
 
   return (

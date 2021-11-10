@@ -1,11 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import { TextBold } from '../ui/TextBold';
-import { Form, Field } from 'react-final-form';
-import { Text } from '../ui/Text';
-interface LoginProps {}
+import React from "react";
+import styled from "styled-components";
+import { TextBold } from "../ui/TextBold";
+import { Form, Field } from "react-final-form";
+import { Text } from "../ui/Text";
 
-const ModalSupport: React.FC<LoginProps> = ({}) => {
+const ModalSupport = () => {
   const onSubmit = (values: any) => {
     if (values) {
       /* setJoined(true); */
@@ -23,7 +22,7 @@ const ModalSupport: React.FC<LoginProps> = ({}) => {
             render={({ handleSubmit, form, submitting, pristine, values }) => (
               <FormContainer onSubmit={handleSubmit}>
                 <div>
-                  <Text mb={'4'}>Reason</Text>
+                  <Text mb={"4"}>Reason</Text>
                   <FormDropdown name="favoriteColor" component="select">
                     <option value="#ff0000">Service Quality</option>
                     <option value="#00ff00">💚 Green</option>
@@ -54,7 +53,7 @@ const ModalSupport: React.FC<LoginProps> = ({}) => {
 
 const Background = styled.div`
   position: fixed;
-  content: '';
+  content: "";
   top: 0;
   left: 0;
   width: 100%;
@@ -91,7 +90,7 @@ const Modal = styled.div`
 `;
 const CloseСross = styled.div`
   position: absolute;
-  content: '';
+  content: "";
   top: 0;
   right: 0;
   width: 35px;

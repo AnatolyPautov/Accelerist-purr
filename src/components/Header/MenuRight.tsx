@@ -1,7 +1,7 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
-import Navbar from '../Navbar';
-import Profile from './Profile';
+import React from "react";
+import styled from "styled-components";
+import Navbar from "../Navbar";
+import Profile from "./Profile";
 
 interface BoardProps {
   menuActive: boolean;
@@ -26,10 +26,10 @@ type MenuProps = {
   menuActive: boolean;
 };
 const Menu = styled.div<MenuProps>`
-  opacity: ${({ menuActive }) => (menuActive ? '1' : '0')};
-  visibility: ${({ menuActive }) => (menuActive ? 'visible' : 'hidden')};
+  opacity: ${({ menuActive }) => (menuActive ? "1" : "0")};
+  visibility: ${({ menuActive }) => (menuActive ? "visible" : "hidden")};
   position: fixed;
-  content: '';
+  content: "";
   top: 0;
   left: 0;
   width: 100%;
@@ -54,7 +54,7 @@ const MenuBlock = styled.div<MenuBlockProps>`
   background: white;
   width: 330px;
   transform: ${({ menuActive }) =>
-    menuActive ? ' translateX(0)' : 'translateX(100%)'};
+    menuActive ? " translateX(0)" : "translateX(100%)"};
   transition: 0.3s;
   @media (max-width: 420px) {
     width: 100%;

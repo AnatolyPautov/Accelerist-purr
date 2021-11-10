@@ -1,8 +1,8 @@
-import GlobalStyle from './globalstyles';
-import Main from './screens/main';
-import Auth from './screens/auth';
-import { useSelector } from 'react-redux';
-import { getUserState } from './store/store';
+import GlobalStyle from "./globalstyles";
+import Main from "./screens/Main";
+import Auth from "./screens/Auth";
+import { useSelector } from "react-redux";
+import { getUserState } from "./store/store";
 
 function App() {
   const userState = useSelector(getUserState);

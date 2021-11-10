@@ -1,17 +1,15 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Redirect, Route } from 'react-router';
-import Header from '../../components/Header';
-import PageHeader from '../../components/PageHeader';
-import { Switch } from 'react-router-dom';
-import CompanyPage from './CompanyScreen';
-import SearchScreen from './SearchScreen';
-import DashboardScreen from './DashboardScreen';
-import ProspectsScreen from './ProspectsScreen';
-import FavoritesScreen from './FavoritesScreen';
-interface Props {}
+import styled from "styled-components";
+import { Redirect, Route } from "react-router";
+import Header from "../../components/Header";
+import PageHeader from "../../components/PageHeader";
+import { Switch } from "react-router-dom";
+import DashboardScreen from "./DashboardScreen";
+import FavoritesScreen from "./FavoritesScreen";
+import ProspectsScreen from "./ProspectsScreen";
+import SearchScreen from "./SearchScreen";
+import CompanyPage from "./CompanyScreen";
 
-const Main: React.FC<Props> = ({}) => {
+const Main = () => {
   return (
     <Container>
       <Header />

@@ -1,3 +1,1 @@
-import ProspectCard from './ProspectCard';
-
-export default ProspectCard;
+export { default } from "./ProspectCard";

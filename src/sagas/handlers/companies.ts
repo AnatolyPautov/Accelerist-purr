@@ -1,18 +1,18 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put } from "redux-saga/effects";
 import {
   requestGetCompanies,
   requestGetCompany,
   requestGetDislike,
   requestGetLike,
-} from '../requests/companies';
-import * as Types from '../../types/types';
-import { SagaIterator } from 'redux-saga';
-import { PayloadAction } from '@reduxjs/toolkit';
+} from "../requests/companies";
+import * as Types from "../../types/types";
+import { SagaIterator } from "redux-saga";
+import { PayloadAction } from "@reduxjs/toolkit";
 import {
   setCompanies,
   setCompany,
   updateLike,
-} from '../../store/companiesSlice';
+} from "../../store/companiesSlice";
 
 export function* handleGetCompanies({
   payload,
@@ -20,7 +20,6 @@ export function* handleGetCompanies({
   try {
     const response = yield call(requestGetCompanies, payload);
     const { data } = response;
-    console.log(data);
     yield put(setCompanies({ ...data }));
   } catch (e) {
     console.log(e);

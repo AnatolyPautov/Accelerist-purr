@@ -1,28 +1,26 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Form, Field, FormProps } from 'react-final-form';
-import { ReactSVG } from 'react-svg';
-import linkedin from '../../../assets/icons/linkedin.svg';
-import { NavLink } from 'react-router-dom';
-import { Tab } from '../../../ui/Tab';
-import { useHistory } from 'react-router';
-import { CheckBox } from '../../../ui/Checkbox';
-import { Text } from '../../../ui/Text';
-import InputField from '../../../ui/InputField';
-import { getUserState, useAppDispatch } from '../../../store/store';
-import { signInRoutine } from '../../../store/userSlice';
-import { useSelector } from 'react-redux';
+import React from "react";
+import styled from "styled-components";
+import { Form, Field, FormProps } from "react-final-form";
+import { ReactSVG } from "react-svg";
+import linkedin from "../../../assets/icons/linkedin.svg";
+import { NavLink } from "react-router-dom";
+import { Tab } from "../../../ui/Tab";
+import { useHistory } from "react-router";
+import { CheckBox } from "../../../ui/Checkbox";
+import { Text } from "../../../ui/Text";
+import InputField from "../../../ui/InputField";
+import { getUserState, useAppDispatch } from "../../../store/store";
+import { signInRoutine } from "../../../store/userSlice";
+import { useSelector } from "react-redux";
 
 import {
   composeValidators,
   validateEmail,
   validateInput,
-} from '../../../utils/validation/validate';
-import { AuthButton } from '../../../ui/AuthButton';
+} from "../../../utils/validation/validate";
+import { AuthButton } from "../../../ui/AuthButton";
 
-interface LoginProps {}
-
-const Login: React.FC<LoginProps> = ({}) => {
+const Login = () => {
   const dispatch = useAppDispatch();
   const user = useSelector(getUserState);
 
@@ -38,8 +36,8 @@ const Login: React.FC<LoginProps> = ({}) => {
         <FormContainer onSubmit={handleSubmit}>
           <FormTitle>Welcome to Accelerist</FormTitle>
           <TabContainer>
-            <Tab onClick={() => history.push('/signup')}>Register</Tab>
-            <Tab active={true} onClick={() => history.push('/signin')}>
+            <Tab onClick={() => history.push("/signup")}>Register</Tab>
+            <Tab active={true} onClick={() => history.push("/signin")}>
               Login
             </Tab>
           </TabContainer>

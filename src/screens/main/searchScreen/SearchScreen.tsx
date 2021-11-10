@@ -1,12 +1,12 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import styled from 'styled-components';
-import { getCompaniesState, useAppDispatch } from '../../../store/store';
-import { Wrapper } from '../../../ui/Wrapper';
-import { Loader } from '../../../ui/Loader';
-import { addCompanies } from '../../../store/companiesSlice';
-import Filtres from './Filters';
-import CardsList from './CardsList';
+import React from "react";
+import { useSelector } from "react-redux";
+import styled from "styled-components";
+import { getCompaniesState, useAppDispatch } from "../../../store/store";
+import { Wrapper } from "../../../ui/Wrapper";
+import { Loader } from "../../../ui/Loader";
+import { addCompanies } from "../../../store/companiesSlice";
+import Filtres from "./Filters";
+import CardsList from "./CardsList";
 
 interface Props {
   page?: string;

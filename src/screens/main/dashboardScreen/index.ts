@@ -1,3 +1,1 @@
-import DashboardScreen from './DashboardScreen';
-
-export default DashboardScreen;
+export { default } from "./DashboardScreen";

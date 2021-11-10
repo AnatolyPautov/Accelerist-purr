@@ -1,3 +1,1 @@
-import CompanyCard from './CompanyCard';
-
-export default CompanyCard;
+export { default } from "./CompanyCard";

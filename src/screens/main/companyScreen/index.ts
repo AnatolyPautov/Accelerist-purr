@@ -1,3 +1,1 @@
-import CompanyPage from './CompanyPage';
-
-export default CompanyPage;
+export { default } from "./CompanyPage";

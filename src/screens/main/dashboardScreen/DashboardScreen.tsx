@@ -1,29 +1,28 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
-import { Title } from '../../../ui/Title';
-import { Wrapper } from '../../../ui/Wrapper';
-import FavoritesCard from './FavoritesCard';
-import ReportsCard from './ReportsCard';
-import { useSelector } from 'react-redux';
+import React from "react";
+import { NavLink } from "react-router-dom";
+import styled from "styled-components";
+import { Title } from "../../../ui/Title";
+import { Wrapper } from "../../../ui/Wrapper";
+import FavoritesCard from "./FavoritesCard";
+import ReportsCard from "./ReportsCard";
+import { useSelector } from "react-redux";
 import {
   getFavoritesState,
   getProspectsState,
   useAppDispatch,
-} from '../../../store/store';
-import ProspectCard from '../../../components/ProspectCard';
-import { ReactSVG } from 'react-svg';
-import emptyHeart from '../../../assets/icons/heart-favorite.svg';
-import { Subtitle } from '../../../ui/Subtitle';
-import { Text } from '../../../ui/Text';
-import { Loader } from '../../../ui/Loader';
-import { ButtonNow } from '../../../ui/ButtonNow';
-import { useHistory } from 'react-router';
-import { addFavorites } from '../../../store/favoritesSlice';
-import { addProspects } from '../../../store/prospectsSlice';
+} from "../../../store/store";
+import ProspectCard from "../../../components/ProspectCard";
+import { ReactSVG } from "react-svg";
+import emptyHeart from "../../../assets/icons/heart-favorite.svg";
+import { Subtitle } from "../../../ui/Subtitle";
+import { Text } from "../../../ui/Text";
+import { Loader } from "../../../ui/Loader";
+import { ButtonNow } from "../../../ui/ButtonNow";
+import { useHistory } from "react-router";
+import { addFavorites } from "../../../store/favoritesSlice";
+import { addProspects } from "../../../store/prospectsSlice";
 
-interface Props {}
-const DashboardScreen: React.FC<Props> = ({}) => {
+const DashboardScreen = () => {
   const favorites = useSelector(getFavoritesState);
   const prospects = useSelector(getProspectsState);
 

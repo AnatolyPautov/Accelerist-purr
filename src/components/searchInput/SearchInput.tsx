@@ -1,11 +1,10 @@
-import React from 'react';
-import { useHistory } from 'react-router';
-import styled from 'styled-components';
-import SearchIcon from '../../assets/icons/SearchIcon';
-import SettingsSearchIcon from '../../assets/icons/SettingsSearchIcon';
-import Context from '../../context';
-import { addCompanies } from '../../store/companiesSlice';
-import { useAppDispatch } from '../../store/store';
+import React from "react";
+import styled from "styled-components";
+import SearchIcon from "../../assets/icons/SearchIcon";
+import SettingsSearchIcon from "../../assets/icons/SettingsSearchIcon";
+import Context from "../../context";
+import { addCompanies } from "../../store/companiesSlice";
+import { useAppDispatch } from "../../store/store";
 
 interface SearchInputProps {
   width?: string;
@@ -17,15 +16,13 @@ const SearchInput: React.FC<SearchInputProps> = ({
   background,
   searchList,
 }) => {
-  const [text, setText] = React.useState<string>('');
+  const [text, setText] = React.useState<string>("");
   const { filterActive, setFilterActive } = React.useContext(Context);
-
-  const history = useHistory();
 
   const dispatch = useAppDispatch();
 
   const keyPressHandler = (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter' && text) {
+    if (event.key === "Enter" && text) {
       dispatch(addCompanies({ page: 1, limit: 12, q: text }));
     }
   };
@@ -61,18 +58,18 @@ type SearchContainerProps = {
 const SearchContainer = styled.div<SearchContainerProps>`
   position: relative;
   width: 100%;
-  max-width: ${({ width }) => (width ? width + 'px' : '365px')};
+  max-width: ${({ width }) => (width ? width + "px" : "365px")};
   flex: 1 1 auto;
   margin-right: 40px;
   @media (max-width: 1170px) {
-    display: ${({ searchList }) => (searchList ? 'block' : 'none')};
+    display: ${({ searchList }) => (searchList ? "block" : "none")};
   }
 `;
 type InputProps = {
   background?: string;
 };
 const Input = styled.input<InputProps>`
-  background: ${({ background }) => (background ? background : '#f3fcff')};
+  background: ${({ background }) => (background ? background : "#f3fcff")};
   border-radius: 6px;
   outline: none;
   border: none;

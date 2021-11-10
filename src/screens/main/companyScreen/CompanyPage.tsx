@@ -1,24 +1,23 @@
-import React from 'react';
-import styled from 'styled-components';
-import { css } from 'styled-components';
-import { ReactSVG } from 'react-svg';
-import globeIcon from '../../../assets/icons/globe.svg';
-import phoneIcon from '../../../assets/icons/phone.svg';
-import mapPinIcon from '../../../assets/icons/map-pin.svg';
-import { Row } from '../../../ui/Row';
-import { Text } from '../../../ui/Text';
-import { Subtitle } from '../../../ui/Subtitle';
-import { Title } from '../../../ui/Title';
-import CompanyHeader from './CompanyHeader';
-import { useSelector } from 'react-redux';
-import { getCompaniesState } from '../../../store/store';
-import { numberWithCommas } from '../../../utils/NumberWithCommas';
-import { TextBold } from '../../../ui/TextBold';
-import { Wrapper } from '../../../ui/Wrapper';
-import { Loader } from '../../../ui/Loader';
+import React from "react";
+import styled from "styled-components";
+import { css } from "styled-components";
+import { ReactSVG } from "react-svg";
+import globeIcon from "../../../assets/icons/globe.svg";
+import phoneIcon from "../../../assets/icons/phone.svg";
+import mapPinIcon from "../../../assets/icons/map-pin.svg";
+import { Row } from "../../../ui/Row";
+import { Text } from "../../../ui/Text";
+import { Subtitle } from "../../../ui/Subtitle";
+import { Title } from "../../../ui/Title";
+import { useSelector } from "react-redux";
+import { getCompaniesState } from "../../../store/store";
+import { numberWithCommas } from "../../../utils/NumberWithCommas";
+import { TextBold } from "../../../ui/TextBold";
+import { Wrapper } from "../../../ui/Wrapper";
+import { Loader } from "../../../ui/Loader";
+import CompanyHeader from "./CompanyHeader";
 
-interface CompanyPageProps {}
-const CompanyPage: React.FC<CompanyPageProps> = ({}) => {
+const CompanyPage = () => {
   const stateCompany = useSelector(getCompaniesState);
   const {
     revenue,
@@ -32,7 +31,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({}) => {
     street,
     zipCode,
   } = stateCompany.currentCompany;
-  const address = street + '. ' + city + ', ' + state + ' ' + zipCode;
+  const address = street + ". " + city + ", " + state + " " + zipCode;
 
   if (stateCompany.loading) {
     return <Loader size="big" variant="secondary" />;
@@ -43,31 +42,31 @@ const CompanyPage: React.FC<CompanyPageProps> = ({}) => {
           <CompanyHeader />
           <Row containerStyled={Content}>
             <Main>
-              <Title mb={'24'}>Business Description Products</Title>
-              <Subtitle mb={'16'}>Description</Subtitle>
+              <Title mb={"24"}>Business Description Products</Title>
+              <Subtitle mb={"16"}>Description</Subtitle>
               <Desc>{descriptionList}</Desc>
-              <Subtitle mb={'16'}>Structure</Subtitle>
+              <Subtitle mb={"16"}>Structure</Subtitle>
               <Desc>Sole proprietorship</Desc>
-              <Subtitle mb={'16'}>Reported</Subtitle>
+              <Subtitle mb={"16"}>Reported</Subtitle>
               <ReportedBlock>
                 <Row containerStyled={Reported}>
-                  <Text mb={'4'}>Revenue Reported</Text>
+                  <Text mb={"4"}>Revenue Reported</Text>
                   <DescBoldLittle>$ {numberWithCommas(revenue)}</DescBoldLittle>
                 </Row>
                 <Row containerStyled={Reported}>
-                  <Text mb={'4'}>Employees Reported</Text>
+                  <Text mb={"4"}>Employees Reported</Text>
                   <DescBoldLittle>
                     {numberWithCommas(employeeCount)}
                   </DescBoldLittle>
                 </Row>
               </ReportedBlock>
-              <Subtitle mb={'16'}>Company Ticker</Subtitle>
+              <Subtitle mb={"16"}>Company Ticker</Subtitle>
               <Row containerStyled={TickerBlock}>
                 <Ticker>
-                  <TextBold>{ticker || 'No information'}</TextBold>
+                  <TextBold>{ticker || "No information"}</TextBold>
                 </Ticker>
               </Row>
-              <Subtitle mb={'16'}>Company Contacts</Subtitle>
+              <Subtitle mb={"16"}>Company Contacts</Subtitle>
               <Contacts>
                 <Contact>
                   <Icon>
@@ -88,11 +87,11 @@ const CompanyPage: React.FC<CompanyPageProps> = ({}) => {
                   <p>{address}</p>
                 </Contact>
               </Contacts>
-              <Title mb={'24'}>Social Impact</Title>
+              <Title mb={"24"}>Social Impact</Title>
               <SocialImpact>
                 <Row>
                   <ImpactBlock>
-                    <Subtitle mb={'16'}>Type of Investment</Subtitle>
+                    <Subtitle mb={"16"}>Type of Investment</Subtitle>
                     <ImpactList>
                       <li>sdfsdfs</li>
                       <li>dfsdf</li>
@@ -101,7 +100,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({}) => {
                     </ImpactList>
                   </ImpactBlock>
                   <ImpactBlock>
-                    <Subtitle mb={'16'}>CRS Focus</Subtitle>
+                    <Subtitle mb={"16"}>CRS Focus</Subtitle>
                     <ImpactList>
                       <li>sdfsdfs</li>
                       <li>dfsdf</li>
@@ -111,7 +110,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({}) => {
                   </ImpactBlock>
                 </Row>
               </SocialImpact>
-              <Subtitle mb={'16'}>SDG Goal Alignment</Subtitle>
+              <Subtitle mb={"16"}>SDG Goal Alignment</Subtitle>
               <SDGContainer>
                 <Row>
                   <SDGBlock></SDGBlock>
@@ -119,7 +118,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({}) => {
                   <SDGBlock></SDGBlock>
                 </Row>
               </SDGContainer>
-              <Subtitle mb={'16'}>Contributions</Subtitle>
+              <Subtitle mb={"16"}>Contributions</Subtitle>
               <ReportedBlock>
                 <Row containerStyled={Сontribution}>
                   <Text>Cash Contributions</Text>
@@ -138,7 +137,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({}) => {
                   <p>42</p>
                 </Row>
               </ReportedBlock>
-              <Subtitle mb={'16'}>Charitable partners</Subtitle>
+              <Subtitle mb={"16"}>Charitable partners</Subtitle>
               <CharitablePartnersContainer>
                 <CharitablePartnersList>
                   <li>sdfsdfs</li>
@@ -150,7 +149,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({}) => {
                   <li>fsdf</li>
                 </CharitablePartnersList>
               </CharitablePartnersContainer>
-              <Subtitle mb={'22'}>Partnership and Program Details</Subtitle>
+              <Subtitle mb={"22"}>Partnership and Program Details</Subtitle>
               <WebsiteLink href="https://ru.linkedin.com/">
                 Go to the company's website
               </WebsiteLink>
@@ -260,7 +259,7 @@ const ImpactList = styled.ul`
   padding: 24px 0 24px 38px;
   list-style: none;
   li:before {
-    content: '.';
+    content: ".";
     color: #2baee0;
     font-weight: bold;
     display: inline-block;

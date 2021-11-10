@@ -1,15 +1,14 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import styled from 'styled-components';
-import Pagination from '../../../components/Pagination';
-import ProspectCard from '../../../components/ProspectCard';
-import { addProspects } from '../../../store/prospectsSlice';
-import { getProspectsState, useAppDispatch } from '../../../store/store';
-import { Loader } from '../../../ui/Loader';
-import { Wrapper } from '../../../ui/Wrapper';
+import React from "react";
+import { useSelector } from "react-redux";
+import styled from "styled-components";
+import Pagination from "../../../components/Pagination";
+import ProspectCard from "../../../components/ProspectCard";
+import { addProspects } from "../../../store/prospectsSlice";
+import { getProspectsState, useAppDispatch } from "../../../store/store";
+import { Loader } from "../../../ui/Loader";
+import { Wrapper } from "../../../ui/Wrapper";
 
-interface Props {}
-const ProspectsScreen: React.FC<Props> = ({}) => {
+const ProspectsScreen = () => {
   const prospects = useSelector(getProspectsState);
 
   const dispatch = useAppDispatch();
@@ -25,7 +24,7 @@ const ProspectsScreen: React.FC<Props> = ({}) => {
                 htmlFor="tab-btn-1"
                 onClick={() =>
                   dispatch(
-                    addProspects({ page: 1, limit: 12, sort: 'alphabet' })
+                    addProspects({ page: 1, limit: 12, sort: "alphabet" })
                   )
                 }
               >
@@ -36,7 +35,7 @@ const ProspectsScreen: React.FC<Props> = ({}) => {
                 htmlFor="tab-btn-2"
                 onClick={() =>
                   dispatch(
-                    addProspects({ page: 1, limit: 12, sort: 'available' })
+                    addProspects({ page: 1, limit: 12, sort: "available" })
                   )
                 }
               >
@@ -50,7 +49,7 @@ const ProspectsScreen: React.FC<Props> = ({}) => {
                     addProspects({
                       page: 1,
                       limit: 12,
-                      sort: 'last-activity',
+                      sort: "last-activity",
                     })
                   )
                 }
@@ -122,14 +121,14 @@ const SortText = styled.div`
 const SortTabs = styled.div`
   display: flex;
   align-items: center;
-  input[type='radio'] {
+  input[type="radio"] {
     display: none;
   }
   label {
     background: transparent;
     font-size: 12px;
     line-height: 150%;
-    font-family: 'Rubik', sans-serif;
+    font-family: "Rubik", sans-serif;
     color: #122434;
     margin-right: 22px;
     cursor: pointer;
@@ -138,7 +137,7 @@ const SortTabs = styled.div`
       margin-left: 26px;
     }
   }
-  input[type='radio']:checked + label {
+  input[type="radio"]:checked + label {
     border-bottom: 2px solid #2baee0;
   }
 `;

@@ -1,27 +1,24 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Form, Field, FormProps } from 'react-final-form';
-import * as Types from '../../../types/types';
-import { ReactSVG } from 'react-svg';
-import linkedin from '../../../assets/icons/linkedin.svg';
-import { Tab } from '../../../ui/Tab';
-import { useHistory } from 'react-router';
-import { Text } from '../../../ui/Text';
-import InputField from '../../../ui/InputField';
-import { signUpRoutine } from '../../../store/userSlice';
-import { FormApi } from 'final-form';
-import { getUserState, useAppDispatch } from '../../../store/store';
+import React from "react";
+import styled from "styled-components";
+import { Form, Field, FormProps } from "react-final-form";
+import { ReactSVG } from "react-svg";
+import linkedin from "../../../assets/icons/linkedin.svg";
+import { Tab } from "../../../ui/Tab";
+import { useHistory } from "react-router";
+import { Text } from "../../../ui/Text";
+import InputField from "../../../ui/InputField";
+import { signUpRoutine } from "../../../store/userSlice";
+import { FormApi } from "final-form";
+import { getUserState, useAppDispatch } from "../../../store/store";
 import {
   composeValidators,
   validateEmail,
   validateInput,
-} from '../../../utils/validation/validate';
-import { AuthButton } from '../../../ui/AuthButton';
-import { useSelector } from 'react-redux';
+} from "../../../utils/validation/validate";
+import { AuthButton } from "../../../ui/AuthButton";
+import { useSelector } from "react-redux";
 
-interface LoginProps {}
-
-const Registration: React.FC<LoginProps> = ({}) => {
+const Registration = () => {
   const dispatch = useAppDispatch();
   const user = useSelector(getUserState);
 
@@ -37,10 +34,10 @@ const Registration: React.FC<LoginProps> = ({}) => {
         <FormContainer onSubmit={handleSubmit}>
           <FormTitle>Welcome to Accelerist</FormTitle>
           <TabContainer>
-            <Tab active={true} onClick={() => history.push('/signup')}>
+            <Tab active={true} onClick={() => history.push("/signup")}>
               Register
             </Tab>
-            <Tab onClick={() => history.push('/signin')}>Login</Tab>
+            <Tab onClick={() => history.push("/signin")}>Login</Tab>
           </TabContainer>
           <Inputs>
             <Text>Email</Text>

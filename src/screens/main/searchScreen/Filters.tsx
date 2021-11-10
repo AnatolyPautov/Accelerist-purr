@@ -1,23 +1,22 @@
-import { FormApi } from 'final-form';
-import React from 'react';
-import { Field, Form, FormProps } from 'react-final-form';
-import styled from 'styled-components';
-import { CheckBox } from '../../../ui/Checkbox';
-import InputField from '../../../ui/InputField';
-import { SelectField } from '../../../ui/SelectField';
-import { Subtitle } from '../../../ui/Subtitle';
-import { Tab } from '../../../ui/Tab';
-import { Text } from '../../../ui/Text';
-import { Title } from '../../../ui/Title';
-import RangeSlider from '../../../ui/RangeSlider';
-import { Button } from '../../../ui/Button';
-import Context from '../../../context';
-import { getCompaniesState, useAppDispatch } from '../../../store/store';
-import { addCompanies } from '../../../store/companiesSlice';
-import { useSelector } from 'react-redux';
+import { FormApi } from "final-form";
+import React from "react";
+import { Field, Form, FormProps } from "react-final-form";
+import styled from "styled-components";
+import { CheckBox } from "../../../ui/Checkbox";
+import InputField from "../../../ui/InputField";
+import { SelectField } from "../../../ui/SelectField";
+import { Subtitle } from "../../../ui/Subtitle";
+import { Tab } from "../../../ui/Tab";
+import { Text } from "../../../ui/Text";
+import { Title } from "../../../ui/Title";
+import RangeSlider from "../../../ui/RangeSlider";
+import { Button } from "../../../ui/Button";
+import Context from "../../../context";
+import { getCompaniesState, useAppDispatch } from "../../../store/store";
+import { addCompanies } from "../../../store/companiesSlice";
+import { useSelector } from "react-redux";
 
-interface BoardProps {}
-const Filtres: React.FC<BoardProps> = ({}) => {
+const Filtres = () => {
   const { filterActive, setFilterActive } = React.useContext(Context);
 
   const stateCompany = useSelector(getCompaniesState);
@@ -35,17 +34,17 @@ const Filtres: React.FC<BoardProps> = ({}) => {
     );
   };
   const eatOptions = [
-    { label: 'Chicken', value: 'chicken' },
-    { label: 'Ham', value: 'ham' },
-    { label: 'Mushrooms', value: 'mushrooms' },
-    { label: 'Tuna', value: 'tuna' },
+    { label: "Chicken", value: "chicken" },
+    { label: "Ham", value: "ham" },
+    { label: "Mushrooms", value: "mushrooms" },
+    { label: "Tuna", value: "tuna" },
   ];
   if (!filterActive) {
     return null;
   } else
     return (
       <Container>
-        <Title mb={'18'}>Filters</Title>
+        <Title mb={"18"}>Filters</Title>
         <TabContainer>
           <Tab active={true}>Advanced</Tab>
           <Tab>Customize</Tab>
@@ -53,16 +52,16 @@ const Filtres: React.FC<BoardProps> = ({}) => {
         <Form
           mutators={{
             setMinRevenue: (args, state, utils) => {
-              utils.changeValue(state, 'minRevenue', () => args[0]);
+              utils.changeValue(state, "minRevenue", () => args[0]);
             },
             setMaxRevenue: (args, state, utils) => {
-              utils.changeValue(state, 'maxRevenue', () => args[0]);
+              utils.changeValue(state, "maxRevenue", () => args[0]);
             },
             setMinAge: (args, state, utils) => {
-              utils.changeValue(state, 'minAge', () => args[0]);
+              utils.changeValue(state, "minAge", () => args[0]);
             },
             setMaxAge: (args, state, utils) => {
-              utils.changeValue(state, 'maxAge', () => args[0]);
+              utils.changeValue(state, "maxAge", () => args[0]);
             },
           }}
           onSubmit={onSubmitForm}

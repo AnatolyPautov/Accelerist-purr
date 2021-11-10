@@ -1,16 +1,15 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
-import Navbar from '../Navbar';
-import SearchInput from '../SearchInput';
-import { Wrapper } from '../../ui/Wrapper';
-import LogoMain from '../../assets/icons/LogoMain';
-import Profile from './Profile';
-import { NavLink } from 'react-router-dom';
-import { useLocation } from 'react-router';
-import MenuRight from './MenuRight';
+import React from "react";
+import styled, { css } from "styled-components";
+import Navbar from "../Navbar";
+import { Wrapper } from "../../ui/Wrapper";
+import LogoMain from "../../assets/icons/LogoMain";
+import Profile from "./Profile";
+import { NavLink } from "react-router-dom";
+import { useLocation } from "react-router";
+import MenuRight from "./MenuRight";
+import SearchInput from "../SearchInput";
 
-interface BoardProps {}
-const Header: React.FC<BoardProps> = ({}) => {
+const Header = () => {
   const [menuActive, setMenuActive] = React.useState<boolean>(false);
   const { pathname } = useLocation();
 
@@ -27,7 +26,7 @@ const Header: React.FC<BoardProps> = ({}) => {
           <Navbar setMenuActive={setMenuActive} />
         </NavBlock>
         <NavBlock>
-          {pathname !== '/audience' && <SearchInput />}
+          {pathname !== "/audience" && <SearchInput />}
           <Profile />
           <HeaderBurger
             menuActive={menuActive}
@@ -94,27 +93,27 @@ const HeaderBurger = styled.button<HeaderBurgerProps>`
     width: 100%;
     height: 2px;
     background-color: ${({ menuActive }) =>
-      menuActive ? '#737373' : '#122434'};
+      menuActive ? "#737373" : "#122434"};
     display: block;
     position: absolute;
     transition: all 0.3s ease 0s;
     border-radius: 1px;
     &:first-child {
       right: 0;
-      top: ${({ menuActive }) => (menuActive ? ' 7px' : '0')};
-      transform: ${({ menuActive }) => (menuActive ? 'rotate(45deg)' : 'none')};
+      top: ${({ menuActive }) => (menuActive ? " 7px" : "0")};
+      transform: ${({ menuActive }) => (menuActive ? "rotate(45deg)" : "none")};
     }
     &:nth-child(2) {
       right: 0;
       top: 50%;
       transform: translateY(-50%);
-      opacity: ${({ menuActive }) => (menuActive ? '0' : '1')};
+      opacity: ${({ menuActive }) => (menuActive ? "0" : "1")};
     }
     &:last-child {
       right: 0;
-      bottom: ${({ menuActive }) => (menuActive ? ' 7px' : '0')};
+      bottom: ${({ menuActive }) => (menuActive ? " 7px" : "0")};
       transform: ${({ menuActive }) =>
-        menuActive ? 'rotate(-45deg)' : 'none'};
+        menuActive ? "rotate(-45deg)" : "none"};
     }
   }
   @media (max-width: 1170px) {

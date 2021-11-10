@@ -1,14 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
-import { ReactSVG } from 'react-svg';
-import logo from '../../assets/icons/authLogo.svg';
-import authBg from '../../assets/images/authBg.jpg';
-import { Redirect, Route, Switch } from 'react-router';
-import Registration from './Registration';
-import Login from './Login';
-interface Props {}
+import React from "react";
+import styled from "styled-components";
+import { ReactSVG } from "react-svg";
+import logo from "../../assets/icons/authLogo.svg";
+import authBg from "../../assets/images/authBg.jpg";
+import { Redirect, Route, Switch } from "react-router";
+import Registration from "./Registration";
+import Login from "./Login";
 
-const Auth: React.FC<Props> = ({}) => {
+const Auth = () => {
   return (
     <Container>
       <AuthHeader>

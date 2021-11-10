@@ -1,3 +1,1 @@
-import ProspectsScreen from './ProspectsScreen';
-
-export default ProspectsScreen;
+export { default } from "./ProspectsScreen";

@@ -1,18 +1,17 @@
-import React from 'react';
-import styled from 'styled-components';
-import { css } from 'styled-components';
-import { ReactSVG } from 'react-svg';
-import facebook from '../../../assets/icons/facebook.svg';
-import twitter from '../../../assets/icons/twitter.svg';
-import { Row } from '../../../ui/Row';
-import { Text } from '../../../ui/Text';
-import { Title } from '../../../ui/Title';
-import { useSelector } from 'react-redux';
-import { getCompaniesState } from '../../../store/store';
-import { HeartIcon } from '../../../assets/icons/HeartIcon';
+import React from "react";
+import styled from "styled-components";
+import { css } from "styled-components";
+import { ReactSVG } from "react-svg";
+import facebook from "../../../assets/icons/facebook.svg";
+import twitter from "../../../assets/icons/twitter.svg";
+import { Row } from "../../../ui/Row";
+import { Text } from "../../../ui/Text";
+import { Title } from "../../../ui/Title";
+import { useSelector } from "react-redux";
+import { getCompaniesState } from "../../../store/store";
+import { HeartIcon } from "../../../assets/icons/HeartIcon";
 
-interface CompanyPageProps {}
-const CompanyHeader: React.FC<CompanyPageProps> = ({}) => {
+const CompanyHeader = () => {
   const stateCompany = useSelector(getCompaniesState);
   const { name } = stateCompany.currentCompany;
 
@@ -28,10 +27,10 @@ const CompanyHeader: React.FC<CompanyPageProps> = ({}) => {
         <Logo>Logo</Logo>
         <div>
           <Row>
-            <Title mb={'4'}>{name}</Title>
+            <Title mb={"4"}>{name}</Title>
             <HeartIcon />
           </Row>
-          <Text mb={'22'}>
+          <Text mb={"22"}>
             Administration, Business Support and Waste Management Services
           </Text>
           <Row containerStyled={SocialStyle}>
