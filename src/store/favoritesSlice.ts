@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import * as Types from '../types/types';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import * as Types from "../types/types";
 
 interface FavoritesSliceState {
   favorites: Types.Company[];
@@ -20,14 +20,13 @@ const initialState: FavoritesSliceState = {
 };
 
 export const favoritesSlice = createSlice({
-  name: 'favorites',
+  name: "favorites",
   initialState,
   reducers: {
     addFavorites(state, { payload }: PayloadAction<Types.GetCompaniesProps>) {
       state.loading = true;
     },
     setFavorites(state, { payload }: PayloadAction<Types.CompaniesData>) {
-      console.log(payload);
       state.favorites = payload.items;
       state.totalItems = payload.meta.totalItems;
       state.currentPage = Number(payload.meta.currentPage);

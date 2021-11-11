@@ -1,39 +1,47 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useAppDispatch } from '../../store/store';
-import { logOut } from '../../store/userSlice';
-import { Text } from '../../ui/Text';
+import React, { useRef } from "react";
+import styled from "styled-components";
+import { useOutsideClick } from "../../hooks/use-outside-click";
+import { useAppDispatch } from "../../store/store";
+import { logOut } from "../../store/userSlice";
+import { Text } from "../../ui/Text";
 
 interface Props {
   responsive?: boolean;
 }
 const Profile: React.FC<Props> = ({ responsive }) => {
-  const [listActive, setListActive] = React.useState<boolean>(false);
+  const [isOpen, setIsOpen] = React.useState<boolean>(false);
+  const ref = useRef(null);
 
   const dispatch = useAppDispatch();
+
+  useOutsideClick(ref, () => setIsOpen(!isOpen));
   return (
-    <ProfileContainer
-      responsive={responsive}
-      onClick={() => setListActive(!listActive)}
-    >
-      <ProfileAccount>
-        <ProfileLogo>-_-</ProfileLogo>
-        <Text color="#122434">United Nations</Text>
-      </ProfileAccount>
-      <ProfileList listActive={listActive}>
-        <ProfileText>Profile</ProfileText>
-        <ProfileText>User Profile</ProfileText>
-        <ProfileText>Users</ProfileText>
-        <ProfileText onClick={() => dispatch(logOut())}>Log out</ProfileText>
-      </ProfileList>
-    </ProfileContainer>
+    <ProfileWrapper>
+      <MenuWrapper responsive={responsive} onClick={() => setIsOpen(!isOpen)}>
+        <ProfileAccount>
+          <ProfileLogo>-_-</ProfileLogo>
+          <Text color="#122434">United Nations</Text>
+        </ProfileAccount>
+      </MenuWrapper>
+      {isOpen && (
+        <ProfileList ref={ref}>
+          <ProfileText>Profile</ProfileText>
+          <ProfileText>User Profile</ProfileText>
+          <ProfileText>Users</ProfileText>
+          <ProfileText onClick={() => dispatch(logOut())}>Log out</ProfileText>
+        </ProfileList>
+      )}
+    </ProfileWrapper>
   );
 };
 
-const ProfileContainer = styled.div<{ responsive?: boolean }>`
+const ProfileWrapper = styled.div`
+  position: relative;
+`;
+const MenuWrapper = styled.div<{ responsive?: boolean }>`
   position: relative;
   @media (max-width: 1170px) {
-    display: ${({ responsive }) => (responsive ? 'block' : 'none')};
+    display: ${({ responsive }) => (responsive ? "block" : "none")};
   }
 `;
 const ProfileAccount = styled.button`
@@ -58,8 +66,7 @@ const ProfileLogo = styled.div`
   align-items: center;
   justify-content: center;
 `;
-const ProfileList = styled.div<{ listActive: boolean }>`
-  display: ${({ listActive }) => (listActive ? 'block' : 'none')};
+const ProfileList = styled.div`
   position: absolute;
   top: 48px;
   left: 0;

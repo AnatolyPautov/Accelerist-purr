@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import * as Types from '../types/types';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import * as Types from "../types/types";
 
 interface ProspectsSliceState {
   prospects: Types.Prospect[];
@@ -18,55 +18,54 @@ const initialState: ProspectsSliceState = {
   totalPages: 0,
   itemCount: 0,
   currentProspect: {
-    id: '',
-    name: 'Name',
-    createdAt: '',
+    id: "",
+    name: "Name",
+    createdAt: "",
     filters: {
-      q: '',
+      q: "",
       deleteIds: [],
       industry: [],
       location: [],
-      scope: '',
-      totalAnnualContributors: '',
-      revenueMin: '',
-      revenueMax: '',
+      scope: "",
+      totalAnnualContributors: "",
+      revenueMin: "",
+      revenueMax: "",
       csrFocusIds: [],
       affinities: [],
-      gender: '',
+      gender: "",
       ethnicities: [],
       ageRanges: [],
       income: [],
       sdgGoals: [],
     },
     lastAuthor: {
-      id: '',
-      email: '',
-      createdAt: '',
-      firstName: '',
-      lastName: '',
-      loggedInAt: '',
-      role: '',
-      teamId: '',
-      updatedAt: '',
+      id: "",
+      email: "",
+      createdAt: "",
+      firstName: "",
+      lastName: "",
+      loggedInAt: "",
+      role: "",
+      teamId: "",
+      updatedAt: "",
       imported: false,
       isAuthorized: false,
       isReceivingNotifications: true,
     },
     prospectsAvailable: 0,
-    updatedAt: '',
+    updatedAt: "",
   },
   loading: false,
 };
 
 export const prospectsSlice = createSlice({
-  name: 'prospects',
+  name: "prospects",
   initialState,
   reducers: {
     addProspects(state, { payload }: PayloadAction<Types.GetProspectsProps>) {
       state.loading = true;
     },
     setProspects(state, { payload }: PayloadAction<Types.ProspectsData>) {
-      console.log(payload);
       state.prospects = payload.items;
       state.totalItems = payload.meta.totalItems;
       state.currentPage = Number(payload.meta.currentPage);
