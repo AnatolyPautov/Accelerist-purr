@@ -37,7 +37,7 @@ const SearchScreen: React.FC<Props> = ({ page }) => {
 
 const Container = styled.div`
   padding: 32px 0;
-  height: 100%;
+  height: 100vh;
   @media (max-width: 525px) {
     padding: 20px 0;
   }
